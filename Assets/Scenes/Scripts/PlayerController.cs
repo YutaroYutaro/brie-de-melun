@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 10;
 
-    // Update is called once per frame
     void FixedUpdate()
     {
 

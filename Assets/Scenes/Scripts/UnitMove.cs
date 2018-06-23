@@ -1,12 +1,17 @@
-﻿using UnityEngine;
-using UnityEngine.AI;
+﻿using System.Collections;
+using System;
+using System.Threading;
+using UniRx;
+using UnityEngine;
 
 public class UnitMove : MonoBehaviour
 {
-    //NavMeshAgent agent;
-
     float distance = 0.0f;
-    CharacterController controller;
+    Nodes nodes;
+    Nodes[,] resultNodes;
+    ShortestPath ShortestPath;
+
+    Vector3 worldPoint;
 
     void Start()
     {
@@ -14,7 +19,10 @@ public class UnitMove : MonoBehaviour
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
         Debug.Log("distance ->" + distance);
 
-        controller = GetComponent<CharacterController>();
+        nodes = new Nodes();
+
+        ShortestPath = new ShortestPath();
+
     }
 
     void Update()
@@ -23,25 +31,52 @@ public class UnitMove : MonoBehaviour
         {
             //クリックしたスクリーン座標を取得
             Vector3 mousePos = Input.mousePosition;
-            Debug.Log(mousePos);
 
             //メインカメラとオブジェクトの距離をクリックした座標の高さに代入
             mousePos.z = distance;
-            Debug.Log(mousePos);
 
             //ワールド座標に変換
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(mousePos);
+            worldPoint = Camera.main.ScreenToWorldPoint(mousePos);
 
             //座標の四捨五入
-            worldPoint.x = Mathf.RoundToInt(worldPoint.x);
-            worldPoint.z = Mathf.RoundToInt(worldPoint.z);
+            int endPointX = Mathf.RoundToInt(worldPoint.x);
+            int endPointZ = Mathf.RoundToInt(worldPoint.z);
 
-            //オブジェクトの移動
-            transform.position = worldPoint;
-            //controller.SimpleMove(worldPoint);
-            Debug.Log(worldPoint);
+            resultNodes = ShortestPath.DijkstraAlgorithm(endPointX, endPointZ);
 
+            Nodes goalNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];
 
+            Debug.Log("========================================");
+
+            string path = "Start -> ";
+            Nodes currentNode = goalNode;
+
+            while (true)
+            {
+                Nodes nextNode = currentNode.previousNodes;
+                if (nextNode == null)
+                {
+                    path += " Goal";
+                    break;
+                }
+
+                MoveUnit(nextNode.idX, nextNode.idZ);
+
+                path += nextNode.idX.ToString() + nextNode.idZ.ToString() +  " -> ";
+
+                currentNode = nextNode;
+            }
+
+            Debug.Log(path);
+            Debug.Log("========================================");
         }
+    }
+
+    private void MoveUnit(int x, int z)
+    {
+        worldPoint.x = x;
+        worldPoint.z = z;
+
+        transform.position = worldPoint;
     }
 }
