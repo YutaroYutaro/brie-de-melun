@@ -8,12 +8,12 @@ public class ShortestPath
 
     public Nodes[,] DijkstraAlgorithm(int startX, int startZ)
     {
-        int maxX = 4;
-        int maxZ = 6;
+        int maxX = 5;
+        int maxZ = 7;
 
         Nodes = new Nodes();
 
-        Nodes[,] nodes = Nodes.CreateNodes(4, 6);
+        Nodes[,] nodes = Nodes.CreateNodes(5, 7);
 
         nodes[startX, startZ].cost = 0;
 
@@ -21,9 +21,9 @@ public class ShortestPath
         {
             Nodes processNode = null;
 
-            for (int posX = 0; posX <= maxX; posX++)
+            for (int posX = 0; posX < maxX; posX++)
             {
-                for (int posZ = 0; posZ <= maxZ; posZ++)
+                for (int posZ = 0; posZ < maxZ; posZ++)
                 {
                     Nodes node = nodes[posX, posZ];
 
