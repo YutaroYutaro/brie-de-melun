@@ -41,7 +41,7 @@ public class CreateMap : MonoBehaviour {
                     mapWeight[posX, posZ] = 1;
 
                 } else if (mapObject[objectNumber].name == "Mount") {
-                    mapWeight[posX, posZ] = 2;
+                    mapWeight[posX, posZ] = 5;
 
                 }
 

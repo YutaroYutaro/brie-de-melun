@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using UniRx;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UnitMove : MonoBehaviour
@@ -25,7 +26,7 @@ public class UnitMove : MonoBehaviour
 
     }
 
-    void Update()
+    async void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -60,7 +61,9 @@ public class UnitMove : MonoBehaviour
                     break;
                 }
 
-                MoveUnit(nextNode.idX, nextNode.idZ);
+                //MoveUnit(nextNode.idX, nextNode.idZ);
+                transform.Translate(nextNode.idX - Mathf.RoundToInt(transform.position.x), 0, nextNode.idZ - Mathf.RoundToInt(transform.position.z));
+                await Task.Delay(TimeSpan.FromSeconds(0.5f));
 
                 path += nextNode.idX.ToString() + nextNode.idZ.ToString() +  " -> ";
 
@@ -69,6 +72,8 @@ public class UnitMove : MonoBehaviour
 
             Debug.Log(path);
             Debug.Log("========================================");
+
+            
         }
     }
 
