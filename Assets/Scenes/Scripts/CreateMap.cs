@@ -29,8 +29,10 @@ public class CreateMap : MonoBehaviour {
         {
             for (; posZ < maxPosZ; posZ++)
             {
+                //生成するマップオブジェクトを選択
                 int objectNumber = Random.Range(0, mapObject.Length);
 
+                //マップオブジェクトごとの重みを保存
                 if (mapObject[objectNumber].name == "Field") {
                     mapWeight[posX, posZ] = 1;
 
@@ -45,10 +47,12 @@ public class CreateMap : MonoBehaviour {
 
                 }
 
+                //オブジェクトの設置位置を設定
                 Vector3 position = new Vector3(posX, 0, posZ);
                 Quaternion q = new Quaternion();
                 q = Quaternion.identity;
 
+                //オブジェクトの生成
                 Instantiate(mapObject[objectNumber], position, q);
             }
 
@@ -68,6 +72,7 @@ public class CreateMap : MonoBehaviour {
         }
     }
 
+    //外部からマップの重み表を取得するメソッド
     public int[,] GetMapWeight()
     {
         return mapWeight;

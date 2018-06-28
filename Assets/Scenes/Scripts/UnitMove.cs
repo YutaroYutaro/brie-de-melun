@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using UniRx;
+using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -13,6 +14,10 @@ public class UnitMove : MonoBehaviour
     ShortestPath ShortestPath;
 
     Vector3 worldPoint;
+    Vector3 destination;
+
+    [SerializeField]
+    RectTransform rectTran;
 
     void Start()
     {
@@ -43,8 +48,11 @@ public class UnitMove : MonoBehaviour
             int endPointX = Mathf.RoundToInt(worldPoint.x);
             int endPointZ = Mathf.RoundToInt(worldPoint.z);
 
+            //ダイクストラ法で最短経路を検索
             resultNodes = ShortestPath.DijkstraAlgorithm(endPointX, endPointZ);
 
+            //現在地を目的地として設定
+            //ノードが後ろから繋がっているため
             Nodes goalNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];
 
             Debug.Log("========================================");
@@ -54,19 +62,30 @@ public class UnitMove : MonoBehaviour
 
             while (true)
             {
+                //ひとつ前のノードを参照
                 Nodes nextNode = currentNode.previousNodes;
+
+                //クリックしたノードに達するとループを抜ける
                 if (nextNode == null)
                 {
                     path += " Goal";
                     break;
                 }
+                
+                //次に移動するノードの座標
+                destination.x = nextNode.idX;
+                destination.y = 1;
+                destination.z = nextNode.idZ;
 
-                //MoveUnit(nextNode.idX, nextNode.idZ);
-                transform.Translate(nextNode.idX - Mathf.RoundToInt(transform.position.x), 0, nextNode.idZ - Mathf.RoundToInt(transform.position.z));
+                //次に移動するノードに移動
+                transform.DOMove(destination, 0.4f);
+
+                //待機
                 await Task.Delay(TimeSpan.FromSeconds(0.5f));
 
                 path += nextNode.idX.ToString() + nextNode.idZ.ToString() +  " -> ";
 
+                //次のノードへ
                 currentNode = nextNode;
             }
 
@@ -75,13 +94,5 @@ public class UnitMove : MonoBehaviour
 
             
         }
-    }
-
-    private void MoveUnit(int x, int z)
-    {
-        worldPoint.x = x;
-        worldPoint.z = z;
-
-        transform.position = worldPoint;
     }
 }

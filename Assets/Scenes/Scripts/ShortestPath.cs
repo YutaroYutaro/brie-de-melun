@@ -6,6 +6,7 @@ public class ShortestPath
 {
     Nodes Nodes;
 
+    //ダイクストラ法
     public Nodes[,] DijkstraAlgorithm(int startX, int startZ)
     {
         int maxX = 5;
