@@ -22,8 +22,9 @@ GameObject:
   - component: {fileID: 33936357271593926}
   - component: {fileID: 23581012683197344}
   - component: {fileID: 135321891859641806}
-  - component: {fileID: 114210444239336606}
   - component: {fileID: 114059720868609728}
+  - component: {fileID: 114210444239336606}
+  - component: {fileID: 114016887889937128}
   m_Layer: 0
   m_Name: ProximityAttackUnit
   m_TagString: ProximityAttackUnit
@@ -86,6 +87,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1072443327872678}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114016887889937128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072443327872678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725c2af9a1d337145a62375adb270805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114059720868609728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,7 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05b6b38add88c74aac183858433bec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTran: {fileID: 0}
 --- !u!135 &135321891859641806
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ProximityAttackUnit
   - RemoteAttackUnit
+  - ReconnaissanceUnit
   layers:
   - Default
   - TransparentFX
