@@ -1,7 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using System;
-using System.Threading;
-using UniRx;
 using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,23 +7,27 @@ using UnityEngine;
 public class UnitMove : MonoBehaviour
 {
     float distance = 0.0f;
-    Nodes nodes;
+    //Nodes nodes;
     Nodes[,] resultNodes;
     ShortestPath ShortestPath;
 
     Vector3 worldPoint;
     Vector3 destination;
 
-    [SerializeField]
-    RectTransform rectTran;
+    //[SerializeField]
+    //RectTransform rectTran;
+    
+    private List<GameObject> _unitList;
 
     void Start()
     {
         //メインカメラとオブジェクトの距離を測定
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
-        Debug.Log("distance ->" + distance);
 
-        nodes = new Nodes();
+        _unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetUnitList();
+        //Debug.Log("distance ->" + distance);
+
+        //nodes = new Nodes();
 
         ShortestPath = new ShortestPath();
 
@@ -54,6 +56,11 @@ public class UnitMove : MonoBehaviour
             //現在地を目的地として設定
             //ノードが後ろから繋がっているため
             Nodes goalNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];
+            
+            for (int i = 0; i < _unitList.Count; i++)
+            {
+                Debug.Log("List[" + i + "] : (" + Mathf.RoundToInt(_unitList[i].transform.position.x) + ", " + Mathf.RoundToInt(_unitList[i].transform.position.z) + ")");
+            }
 
             Debug.Log("========================================");
 
@@ -66,7 +73,7 @@ public class UnitMove : MonoBehaviour
                 Nodes nextNode = currentNode.previousNodes;
 
                 //クリックしたノードに達するとループを抜ける
-                if (nextNode == null)
+                if (nextNode == null || this.ExistUnit(nextNode.idX, nextNode.idZ))
                 {
                     path += " Goal";
                     break;
@@ -94,5 +101,19 @@ public class UnitMove : MonoBehaviour
 
             
         }
+    }
+
+    private bool ExistUnit(int x, int z)
+    {
+        for (int i = 0; i < _unitList.Count; i++)
+        {
+            if (Mathf.RoundToInt(_unitList[i].transform.position.x) == x &&
+                Mathf.RoundToInt(_unitList[i].transform.position.z) == z)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

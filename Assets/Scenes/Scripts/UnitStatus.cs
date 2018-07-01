@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class UnitStatus : MonoBehaviour {
 
@@ -7,9 +8,14 @@ public class UnitStatus : MonoBehaviour {
     public float AttackPoint = 0;
     public float DefensPoint = 0;
     public float MovementPoint = 0;
+	
+	private List<GameObject> _unitList;
 
 	// Use this for initialization
 	void Start () {
+		
+		_unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetUnitList();
+		
 		if (CompareTag("ProximityAttackUnit"))
 		{
             Debug.Log("Proximity");
@@ -33,7 +39,15 @@ public class UnitStatus : MonoBehaviour {
 
 		if (this.HitPoint <= 0)
 		{
-			Destroy(this.gameObject);
+			for (int i = 0; i < _unitList.Count; i++)
+			{
+				if (_unitList[i] == this.gameObject)
+				{
+					Destroy(_unitList[i]);
+					_unitList.RemoveAt(i);
+					break;
+				}
+			}
 		}
 	}
 

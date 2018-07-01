@@ -10,7 +10,7 @@ public class UnitManager : MonoBehaviour
 	
 	// Use this for initialization
 	void Start () {
-		UnitList = new List<GameObject>();
+		//UnitList = new List<GameObject>();
 		
 		GameObject toggleInstance = Instantiate(CreatedUnit) as GameObject;
 		
@@ -20,5 +20,10 @@ public class UnitManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public List<GameObject> GetUnitList()
+	{
+		return UnitList;
 	}
 }
