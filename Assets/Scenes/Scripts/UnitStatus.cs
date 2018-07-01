@@ -30,9 +30,24 @@ public class UnitStatus : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		if (this.HitPoint <= 0)
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
+	public UnitStatus GetUnitStatus()
+	{
+		return this;
+	}
+	
+	public void SetUnitStatus(UnitStatus unitStatus)
+	{
+		this.HitPoint = unitStatus.HitPoint;
+		Debug.Log("targetHitPoint : " + this.HitPoint);
+	}
+	
 	public float GetUnitHitPoint()
 	{
 		return this.HitPoint;
