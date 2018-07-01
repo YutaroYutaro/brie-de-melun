@@ -25,7 +25,7 @@ public class UnitAttack : MonoBehaviour
 		{
 			_clickObject = ClickObject.GetClickObject();
 
-			if (this.ExistTarget(Mathf.RoundToInt(_clickObject.transform.position.x),
+			if ( _clickObject != null && this.ExistTarget(Mathf.RoundToInt(_clickObject.transform.position.x),
 				Mathf.RoundToInt(_clickObject.transform.position.z)))
 			{
 

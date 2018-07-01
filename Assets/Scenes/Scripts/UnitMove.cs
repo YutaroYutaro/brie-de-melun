@@ -43,12 +43,23 @@ public class UnitMove : MonoBehaviour
             //メインカメラとオブジェクトの距離をクリックした座標の高さに代入
             mousePos.z = distance;
 
-            //ワールド座標に変換
-            worldPoint = Camera.main.ScreenToWorldPoint(mousePos);
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
-            //座標の四捨五入
-            int endPointX = Mathf.RoundToInt(worldPoint.x);
-            int endPointZ = Mathf.RoundToInt(worldPoint.z);
+            RaycastHit hit;
+
+            int endPointX;
+            int endPointZ;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                endPointX = Mathf.RoundToInt(hit.point.x);
+                endPointZ = Mathf.RoundToInt(hit.point.z);
+            }
+            else
+            {
+                endPointX = Mathf.RoundToInt(transform.position.x);
+                endPointZ = Mathf.RoundToInt(transform.position.z);
+            }
 
             //ダイクストラ法で最短経路を検索
             resultNodes = ShortestPath.DijkstraAlgorithm(endPointX, endPointZ);
