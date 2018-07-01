@@ -413,13 +413,29 @@ GameObject:
   - component: {fileID: 706809379}
   - component: {fileID: 706809378}
   - component: {fileID: 706809383}
+  - component: {fileID: 706809377}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: ProximityAttackUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &706809377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 706809376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9ab88e748c68c4ab8b670b0efbbfd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPoint: 0
+  AttackPoint: 0
+  DefensPoint: 0
+  MovementPoint: 0
 --- !u!135 &706809378
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -498,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05b6b38add88c74aac183858433bec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTran: {fileID: 0}
 --- !u!1 &736199830
 GameObject:
   m_ObjectHideFlags: 0
