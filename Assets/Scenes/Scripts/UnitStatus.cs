@@ -18,7 +18,7 @@ public class UnitStatus : MonoBehaviour {
 		
 		if (CompareTag("ProximityAttackUnit"))
 		{
-            Debug.Log("Proximity");
+            //Debug.Log("Proximity");
 			this.HitPoint = 5;
 			this.AttackPoint = 2;
 			this.DefensPoint = 1;
@@ -26,11 +26,11 @@ public class UnitStatus : MonoBehaviour {
         } 
 		else if (CompareTag("RemoteAttackUnit")) 
 		{
-            Debug.Log("RemoteAttackUnit");
+            //Debug.Log("RemoteAttackUnit");
         }
 		else
 		{
-			Debug.Log("ReconnaissanceUnit");
+			//Debug.Log("ReconnaissanceUnit");
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class UnitStatus : MonoBehaviour {
 	public void SetUnitStatus(UnitStatus unitStatus)
 	{
 		this.HitPoint = unitStatus.HitPoint;
-		Debug.Log("targetHitPoint : " + this.HitPoint);
+		//Debug.Log("targetHitPoint : " + this.HitPoint);
 	}
 	
 	public float GetUnitHitPoint()
