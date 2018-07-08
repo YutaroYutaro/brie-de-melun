@@ -18,14 +18,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	{
 		Debug.Log(eventData);
 		
-		Vector2 result = Vector2.zero;
+		Vector3 result = Vector3.zero;
 
-		if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, Camera.main,
+		if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, Camera.main,
 			out result))
 		{
-//			Debug.Log("OnDrag");
-//			Debug.Log(result.normalized);
-			rectTransform.localPosition = result;
+			rectTransform.position = result;
 		}
 		
 	}
@@ -40,12 +38,4 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 		Debug.Log("OnEndDtag");
 	} 
 	
-//	private Vector2 GetLocalPosition(Vector2 screenPosition)
-//	{
-//    
-//		RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, screenPosition, Camera.main, out result);
-//       
-//		return result;
-//	}
-//	
 }
