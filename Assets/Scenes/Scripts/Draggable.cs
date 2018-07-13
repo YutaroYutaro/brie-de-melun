@@ -9,6 +9,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	RectTransform rectTransform = null;
 	
 	private Transform parentToReturnTo = null;
+
+	private GameObject placeholder = null;
 	
 	void Awake()
 	{
@@ -17,6 +19,22 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	
 	public void OnBeginDrag(PointerEventData eventData)
 	{
+		placeholder = new GameObject();
+		placeholder.transform.SetParent(this.transform.parent);
+		LayoutElement le = placeholder.AddComponent<LayoutElement>();
+		le.preferredWidth = this.GetComponent<LayoutElement>().preferredWidth;
+		le.preferredHeight = this.GetComponent<LayoutElement>().preferredHeight;
+		le.flexibleWidth = 0;
+		le.flexibleHeight = 0;
+		
+		RectTransform rt = placeholder.GetComponent<RectTransform>();
+		rt.sizeDelta = new Vector2 (300, 480);
+		
+		Debug.Log(le.preferredWidth);
+		Debug.Log(le.preferredHeight);
+		
+		placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
+		
 		parentToReturnTo = this.transform.parent;
 		this.transform.SetParent(this.transform.parent.parent);
 		Debug.Log("OnBeginDrag");
@@ -24,7 +42,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		Debug.Log(eventData);
+		//Debug.Log(eventData);
 //		this.transform.position = eventData.position;
 
 		Vector3 result = Vector3.zero;
@@ -33,7 +51,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 			out result))
 		{
 			rectTransform.position = result;
-			Debug.Log("OnDrag");
+			//Debug.Log("OnDrag");
 		}
 
 	}
@@ -42,6 +60,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	{
 		Debug.Log("OnEndDtag");
 		this.transform.SetParent(parentToReturnTo);
+		this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+
+		Destroy(placeholder);
 	}
 	
 }
