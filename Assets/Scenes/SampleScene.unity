@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 78111247}
   m_Layer: 5
   m_Name: UsedCardZone
-  m_TagString: Untagged
+  m_TagString: UsedCardZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -838,6 +838,11 @@ Prefab:
         type: 2}
       propertyPath: m_IgnoreLayout
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 225425101813304038, guid: dcd9cd5977d39dd4b83a1cc9adc5d14d,
+        type: 2}
+      propertyPath: m_BlocksRaycasts
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dcd9cd5977d39dd4b83a1cc9adc5d14d, type: 2}

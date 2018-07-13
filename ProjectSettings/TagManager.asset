@@ -9,6 +9,7 @@ TagManager:
   - ReconnaissanceUnit
   - Card
   - MoveCard
+  - UsedCardZone
   layers:
   - Default
   - TransparentFX
