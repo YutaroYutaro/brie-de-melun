@@ -1,9 +1,25 @@
-﻿using System.Collections;
-using UnityEngine.EventSystems;
+﻿using UnityEngine.EventSystems;
 using UnityEngine;
+using System;
+using System.Threading.Tasks;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    async void Update()
+    {
+        if (this.CompareTag("UsedCardZone"))
+        {
+            foreach (Transform transform in gameObject.transform)
+            {
+                if (transform.CompareTag("MoveCard"))
+                {
+                    var go = transform.gameObject;
+                    await Task.Delay(TimeSpan.FromSeconds(0.5f));
+                    Destroy(go);
+                }
+            }
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -45,5 +61,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             dragObjectDraggable.parentToReturnTo = transform;
         }
+        
     }
 }
