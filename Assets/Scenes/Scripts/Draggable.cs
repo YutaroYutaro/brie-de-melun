@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 	
-	RectTransform rectTransform = null;
+	private RectTransform rectTransform = null;
 	
-	private Transform parentToReturnTo = null;
+	public Transform parentToReturnTo = null;
 
 	private GameObject placeholder = null;
+	public Transform placeholderParent = null;
 	
 	void Awake()
 	{
@@ -36,7 +37,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 		placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
 		
 		parentToReturnTo = this.transform.parent;
+		placeholderParent = parentToReturnTo;
 		this.transform.SetParent(this.transform.parent.parent);
+		GetComponent<CanvasGroup> ().blocksRaycasts = false;
 		Debug.Log("OnBeginDrag");
 	}
 
@@ -44,6 +47,11 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	{
 		//Debug.Log(eventData);
 //		this.transform.position = eventData.position;
+
+		if (placeholder.transform.parent != placeholderParent)
+		{
+			placeholder.transform.SetParent(placeholderParent);
+		}
 
 		Vector3 result = Vector3.zero;
 
@@ -61,6 +69,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 		Debug.Log("OnEndDtag");
 		this.transform.SetParent(parentToReturnTo);
 		this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+		GetComponent<CanvasGroup> ().blocksRaycasts = true;
 
 		Destroy(placeholder);
 	}
