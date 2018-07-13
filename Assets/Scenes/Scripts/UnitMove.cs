@@ -52,6 +52,7 @@ public class UnitMove : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
+                //Debug.DrawRay(ray.origin, mousePos);
                 endPointX = Mathf.RoundToInt(hit.point.x);
                 endPointZ = Mathf.RoundToInt(hit.point.z);
             }
@@ -70,7 +71,7 @@ public class UnitMove : MonoBehaviour
             
             for (int i = 0; i < _unitList.Count; i++)
             {
-                Debug.Log("List[" + i + "] : (" + Mathf.RoundToInt(_unitList[i].transform.position.x) + ", " + Mathf.RoundToInt(_unitList[i].transform.position.z) + ")");
+                //Debug.Log("List[" + i + "] : (" + Mathf.RoundToInt(_unitList[i].transform.position.x) + ", " + Mathf.RoundToInt(_unitList[i].transform.position.z) + ")");
             }
 
             Debug.Log("========================================");

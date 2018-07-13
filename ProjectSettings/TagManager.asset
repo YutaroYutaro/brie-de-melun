@@ -7,6 +7,9 @@ TagManager:
   - ProximityAttackUnit
   - RemoteAttackUnit
   - ReconnaissanceUnit
+  - Card
+  - MoveCard
+  - UsedCardZone
   layers:
   - Default
   - TransparentFX
