@@ -5,62 +5,72 @@ using System.Threading.Tasks;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    async void Update()
-    {
-        if (this.CompareTag("UsedCardZone"))
-        {
-            foreach (Transform transform in gameObject.transform)
-            {
-                if (transform.CompareTag("MoveCard"))
-                {
-                    var go = transform.gameObject;
-                    await Task.Delay(TimeSpan.FromSeconds(0.5f));
-                    Destroy(go);
-                }
-            }
-        }
-    }
+    private string _nowPhase = null;
 
     public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log ("OnPointerEnter");
-        
-        if (eventData.pointerDrag == null)
-            return;
-        
-        Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
+    {   
+        _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
 
-        if (dragObjectDraggable != null)
+        if (_nowPhase == "SelectUseCard")
         {
-            dragObjectDraggable.placeholderParent = transform;
+            if (eventData.pointerDrag == null)
+                return;
+        
+            Debug.Log ("OnPointerEnter");
+        
+            Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
+
+            if (dragObjectDraggable != null)
+            {
+                dragObjectDraggable.placeholderParent = transform;
+            }
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log ("OnPointerExit");
+        _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
         
-        if (eventData.pointerDrag == null)
-            return;
-        
-        Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
-
-        if (dragObjectDraggable != null && dragObjectDraggable.placeholderParent == transform)
+        if (_nowPhase == "SelectUseCard")
         {
-            dragObjectDraggable.placeholderParent = dragObjectDraggable.parentToReturnTo;
+            if (eventData.pointerDrag == null)
+                return;
+        
+            Debug.Log ("OnPointerExit");
+        
+            Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
+
+            if (dragObjectDraggable != null && dragObjectDraggable.placeholderParent == transform)
+            {
+                dragObjectDraggable.placeholderParent = dragObjectDraggable.parentToReturnTo;
+            }
         }
     }
     
-    public void OnDrop(PointerEventData eventData)
+    public async void OnDrop(PointerEventData eventData)
     {
-        Debug.Log (eventData.pointerDrag.name + "was dropped on " + gameObject.name);
+        _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
         
-        Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
-
-        if (dragObjectDraggable != null)
+        if (_nowPhase == "SelectUseCard")
         {
-            dragObjectDraggable.parentToReturnTo = transform;
+            Debug.Log (eventData.pointerDrag.name + "was dropped on " + gameObject.name);
+
+            GameObject dragGameObject = eventData.pointerDrag;
+            Draggable dragGameObjectDraggable = dragGameObject.GetComponent<Draggable>();
+
+            if (dragGameObjectDraggable != null)
+            {
+                dragGameObjectDraggable.parentToReturnTo = transform;
+
+                if (dragGameObject.CompareTag("MoveCard"))
+                {
+                    Debug.Log("This card is a " + dragGameObject.tag);
+                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectMoveUnit");
+                }
+            
+                await Task.Delay(TimeSpan.FromSeconds(1.0f));
+                Destroy(dragGameObject);
+            }
         }
-        
     }
 }
