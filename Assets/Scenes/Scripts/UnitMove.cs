@@ -12,7 +12,7 @@ public class UnitMove : MonoBehaviour
     ShortestPath ShortestPath;
 
     Vector3 worldPoint;
-    Vector3 destination;
+    Vector3 _nextDestination;
 
     //[SerializeField]
     //RectTransform rectTran;
@@ -67,7 +67,7 @@ public class UnitMove : MonoBehaviour
 
             //現在地を目的地として設定
             //ノードが後ろから繋がっているため
-            Nodes goalNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];
+            Nodes unitPositionNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];
             
             for (int i = 0; i < _unitList.Count; i++)
             {
@@ -77,7 +77,7 @@ public class UnitMove : MonoBehaviour
             Debug.Log("========================================");
 
             string path = "Start -> ";
-            Nodes currentNode = goalNode;
+            Nodes currentNode = unitPositionNode;
 
             while (true)
             {
@@ -92,12 +92,12 @@ public class UnitMove : MonoBehaviour
                 }
                 
                 //次に移動するノードの座標
-                destination.x = nextNode.idX;
-                destination.y = 1;
-                destination.z = nextNode.idZ;
+                _nextDestination.x = nextNode.idX;
+                _nextDestination.y = 1;
+                _nextDestination.z = nextNode.idZ;
 
                 //次に移動するノードに移動
-                transform.DOMove(destination, 0.4f);
+                transform.DOMove(_nextDestination, 0.4f);
 
                 //待機
                 await Task.Delay(TimeSpan.FromSeconds(0.5f));
@@ -125,7 +125,53 @@ public class UnitMove : MonoBehaviour
                 return true;
             }
         }
-
         return false;
+    }
+
+    public async void MiniMapClickUnitMove(int clickMiniMapImageInstancePositionX, int clickMiniMapImageInstancePositionZ)
+    {
+        //ダイクストラ法で最短経路を検索
+        resultNodes = ShortestPath.DijkstraAlgorithm(clickMiniMapImageInstancePositionX, clickMiniMapImageInstancePositionZ);
+
+        //現在地を目的地として設定
+        //ノードが後ろから繋がっているため
+        Nodes unitPositionNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];            
+
+        Debug.Log("========================================");
+
+        string path = "Start -> ";
+        Nodes currentNode = unitPositionNode;
+
+        while (true)
+        {
+            //ひとつ前のノードを参照
+            Nodes nextNode = currentNode.previousNodes;
+
+            //クリックしたノードに達するとループを抜ける
+            if (nextNode == null || this.ExistUnit(nextNode.idX, nextNode.idZ))
+            {
+                path += " Goal";
+                break;
+            }
+                
+            //次に移動するノードの座標
+            _nextDestination.x = nextNode.idX;
+            _nextDestination.y = 1;
+            _nextDestination.z = nextNode.idZ;
+
+            //次に移動するノードに移動
+            transform.DOMove(_nextDestination, 0.4f);
+
+            //待機
+            await Task.Delay(TimeSpan.FromSeconds(0.5f));
+
+            path += nextNode.idX.ToString() + nextNode.idZ.ToString() +  " -> ";
+
+            //次のノードへ
+            currentNode = nextNode;
+        }
+
+        Debug.Log(path);
+        Debug.Log("========================================");            
     }
 }
