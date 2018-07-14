@@ -5,28 +5,13 @@ using System.Threading.Tasks;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    async void Update()
-    {
-        if (this.CompareTag("UsedCardZone"))
-        {
-            foreach (Transform transform in gameObject.transform)
-            {
-                if (transform.CompareTag("MoveCard"))
-                {
-                    var go = transform.gameObject;
-                    await Task.Delay(TimeSpan.FromSeconds(0.5f));
-                    Destroy(go);
-                }
-            }
-        }
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log ("OnPointerEnter");
-        
+    {   
         if (eventData.pointerDrag == null)
             return;
+        
+        Debug.Log ("OnPointerEnter");
         
         Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
@@ -38,10 +23,10 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log ("OnPointerExit");
-        
         if (eventData.pointerDrag == null)
             return;
+        
+        Debug.Log ("OnPointerExit");
         
         Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
@@ -51,15 +36,19 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         }
     }
     
-    public void OnDrop(PointerEventData eventData)
+    public async void OnDrop(PointerEventData eventData)
     {
         Debug.Log (eventData.pointerDrag.name + "was dropped on " + gameObject.name);
-        
-        Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
-        if (dragObjectDraggable != null)
+        GameObject dragGameObject = eventData.pointerDrag;
+        Draggable dragGameObjectDraggable = dragGameObject.GetComponent<Draggable>();
+
+        if (dragGameObjectDraggable != null)
         {
-            dragObjectDraggable.parentToReturnTo = transform;
+            dragGameObjectDraggable.parentToReturnTo = transform;
+            Debug.Log(dragGameObject.tag);
+            await Task.Delay(TimeSpan.FromSeconds(1.0f));
+            Destroy(dragGameObject);
         }
         
     }
