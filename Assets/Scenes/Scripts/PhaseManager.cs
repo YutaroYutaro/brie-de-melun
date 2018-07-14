@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhaseManager : MonoBehaviour
 {
-    public string StartPhase = "SelectMoveUnit";
+    public string StartPhase = "SelectUseCard";
     
     private string _nowPhase = null;
 

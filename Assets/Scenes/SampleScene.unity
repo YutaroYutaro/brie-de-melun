@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5add706bc5bd4a14d8d08c3e0ae58596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPhase: SelectMoveUnit
+  StartPhase: SelectUseCard
 --- !u!4 &1681255781
 Transform:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
         else if (_nowPhase == "SelectDestination")
         {
             GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().MiniMapUnitMove(_miniMapImageInstancePosition.PosX, _miniMapImageInstancePosition.PosZ);
-            GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectMoveUnit");
+            GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
             GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(null);
             
         }
