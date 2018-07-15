@@ -67,6 +67,10 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     Debug.Log("This card is a " + dragGameObject.tag);
                     GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectMoveUnit");
                 }
+                else if (dragGameObject.CompareTag("AttackCard"))
+                {
+                    Debug.Log("This card is a " + dragGameObject.tag);
+                }
             
                 await Task.Delay(TimeSpan.FromSeconds(1.0f));
                 Destroy(dragGameObject);
