@@ -60,7 +60,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
             if (dragGameObjectDraggable != null)
             {
-                dragGameObjectDraggable.parentToReturnTo = transform;
+//                dragGameObjectDraggable.parentToReturnTo = transform;
 
                 if (dragGameObject.CompareTag("MoveCard"))
                 {
@@ -70,8 +70,15 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 else if (dragGameObject.CompareTag("AttackCard"))
                 {
                     Debug.Log("This card is a " + dragGameObject.tag);
+                    if (!(GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>().ExistAttackTargetUnit()))
+                    {
+                        dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                        Debug.Log("Don't exist target.");
+                        return;
+                    }
                 }
             
+                dragGameObjectDraggable.parentToReturnTo = transform;
                 await Task.Delay(TimeSpan.FromSeconds(1.0f));
                 Destroy(dragGameObject);
             }
