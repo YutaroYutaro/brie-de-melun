@@ -18,13 +18,16 @@ public class UnitMove : MonoBehaviour
     //RectTransform rectTran;
     
     private List<GameObject> _unitList;
+    private List<GameObject> _enemyUnitList;
 
     void Start()
     {
         //メインカメラとオブジェクトの距離を測定
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
 
-        _unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetUnitList();
+        _unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
+        _enemyUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
+        //_unitList.AddRange(_enemyUnitList);
         //Debug.Log("distance ->" + distance);
 
         //nodes = new Nodes();
@@ -121,6 +124,15 @@ public class UnitMove : MonoBehaviour
         {
             if (Mathf.RoundToInt(_unitList[i].transform.position.x) == x &&
                 Mathf.RoundToInt(_unitList[i].transform.position.z) == z)
+            {
+                return true;
+            }
+        }
+
+        foreach (GameObject enemyUnit in _enemyUnitList)
+        {
+            if (Mathf.RoundToInt(enemyUnit.transform.position.x) == x &&
+                Mathf.RoundToInt(enemyUnit.transform.position.z) == z)
             {
                 return true;
             }

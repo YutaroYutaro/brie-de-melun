@@ -10,11 +10,13 @@ public class UnitStatus : MonoBehaviour {
     public float MovementPoint = 0;
 	
 	private List<GameObject> _unitList;
+	private List<GameObject> _enemyUnitList;
 
 	// Use this for initialization
 	void Start () {
 		
-		_unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetUnitList();
+		_unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
+		_enemyUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
 		
 		if (CompareTag("ProximityAttackUnit"))
 		{
@@ -45,6 +47,16 @@ public class UnitStatus : MonoBehaviour {
 				{
 					Destroy(_unitList[i]);
 					_unitList.RemoveAt(i);
+					break;
+				}
+			}
+
+			foreach (var enemyUnit in _enemyUnitList)
+			{
+				if (enemyUnit == this.gameObject)
+				{
+					Destroy(enemyUnit);
+					_enemyUnitList.Remove(enemyUnit);
 					break;
 				}
 			}

@@ -11,6 +11,7 @@ TagManager:
   - MoveCard
   - UsedCardZone
   - Placeholder
+  - AttackCard
   layers:
   - Default
   - TransparentFX
