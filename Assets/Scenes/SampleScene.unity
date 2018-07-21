@@ -1338,7 +1338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c458c299c201234fb9133e4e8cc625a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitList:
+  MyUnitList: []
+  EnemyUnitList:
   - {fileID: 121988190}
   - {fileID: 1536392509}
   CreatedUnit: {fileID: 1072443327872678, guid: a79c220a3dec8544493c68f2d551bce1,

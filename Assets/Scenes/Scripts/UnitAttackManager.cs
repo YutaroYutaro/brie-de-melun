@@ -6,49 +6,44 @@ using UnityEngine.UI;
 
 public class UnitAttackManager : MonoBehaviour
 {
-	private UnitStatus _attackerStatus;
-	
-	private UnitStatus _targetStatus;
 	
 	private List<GameObject> _attackerUnitList = null;
 	private List<GameObject> _targetUnitList = null;
 	
-	
+//	private GameObject _attackerUnit;
+//	private GameObject _targetUnit;
 	
 	public struct AttackerAndTarget
 	{
 		public GameObject Attacker;
-		public GameObject Target;
+		public List<GameObject> Target;
 	}
 	
 	private List<AttackerAndTarget> _attackerAndTargetList = new List<AttackerAndTarget>();
 
-	public void AttackCommand(GameObject attacker, GameObject target)
-	{
-		_attackerStatus = attacker.GetComponent<UnitStatus>().GetUnitStatus();
-		_targetStatus = target.GetComponent<UnitStatus>().GetUnitStatus();
+	private AttackerAndTarget _selectedAttackerAndTarget;
 
-		_targetStatus.HitPoint -= (_attackerStatus.AttackPoint - _targetStatus.DefensPoint);
-		
-		_targetStatus.SetUnitStatus(_targetStatus);
-	}
 
 	public bool ExistAttackTargetUnit()
 	{
-		_attackerUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetUnitList();
+		
+		_attackerAndTargetList.Clear();
+		
+		_attackerUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
 //		foreach (GameObject attackerUnit in _attackerUnitList)
 //		{
 //			Debug.Log("attacker: " + attackerUnit.name);
 //		}
 
-		_targetUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetUnitList();
+		_targetUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
 
 		foreach (GameObject attackerUnit in _attackerUnitList)
-		{
+		{	
+			AttackerAndTarget attackerAndTarget;
+			attackerAndTarget.Target = new List<GameObject>();
+			
 			int attackerUnitPositionX = Mathf.RoundToInt(attackerUnit.transform.position.x);
 			int attackerUnitPositionZ = Mathf.RoundToInt(attackerUnit.transform.position.z);
-			
-			//Debug.Log("attacker: " + attackerUnit.name);
 			
 			foreach (GameObject targetUnit in _targetUnitList)
 			{
@@ -58,20 +53,56 @@ public class UnitAttackManager : MonoBehaviour
 				int absX = Math.Abs(targetUnitPositionX - attackerUnitPositionX);
 				int absZ = Math.Abs(targetUnitPositionZ - attackerUnitPositionZ);
 				
-				//Debug.Log("target: " + targetUnit.name);
-
 				if (attackerUnit.CompareTag("ProximityAttackUnit") && (absX == 0 && absZ == 1 || absX == 1 && absZ == 0))
 				{
-					_attackerAndTargetList.Add(new AttackerAndTarget() {Attacker = attackerUnit, Target = targetUnit});
+					attackerAndTarget.Target.Add(targetUnit);
 				}
 			}
-		}
 
-		return _attackerAndTargetList != null;
+			if (attackerAndTarget.Target.Count != 0)
+			{
+				attackerAndTarget.Attacker = attackerUnit;
+				_attackerAndTargetList.Add(attackerAndTarget);
+			}		
+		}
+		
+		//Debug.Log(_attackerAndTargetList[1].Attacker + " " + _attackerAndTargetList[1].Target[0]);
+
+		return _attackerAndTargetList.Count != 0;
 	}
 
 	public List<AttackerAndTarget> GetAttackerAndTargetList()
 	{
 		return _attackerAndTargetList;
+	}
+	
+	public void SetSelectedAttackerAndTargetUnit(AttackerAndTarget attackerAndTarget)
+	{
+		_selectedAttackerAndTarget = attackerAndTarget;
+	}
+	
+	public AttackerAndTarget GetSelectedAttackerAndTargetUnit()
+	{
+		return _selectedAttackerAndTarget;
+	}
+
+	public void ClearGetAttackerAndTargetList()
+	{
+		_attackerAndTargetList.Clear();
+	}
+	
+//	public void SetAttackerUnit(GameObject attackerUnit)
+//	{
+//		_attackerUnit = attackerUnit;
+//	}
+//	
+//	public GameObject GetAttackerUnit()
+//	{
+//		return _attackerUnit;
+//	}
+	
+	public void MiniMapUnitAttack(GameObject targetUnit)
+	{
+		_selectedAttackerAndTarget.Attacker.GetComponent<UnitAttack>().MiniMapClickUnitAttack(targetUnit);
 	}
 }

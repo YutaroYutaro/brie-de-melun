@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class UnitManager : MonoBehaviour
 {
-	public List<GameObject> UnitList;
+	public List<GameObject> MyUnitList;
+	public List<GameObject> EnemyUnitList;
 
 	public GameObject CreatedUnit;
 	
@@ -14,7 +15,7 @@ public class UnitManager : MonoBehaviour
 		
 		GameObject toggleInstance = Instantiate(CreatedUnit) as GameObject;
 		
-		UnitList.Add(toggleInstance);
+		MyUnitList.Add(toggleInstance);
 	}
 	
 	// Update is called once per frame
@@ -22,8 +23,13 @@ public class UnitManager : MonoBehaviour
 		
 	}
 
-	public List<GameObject> GetUnitList()
+	public List<GameObject> GetMyUnitList()
 	{
-		return UnitList;
+		return MyUnitList;
+	}
+	
+	public List<GameObject> GetEnemyUnitList()
+	{
+		return EnemyUnitList;
 	}
 }
