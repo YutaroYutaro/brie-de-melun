@@ -21,4 +21,9 @@ public class CardFlowManager : MonoBehaviour
 	{
 		return GraveyardCardList;
 	}
+	
+	public List<GameObject> GetDeckCardList()
+	{
+		return DeckCardList;
+	}
 }
