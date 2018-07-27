@@ -16,4 +16,9 @@ public class CardFlowManager : MonoBehaviour
 		_graveyardText = GameObject.Find("Graveyard");
 		
 	}
+
+	public List<GameObject> GetGraveyardCardList()
+	{
+		return GraveyardCardList;
+	}
 }
