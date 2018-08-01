@@ -16,13 +16,10 @@ public class DeckAndGraveyardManager : MonoBehaviour
     private Text _deckText;
     private Text _graveyardText;
 
-    // Use this for initialization
+
     void Start()
     {
         _cardFlowManager = GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>();
-//		_deckCardList = _cardFlowManager.GetDeckCardList();
-//		_graveyardCardList = _cardFlowManager.GetGraveyardCardList();
-
         _numberOfDeckCards = _cardFlowManager.GetDeckCardList().Count;
         _numberOfGraveyardCards = _cardFlowManager.GetGraveyardCardList().Count;
 
@@ -32,11 +29,9 @@ public class DeckAndGraveyardManager : MonoBehaviour
         _deckText.text = _numberOfDeckCards.ToString();
         _graveyardText.text = _numberOfGraveyardCards.ToString();
 
-//		Debug.Log(_deckText);
         Debug.Log(_numberOfGraveyardCards);
     }
 
-    // Update is called once per frame
     void Update()
     {
         _deckCardList = _cardFlowManager.GetDeckCardList();

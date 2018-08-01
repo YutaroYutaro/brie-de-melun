@@ -17,7 +17,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             if (eventData.pointerDrag == null)
                 return;
 
-            //Debug.Log ("OnPointerEnter");
 
             Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
@@ -37,7 +36,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             if (eventData.pointerDrag == null)
                 return;
 
-            //Debug.Log ("OnPointerExit");
 
             Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 

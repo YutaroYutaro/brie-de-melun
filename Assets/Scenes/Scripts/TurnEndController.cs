@@ -10,7 +10,6 @@ public class TurnEndController : MonoBehaviour
 
         Transform handChildren = GameObject.Find("Hand").transform;
 
-        //Transform[] children;
 
         foreach (Transform handChild in handChildren)
         {

@@ -9,8 +9,6 @@ public class UnitAttackManager : MonoBehaviour
     private List<GameObject> _attackerUnitList = null;
     private List<GameObject> _targetUnitList = null;
 
-//	private GameObject _attackerUnit;
-//	private GameObject _targetUnit;
 
     public struct AttackerAndTarget
     {
@@ -28,10 +26,6 @@ public class UnitAttackManager : MonoBehaviour
         _attackerAndTargetList.Clear();
 
         _attackerUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
-//		foreach (GameObject attackerUnit in _attackerUnitList)
-//		{
-//			Debug.Log("attacker: " + attackerUnit.name);
-//		}
 
         _targetUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
 
@@ -65,8 +59,6 @@ public class UnitAttackManager : MonoBehaviour
             }
         }
 
-        //Debug.Log(_attackerAndTargetList[1].Attacker + " " + _attackerAndTargetList[1].Target[0]);
-
         return _attackerAndTargetList.Count != 0;
     }
 
@@ -89,16 +81,6 @@ public class UnitAttackManager : MonoBehaviour
     {
         _attackerAndTargetList.Clear();
     }
-
-//	public void SetAttackerUnit(GameObject attackerUnit)
-//	{
-//		_attackerUnit = attackerUnit;
-//	}
-//	
-//	public GameObject GetAttackerUnit()
-//	{
-//		return _attackerUnit;
-//	}
 
     public void MiniMapUnitAttack(GameObject targetUnit)
     {

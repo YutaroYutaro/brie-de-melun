@@ -8,16 +8,12 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 {
     private MiniMapImageInstancePosition _miniMapImageInstancePosition = null;
 
-    //private List<GameObject> _unitList = null;
 
     private string _nowPhase = null;
 
-    //private UnitAttackManager _unitAttackManager = null;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("Clicked");
-
         _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
 
         _miniMapImageInstancePosition = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>();
@@ -34,7 +30,6 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 if (unitPositionX == _miniMapImageInstancePosition.PosX &&
                     unitPositionZ == _miniMapImageInstancePosition.PosZ)
                 {
-                    //Debug.Log(_unitList[i].gameObject.name);
                     GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(unitList[i]);
                     GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectDestination");
                     Debug.Log("Phase: SelectDestination");
@@ -109,7 +104,6 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
             }
         }
 
-        //Debug.Log(this.gameObject.GetInstanceID());
         Debug.Log("PosX: " + _miniMapImageInstancePosition.PosX +
                   " PosZ: " + _miniMapImageInstancePosition.PosZ);
     }

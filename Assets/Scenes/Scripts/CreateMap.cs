@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CreateMap : MonoBehaviour
 {
@@ -63,16 +61,6 @@ public class CreateMap : MonoBehaviour
         }
 
         posX = 0;
-
-//        for (; posX < maxPosX; posX++)
-//        {
-//            for (; posZ < maxPosZ; posZ++)
-//            {
-//                Debug.Log("(posX, posZ) = (" + posX + ", " + posZ + ") :" + mapWeight[posX, posZ]);
-//            }
-//
-//            posZ = 0;
-//        }
     }
 
     //外部からマップの重み表を取得するメソッド

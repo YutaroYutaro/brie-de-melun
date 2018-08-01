@@ -12,7 +12,6 @@ public class UnitStatus : MonoBehaviour
     private List<GameObject> _unitList;
     private List<GameObject> _enemyUnitList;
 
-    // Use this for initialization
     void Start()
     {
         _unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
@@ -20,7 +19,6 @@ public class UnitStatus : MonoBehaviour
 
         if (CompareTag("ProximityAttackUnit"))
         {
-            //Debug.Log("Proximity");
             this.HitPoint = 5;
             this.AttackPoint = 2;
             this.DefensPoint = 1;
@@ -28,15 +26,12 @@ public class UnitStatus : MonoBehaviour
         }
         else if (CompareTag("RemoteAttackUnit"))
         {
-            //Debug.Log("RemoteAttackUnit");
         }
         else
         {
-            //Debug.Log("ReconnaissanceUnit");
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (this.HitPoint <= 0)
@@ -71,7 +66,6 @@ public class UnitStatus : MonoBehaviour
     public void SetUnitStatus(UnitStatus unitStatus)
     {
         this.HitPoint = unitStatus.HitPoint;
-        //Debug.Log("targetHitPoint : " + this.HitPoint);
     }
 
     public float GetUnitHitPoint()
