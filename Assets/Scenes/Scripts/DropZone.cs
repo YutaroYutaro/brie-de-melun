@@ -112,7 +112,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
                 dragGameObjectDraggable.parentToReturnTo = transform;
                 await Task.Delay(TimeSpan.FromSeconds(1.0f));
-                Destroy(dragGameObject);
+                dragGameObject.transform.SetParent(GameObject.Find("Graveyard").transform);
+                dragGameObject.gameObject.SetActive(false);
             }
         }
     }
