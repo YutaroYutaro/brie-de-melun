@@ -1,15 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DeckAndGraveyardManager : MonoBehaviour
 {
-    private List<GameObject> _deckCardList;
-    private List<GameObject> _graveyardCardList;
-
-    private CardFlowManager _cardFlowManager;
-
     private int _numberOfDeckCards;
     private int _numberOfGraveyardCards;
 
@@ -19,36 +12,25 @@ public class DeckAndGraveyardManager : MonoBehaviour
 
     void Start()
     {
-        _cardFlowManager = GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>();
-        _numberOfDeckCards = _cardFlowManager.GetDeckCardList().Count;
-        _numberOfGraveyardCards = _cardFlowManager.GetGraveyardCardList().Count;
-
         _deckText = GameObject.Find("Deck").GetComponent<Text>();
         _graveyardText = GameObject.Find("Graveyard").GetComponent<Text>();
 
-        _deckText.text = _numberOfDeckCards.ToString();
-        _graveyardText.text = _numberOfGraveyardCards.ToString();
-
-//        Debug.Log(_numberOfGraveyardCards);
+        _deckText.text = GameObject.Find("Deck").transform.childCount.ToString();
+        _graveyardText.text = GameObject.Find("Graveyard").transform.childCount.ToString();
     }
 
     void Update()
     {
-        _deckCardList = _cardFlowManager.GetDeckCardList();
-        _graveyardCardList = _cardFlowManager.GetGraveyardCardList();
-
-
-        if (_numberOfDeckCards != _deckCardList.Count)
+        if (_numberOfDeckCards != GameObject.Find("Deck").transform.childCount)
         {
-            _deckText.text = _deckCardList.Count.ToString();
-            _numberOfDeckCards = _deckCardList.Count;
+            _deckText.text = GameObject.Find("Deck").transform.childCount.ToString();
+            _numberOfDeckCards = GameObject.Find("Deck").transform.childCount;
         }
 
-        if (_numberOfGraveyardCards != _graveyardCardList.Count)
+        if (_numberOfGraveyardCards != GameObject.Find("Graveyard").transform.childCount)
         {
-//            Debug.Log(_graveyardCardList.Count);
-            _graveyardText.text = _graveyardCardList.Count.ToString();
-            _numberOfGraveyardCards = _graveyardCardList.Count;
+            _graveyardText.text = GameObject.Find("Graveyard").transform.childCount.ToString();
+            _numberOfGraveyardCards = GameObject.Find("Graveyard").transform.childCount;
         }
     }
 }
