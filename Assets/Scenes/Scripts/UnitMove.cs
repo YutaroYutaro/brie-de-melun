@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UnitMove : MonoBehaviour
 {
-    float distance = 0.0f;
+//    float distance = 0.0f;
     //Nodes nodes;
     Nodes[,] resultNodes;
     ShortestPath ShortestPath;
@@ -16,14 +16,14 @@ public class UnitMove : MonoBehaviour
 
     //[SerializeField]
     //RectTransform rectTran;
-    
+
     private List<GameObject> _unitList;
     private List<GameObject> _enemyUnitList;
 
     void Start()
     {
         //メインカメラとオブジェクトの距離を測定
-        distance = Vector3.Distance(transform.position, Camera.main.transform.position);
+//        distance = Vector3.Distance(transform.position, Camera.main.transform.position);
 
         _unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
         _enemyUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
@@ -71,7 +71,7 @@ public class UnitMove : MonoBehaviour
 //            //現在地を目的地として設定
 //            //ノードが後ろから繋がっているため
 //            Nodes unitPositionNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];
-//            
+//
 //            for (int i = 0; i < _unitList.Count; i++)
 //            {
 //                //Debug.Log("List[" + i + "] : (" + Mathf.RoundToInt(_unitList[i].transform.position.x) + ", " + Mathf.RoundToInt(_unitList[i].transform.position.z) + ")");
@@ -93,7 +93,7 @@ public class UnitMove : MonoBehaviour
 //                    path += " Goal";
 //                    break;
 //                }
-//                
+//
 //                //次に移動するノードの座標
 //                _nextDestination.x = nextNode.idX;
 //                _nextDestination.y = 1;
@@ -114,7 +114,7 @@ public class UnitMove : MonoBehaviour
 //            Debug.Log(path);
 //            Debug.Log("========================================");
 //
-//            
+//
 //        }
 //    }
 
@@ -147,7 +147,7 @@ public class UnitMove : MonoBehaviour
 
         //現在地を目的地として設定
         //ノードが後ろから繋がっているため
-        Nodes unitPositionNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];            
+        Nodes unitPositionNode = resultNodes[Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z)];
 
         Debug.Log("========================================");
 
@@ -165,7 +165,7 @@ public class UnitMove : MonoBehaviour
                 path += " Goal";
                 break;
             }
-                
+
             //次に移動するノードの座標
             _nextDestination.x = nextNode.idX;
             _nextDestination.y = 1;
@@ -184,6 +184,6 @@ public class UnitMove : MonoBehaviour
         }
 
         Debug.Log(path);
-        Debug.Log("========================================");            
+        Debug.Log("========================================");
     }
 }
