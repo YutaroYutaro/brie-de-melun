@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateMap : MonoBehaviour {
-
+public class CreateMap : MonoBehaviour
+{
     //生成するマップオブジェクト
     public GameObject[] mapObject;
 
@@ -33,18 +33,21 @@ public class CreateMap : MonoBehaviour {
                 int objectNumber = Random.Range(0, mapObject.Length);
 
                 //マップオブジェクトごとの重みを保存
-                if (mapObject[objectNumber].name == "Field") {
+                if (mapObject[objectNumber].name == "Field")
+                {
                     mapWeight[posX, posZ] = 1;
-
-                } else if (mapObject[objectNumber].name == "Forest") {
+                }
+                else if (mapObject[objectNumber].name == "Forest")
+                {
                     mapWeight[posX, posZ] = 2;
-
-                } else if (mapObject[objectNumber].name == "GoldMine") {
+                }
+                else if (mapObject[objectNumber].name == "GoldMine")
+                {
                     mapWeight[posX, posZ] = 1;
-
-                } else if (mapObject[objectNumber].name == "Mount") {
+                }
+                else if (mapObject[objectNumber].name == "Mount")
+                {
                     mapWeight[posX, posZ] = 5;
-
                 }
 
                 //オブジェクトの設置位置を設定

@@ -8,21 +8,21 @@ public class UnitAttack : MonoBehaviour
 {
 //	private GameObject _unitAttackManager;
 
-	//private UnitAttackManager _attackCommand;
+    //private UnitAttackManager _attackCommand;
 
-	//private GameObject _clickObject;
-	
-	private UnitStatus _attackerStatus;
-	private UnitStatus _targetStatus;
-	
-	// Use this for initialization
+    //private GameObject _clickObject;
+
+    private UnitStatus _attackerStatus;
+    private UnitStatus _targetStatus;
+
+    // Use this for initialization
 //	void Start () {
 //		_unitAttackManager = GameObject.Find("UnitAttackManager");
 //
 //		_attackCommand = _unitAttackManager.GetComponent<UnitAttackManager>();
 //	}
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
 //	void Update ()
 //	{
 //		if (Input.GetMouseButtonDown(0))
@@ -62,30 +62,28 @@ public class UnitAttack : MonoBehaviour
 //		
 //		return false;
 //	}
-	
-	public async void MiniMapClickUnitAttack(GameObject targetUnit)
-	{
-		_attackerStatus = this.GetComponent<UnitStatus>().GetUnitStatus();
-		_targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
-		
-		targetUnit.SetActive(false);
-		await Task.Delay(TimeSpan.FromSeconds(0.1f));
-		targetUnit.SetActive(true);
-		await Task.Delay(TimeSpan.FromSeconds(0.2f));
-		targetUnit.SetActive(false);
-		await Task.Delay(TimeSpan.FromSeconds(0.1f));
-		targetUnit.SetActive(true);
-		await Task.Delay(TimeSpan.FromSeconds(0.2f));
-		targetUnit.SetActive(false);
-		await Task.Delay(TimeSpan.FromSeconds(0.1f));
-		targetUnit.SetActive(true);
-		//await Task.Delay(TimeSpan.FromSeconds(0.1f));
-		
 
-		_targetStatus.HitPoint -= (_attackerStatus.AttackPoint - _targetStatus.DefensPoint);
-		
-		_targetStatus.SetUnitStatus(_targetStatus);
-	}
+    public async void MiniMapClickUnitAttack(GameObject targetUnit)
+    {
+        _attackerStatus = this.GetComponent<UnitStatus>().GetUnitStatus();
+        _targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
+
+        targetUnit.SetActive(false);
+        await Task.Delay(TimeSpan.FromSeconds(0.1f));
+        targetUnit.SetActive(true);
+        await Task.Delay(TimeSpan.FromSeconds(0.2f));
+        targetUnit.SetActive(false);
+        await Task.Delay(TimeSpan.FromSeconds(0.1f));
+        targetUnit.SetActive(true);
+        await Task.Delay(TimeSpan.FromSeconds(0.2f));
+        targetUnit.SetActive(false);
+        await Task.Delay(TimeSpan.FromSeconds(0.1f));
+        targetUnit.SetActive(true);
+        //await Task.Delay(TimeSpan.FromSeconds(0.1f));
 
 
+        _targetStatus.HitPoint -= (_attackerStatus.AttackPoint - _targetStatus.DefensPoint);
+
+        _targetStatus.SetUnitStatus(_targetStatus);
+    }
 }
