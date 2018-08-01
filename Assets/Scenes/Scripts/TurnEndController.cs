@@ -8,26 +8,29 @@ public class TurnEndController : MonoBehaviour
     {
         Debug.Log("Debug: TurnEnd");
 
-        Transform handChildren = GameObject.Find("Hand").transform;
+//        List<GameObject> handcardList =
+//            GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>().GetHandCardList();
+//
+//        foreach (GameObject handCard in handcardList)
+//        {
+//            GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>().GetGraveyardCardList()
+//                .Add(handCard.gameObject);
+//        }
+//
+//        handcardList.Clear();
 
+        Transform handChildren = GameObject.Find("Hand").transform;
+        List<GameObject> handCardObjects = new List<GameObject>();
 
         foreach (Transform handChild in handChildren)
         {
-            Debug.Log(handChild.name);
-
-            GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>().GetGraveyardCardList()
-                .Add(handChild.gameObject);
+            handCardObjects.Add(handChild.gameObject);
             handChild.gameObject.SetActive(false);
-
-            Debug.Log(handChild.name);
         }
 
-        List<GameObject> handCard =
-            GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>().GetGraveyardCardList();
-
-        foreach (var card in handCard)
+        foreach (GameObject cardObject in handCardObjects)
         {
-            card.transform.SetParent(GameObject.Find("Graveyard").transform);
+            cardObject.transform.SetParent(GameObject.Find("Graveyard").transform);
         }
     }
 }

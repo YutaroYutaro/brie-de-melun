@@ -29,7 +29,7 @@ public class DeckAndGraveyardManager : MonoBehaviour
         _deckText.text = _numberOfDeckCards.ToString();
         _graveyardText.text = _numberOfGraveyardCards.ToString();
 
-        Debug.Log(_numberOfGraveyardCards);
+//        Debug.Log(_numberOfGraveyardCards);
     }
 
     void Update()
@@ -46,7 +46,7 @@ public class DeckAndGraveyardManager : MonoBehaviour
 
         if (_numberOfGraveyardCards != _graveyardCardList.Count)
         {
-            Debug.Log(_graveyardCardList.Count);
+//            Debug.Log(_graveyardCardList.Count);
             _graveyardText.text = _graveyardCardList.Count.ToString();
             _numberOfGraveyardCards = _graveyardCardList.Count;
         }

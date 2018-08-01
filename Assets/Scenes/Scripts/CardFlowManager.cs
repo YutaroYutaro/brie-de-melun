@@ -4,6 +4,7 @@ using UnityEngine;
 public class CardFlowManager : MonoBehaviour
 {
     public List<GameObject> DeckCardList;
+    public List<GameObject> HandCardList;
     public List<GameObject> GraveyardCardList;
 
     public List<GameObject> GetGraveyardCardList()
@@ -14,5 +15,10 @@ public class CardFlowManager : MonoBehaviour
     public List<GameObject> GetDeckCardList()
     {
         return DeckCardList;
+    }
+
+    public List<GameObject> GetHandCardList()
+    {
+        return HandCardList;
     }
 }
