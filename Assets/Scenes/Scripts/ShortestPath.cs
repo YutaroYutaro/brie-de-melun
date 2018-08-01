@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ShortestPath
+﻿public class ShortestPath
 {
     Nodes Nodes;
 
@@ -67,6 +63,7 @@ public class ShortestPath
                 }
             }
         }
+
         return nodes;
     }
 }

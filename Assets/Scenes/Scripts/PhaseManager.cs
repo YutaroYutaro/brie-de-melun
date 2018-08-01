@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PhaseManager : MonoBehaviour
 {
     public string StartPhase = "SelectUseCard";
-    
+
     private string _nowPhase = null;
 
     private void Start()

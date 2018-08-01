@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Nodes {
-
+public class Nodes
+{
     public List<Nodes> edgesTo = new List<Nodes>(); //移動先のノード
-    public List<int> edgesCost = new List<int>();   //移動先の重み
-    public bool done = false;                       //探索済みか否か
-    public int cost = -1;                           //現在位置の重み-1に設定
-    public int idX = 0;                             //ノードのマップ上x座標
-    public int idZ = 0;                             //ノードのマップ上z座標
-    public Nodes previousNodes = null;              //最短経路の次ノード
+    public List<int> edgesCost = new List<int>(); //移動先の重み
+    public bool done = false; //探索済みか否か
+    public int cost = -1; //現在位置の重み-1に設定
+    public int idX = 0; //ノードのマップ上x座標
+    public int idZ = 0; //ノードのマップ上z座標
+    public Nodes previousNodes = null; //最短経路の次ノード
 
-    GameObject Map;         //Mapオブジェクトを格納するオブジェクト
-    CreateMap CreateMap;    //MapオブジェクトのCreateMapコンポーネントを格納するオブジェクト
+    GameObject Map; //Mapオブジェクトを格納するオブジェクト
+    CreateMap CreateMap; //MapオブジェクトのCreateMapコンポーネントを格納するオブジェクト
 
     //探索するためのノード群を生成するメソッド
     public Nodes[,] CreateNodes(int maxX = 5, int maxZ = 7)
@@ -48,24 +47,22 @@ public class Nodes {
             for (int posZ = 0; posZ < maxZ; posZ++)
             {
                 //左下角
-                if (posX == 0 && posZ == 0) {
+                if (posX == 0 && posZ == 0)
+                {
                     nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
-
                 }
                 //左上角
                 else if (posX == 0 && posZ == maxZ - 1)
                 {
                     nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
-
                 }
                 //右下角
                 else if (posX == maxX - 1 && posZ == 0)
                 {
                     nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
-
                 }
                 //右上角
                 else if (posX == maxX - 1 && posZ == maxZ - 1)
@@ -79,7 +76,6 @@ public class Nodes {
                     nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
-
                 }
                 //右辺
                 else if (posX == maxX - 1)
@@ -87,7 +83,6 @@ public class Nodes {
                     nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
-
                 }
                 //下辺
                 else if (posZ == 0)
@@ -95,7 +90,6 @@ public class Nodes {
                     nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
-
                 }
                 //上辺
                 else if (posZ == maxZ - 1)
@@ -103,7 +97,6 @@ public class Nodes {
                     nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
-
                 }
                 //それ以外
                 else
@@ -112,10 +105,10 @@ public class Nodes {
                     nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
                     nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
-
                 }
             }
         }
+
         return nodes;
     }
 
@@ -125,5 +118,4 @@ public class Nodes {
         this.edgesTo.Add(node);
         this.edgesCost.Add(cost);
     }
-
 }

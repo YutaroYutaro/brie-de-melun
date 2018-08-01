@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UnitMoveManager : MonoBehaviour
 {
@@ -13,6 +11,7 @@ public class UnitMoveManager : MonoBehaviour
 
     public void MiniMapUnitMove(int clickMiniMapImageInstancePositionX, int clickMiniMapImageInstancePositionZ)
     {
-        _selectMoveUnit.GetComponent<UnitMove>().MiniMapClickUnitMove(clickMiniMapImageInstancePositionX, clickMiniMapImageInstancePositionZ);
+        _selectMoveUnit.GetComponent<UnitMove>()
+            .MiniMapClickUnitMove(clickMiniMapImageInstancePositionX, clickMiniMapImageInstancePositionZ);
     }
 }

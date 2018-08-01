@@ -8,18 +8,14 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 {
     private MiniMapImageInstancePosition _miniMapImageInstancePosition = null;
 
-    //private List<GameObject> _unitList = null;
-    
+
     private string _nowPhase = null;
 
-    //private UnitAttackManager _unitAttackManager = null;
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Debug.Log("Clicked");
-
         _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
-        
+
         _miniMapImageInstancePosition = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>();
 
         if (_nowPhase == "SelectMoveUnit")
@@ -34,17 +30,17 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 if (unitPositionX == _miniMapImageInstancePosition.PosX &&
                     unitPositionZ == _miniMapImageInstancePosition.PosZ)
                 {
-                    //Debug.Log(_unitList[i].gameObject.name);
                     GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(unitList[i]);
                     GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectDestination");
                     Debug.Log("Phase: SelectDestination");
                     break;
                 }
-            }   
+            }
         }
         else if (_nowPhase == "SelectDestination")
         {
-            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().MiniMapUnitMove(_miniMapImageInstancePosition.PosX, _miniMapImageInstancePosition.PosZ);
+            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
+                .MiniMapUnitMove(_miniMapImageInstancePosition.PosX, _miniMapImageInstancePosition.PosZ);
             GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
             Debug.Log("Phase: SelectUseCard");
             GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(null);
@@ -53,8 +49,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
         {
             UnitAttackManager unitAttackManager =
                 GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
-            
-            List<UnitAttackManager.AttackerAndTarget> attackerAndTargetList = 
+
+            List<UnitAttackManager.AttackerAndTarget> attackerAndTargetList =
                 unitAttackManager.GetAttackerAndTargetList();
 
             foreach (UnitAttackManager.AttackerAndTarget attackerAndTarget in attackerAndTargetList)
@@ -67,7 +63,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 {
                     unitAttackManager.SetSelectedAttackerAndTargetUnit(attackerAndTarget);
                     Debug.Log("Debug: Set Attacker Unit");
-                    
+
                     if (attackerAndTarget.Target.Count == 1)
                     {
                         unitAttackManager.MiniMapUnitAttack(attackerAndTarget.Target[0]);
@@ -77,8 +73,10 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     else
                     {
                         Debug.Log("Phase: SelectAttackTargetUnit");
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectAttackTargetUnit");
+                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                            .SetNextPhase("SelectAttackTargetUnit");
                     }
+
                     break;
                 }
             }
@@ -87,8 +85,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
         {
             UnitAttackManager unitAttackManager =
                 GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
-            
-            List<GameObject> selectedTargetList = 
+
+            List<GameObject> selectedTargetList =
                 unitAttackManager.GetSelectedAttackerAndTargetUnit().Target;
 
             foreach (GameObject selectedTarget in selectedTargetList)
@@ -106,11 +104,10 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
             }
         }
 
-        //Debug.Log(this.gameObject.GetInstanceID());
         Debug.Log("PosX: " + _miniMapImageInstancePosition.PosX +
                   " PosZ: " + _miniMapImageInstancePosition.PosZ);
     }
-    
+
     //マップオブジェクトにマウスがホバーしたときに色を変更
     public void OnPointerEnter(PointerEventData eventData)
     {

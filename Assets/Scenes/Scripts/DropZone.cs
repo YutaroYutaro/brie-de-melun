@@ -9,16 +9,15 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     private string _nowPhase = null;
 
     public void OnPointerEnter(PointerEventData eventData)
-    {   
+    {
         _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
 
         if (_nowPhase == "SelectUseCard")
         {
             if (eventData.pointerDrag == null)
                 return;
-        
-            //Debug.Log ("OnPointerEnter");
-        
+
+
             Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
             if (dragObjectDraggable != null)
@@ -31,14 +30,13 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     public void OnPointerExit(PointerEventData eventData)
     {
         _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
-        
+
         if (_nowPhase == "SelectUseCard")
         {
             if (eventData.pointerDrag == null)
                 return;
-        
-            //Debug.Log ("OnPointerExit");
-        
+
+
             Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
             if (dragObjectDraggable != null && dragObjectDraggable.placeholderParent == transform)
@@ -47,14 +45,14 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             }
         }
     }
-    
+
     public async void OnDrop(PointerEventData eventData)
     {
         _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
-        
+
         if (_nowPhase == "SelectUseCard")
         {
-            Debug.Log (eventData.pointerDrag.name + "was dropped on " + gameObject.name);
+            Debug.Log(eventData.pointerDrag.name + "was dropped on " + gameObject.name);
 
             GameObject dragGameObject = eventData.pointerDrag;
             Draggable dragGameObjectDraggable = dragGameObject.GetComponent<Draggable>();
@@ -67,13 +65,13 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectMoveUnit");
                     Debug.Log("Phase: SelectMoveUnit");
                 }
-                else if (dragGameObject.CompareTag("AttackCard")) 
+                else if (dragGameObject.CompareTag("AttackCard"))
                 {
                     Debug.Log("This card is a " + dragGameObject.tag);
 
                     UnitAttackManager unitAttackManager =
                         GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
-                    
+
                     //攻撃できるユニットが存在するか判定
                     if (!(unitAttackManager.ExistAttackTargetUnit()))
                     {
@@ -87,7 +85,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     {
                         //ターゲットユニットが1体か判定
                         if (unitAttackManager
-                            .GetAttackerAndTargetList().First().Target.Count == 1)
+                                .GetAttackerAndTargetList().First().Target.Count == 1)
                         {
                             unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
                                 .GetAttackerAndTargetList().First());
@@ -101,7 +99,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
                                 .GetAttackerAndTargetList().First());
                             Debug.Log("Phase: SelectAttackTargetUnit");
-                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectAttackTargetUnit");
+                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectAttackTargetUnit");
                         }
                     }
                     else
@@ -110,10 +109,11 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectAttackerUnit");
                     }
                 }
-            
+
                 dragGameObjectDraggable.parentToReturnTo = transform;
                 await Task.Delay(TimeSpan.FromSeconds(1.0f));
-                Destroy(dragGameObject);
+                dragGameObject.transform.SetParent(GameObject.Find("Graveyard").transform);
+                dragGameObject.gameObject.SetActive(false);
             }
         }
     }
