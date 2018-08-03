@@ -12,6 +12,7 @@ TagManager:
   - UsedCardZone
   - Placeholder
   - AttackCard
+  - SummonCard
   layers:
   - Default
   - TransparentFX

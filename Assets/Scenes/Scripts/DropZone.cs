@@ -109,6 +109,10 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectAttackerUnit");
                     }
                 }
+                else if (dragGameObject.CompareTag("SummonCard"))
+                {
+                    Debug.Log("This is a SummonCard");
+                }
 
                 dragGameObjectDraggable.parentToReturnTo = transform;
                 await Task.Delay(TimeSpan.FromSeconds(1.0f));

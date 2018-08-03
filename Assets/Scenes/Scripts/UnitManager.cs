@@ -13,6 +13,8 @@ public class UnitManager : MonoBehaviour
         GameObject toggleInstance = Instantiate(CreatedUnit) as GameObject;
 
         MyUnitList.Add(toggleInstance);
+
+        toggleInstance.transform.SetParent(GameObject.Find("Player1Units").transform);
     }
 
     public List<GameObject> GetMyUnitList()
