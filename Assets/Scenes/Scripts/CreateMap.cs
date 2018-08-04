@@ -3,7 +3,7 @@
 public class CreateMap : MonoBehaviour
 {
     //生成するマップオブジェクト
-    public GameObject[] mapObject;
+    public GameObject[] MapObjectType;
 
     //生成するマップの大きさ
     public int maxPosX = 5;
@@ -28,22 +28,22 @@ public class CreateMap : MonoBehaviour
             for (; posZ < maxPosZ; posZ++)
             {
                 //生成するマップオブジェクトを選択
-                int objectNumber = Random.Range(0, mapObject.Length);
+                int objectNumber = Random.Range(0, MapObjectType.Length);
 
                 //マップオブジェクトごとの重みを保存
-                if (mapObject[objectNumber].name == "Field")
+                if (MapObjectType[objectNumber].name == "Field")
                 {
                     mapWeight[posX, posZ] = 1;
                 }
-                else if (mapObject[objectNumber].name == "Forest")
+                else if (MapObjectType[objectNumber].name == "Forest")
                 {
                     mapWeight[posX, posZ] = 2;
                 }
-                else if (mapObject[objectNumber].name == "GoldMine")
+                else if (MapObjectType[objectNumber].name == "GoldMine")
                 {
                     mapWeight[posX, posZ] = 1;
                 }
-                else if (mapObject[objectNumber].name == "Mount")
+                else if (MapObjectType[objectNumber].name == "Mount")
                 {
                     mapWeight[posX, posZ] = 5;
                 }
@@ -54,7 +54,16 @@ public class CreateMap : MonoBehaviour
                 q = Quaternion.identity;
 
                 //オブジェクトの生成
-                Instantiate(mapObject[objectNumber], position, q);
+                GameObject mapObject = Instantiate(MapObjectType[objectNumber], position, q);
+
+                if (posZ == 0 && (posX == 1 || posX == 2 || posX == 3))
+                {
+                    mapObject.transform.SetParent(GameObject.Find("ClearMapObjects").transform);
+                }
+                else
+                {
+                    mapObject.transform.SetParent(GameObject.Find("FoggyMapObjects").transform);
+                }
             }
 
             posZ = 0;
