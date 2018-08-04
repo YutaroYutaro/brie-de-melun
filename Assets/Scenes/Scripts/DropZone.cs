@@ -111,6 +111,43 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 }
                 else if (dragGameObject.CompareTag("SummonCard"))
                 {
+                    if (GameObject.Find("Player1Units").transform.childCount != 0)
+                    {
+                        Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
+                        bool existUnit1 = false;
+                        bool existUnit2 = false;
+                        bool existUnit3 = false;
+
+                        foreach (Transform player1UnitChild in player1UnitChildren)
+                        {
+                            if (Mathf.RoundToInt(player1UnitChild.position.x) == 1 &&
+                                Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                            {
+                                Debug.Log("Exist Unit (1, 1, 0)");
+                                existUnit1 = true;
+
+                            }
+                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
+                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                            {
+                                Debug.Log("Exist Unit (2, 1, 0)");
+                                existUnit2 = true;
+                            }
+                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 3 &&
+                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                            {
+                                Debug.Log("Exist Unit (3, 1, 0)");
+                                existUnit3 = true;
+                            }
+
+                            if (existUnit1 && existUnit2 && existUnit3)
+                            {
+                                Debug.Log("Can't Summon");
+                                dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                                return;
+                            }
+                        }
+                    }
                     Debug.Log("This is a SummonCard");
                     Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
                     GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
