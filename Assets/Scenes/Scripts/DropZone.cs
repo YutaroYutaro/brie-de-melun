@@ -112,6 +112,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 else if (dragGameObject.CompareTag("SummonCard"))
                 {
                     Debug.Log("This is a SummonCard");
+                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonProximityAttackUnit();
                 }
 
                 dragGameObjectDraggable.parentToReturnTo = transform;
