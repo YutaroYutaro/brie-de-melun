@@ -116,22 +116,39 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     if (GameObject.Find("Player1Units").transform.childCount != 0)
                     {
                         Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
+                        bool existUnit1 = false;
+                        bool existUnit2 = false;
+                        bool existUnit3 = false;
 
                         foreach (Transform player1UnitChild in player1UnitChildren)
                         {
-                            if (!(posX == Mathf.RoundToInt(player1UnitChild.position.x) &&
-                                  posZ == Mathf.RoundToInt(player1UnitChild.position.z)))
-                            {
-                                GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                    .SummonProximityAttackUnit(posX, posZ);
-                                Debug.Log("Phase: SelectUseCard");
-                                GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                    .SetNextPhase("SelectUseCard");
-                            }
-                            else
+                            if (Mathf.RoundToInt(player1UnitChild.position.x) == 1 &&
+                                Mathf.RoundToInt(player1UnitChild.position.z) == 0)
                             {
                                 Debug.Log("Exist Unit");
+                                existUnit1 = true;
                             }
+                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
+                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                            {
+                                Debug.Log("Exist Unit");
+                                existUnit2 = true;
+                            }
+                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 3 &&
+                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                            {
+                                Debug.Log("Exist Unit");
+                                existUnit3 = true;
+                            }
+                        }
+
+                        if (!existUnit1 && posX == 1 || !existUnit2 && posX == 2 || !existUnit3 && posX == 3)
+                        {
+                            GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                .SummonProximityAttackUnit(posX, posZ);
+                            Debug.Log("Phase: SelectUseCard");
+                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectUseCard");
                         }
                     }
                     else
