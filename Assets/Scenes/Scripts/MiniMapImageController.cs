@@ -104,6 +104,23 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
             }
         }
 
+        switch (_nowPhase)
+        {
+            case "SelectMiniMapPositionUnitSummon":
+                int posX = _miniMapImageInstancePosition.PosX;
+                int posZ = _miniMapImageInstancePosition.PosZ;
+
+                if (posZ == 0 && (posX == 1 || posX == 2 || posX == 3))
+                {
+                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                        .SummonProximityAttackUnit(posX, posZ);
+                    Debug.Log("Phase: SelectUseCard");
+                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
+                }
+
+                break;
+        }
+
         Debug.Log("PosX: " + _miniMapImageInstancePosition.PosX +
                   " PosZ: " + _miniMapImageInstancePosition.PosZ);
     }
