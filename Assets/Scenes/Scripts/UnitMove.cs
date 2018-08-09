@@ -42,7 +42,16 @@ public class UnitMove : MonoBehaviour
             if (Mathf.RoundToInt(enemyUnit.transform.position.x) == x &&
                 Mathf.RoundToInt(enemyUnit.transform.position.z) == z)
             {
-                GameObject.Find("FogManager").GetComponent<FogManager>().SetActiveUnitInFog(x, z);
+                GameObject surpriseAttacker = GameObject.Find("FogManager").GetComponent<FogManager>()
+                    .SetActiveUnitInFog(x, z);
+                if (surpriseAttacker != null)
+                {
+                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>()
+                        .SetSurpriseAttacker(surpriseAttacker);
+                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>()
+                        .SurpriseAttack(this.gameObject);
+                }
+
                 return true;
             }
         }

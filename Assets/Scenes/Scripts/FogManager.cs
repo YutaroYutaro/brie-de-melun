@@ -19,17 +19,21 @@ public class FogManager : MonoBehaviour
         }
     }
 
-    public void SetActiveUnitInFog(int unitPosX, int unitPosZ)
+    public GameObject SetActiveUnitInFog(int unitPosX, int unitPosZ)
     {
         Transform player2UnitsChildren = GameObject.Find("Player2Units").transform;
 
         foreach (Transform player2UnitsChild in player2UnitsChildren)
         {
             if (unitPosX == Mathf.RoundToInt(player2UnitsChild.position.x) &&
-                unitPosZ == Mathf.RoundToInt(player2UnitsChild.position.z))
+                unitPosZ == Mathf.RoundToInt(player2UnitsChild.position.z) &&
+                !(player2UnitsChild.gameObject.activeSelf))
             {
                 player2UnitsChild.gameObject.SetActive(true);
+                return player2UnitsChild.gameObject;
             }
         }
+
+        return null;
     }
 }
