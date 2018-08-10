@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using FogDefine;
 
 public class CreateMap : MonoBehaviour
 {
@@ -9,9 +10,6 @@ public class CreateMap : MonoBehaviour
     public int maxPosX = 5;
     public int maxPosZ = 7;
 
-    //マップオブジェクトを生成する座標
-    private int posX = 0;
-    private int posZ = 0;
 
     //マップ重み表
     private int[,] mapWeight;
@@ -23,9 +21,9 @@ public class CreateMap : MonoBehaviour
         mapWeight = new int[maxPosX, maxPosZ];
 
         //左下からマップ生成
-        for (; posX < maxPosX; posX++)
+        for (int posX = 0; posX < maxPosX; ++posX)
         {
-            for (; posZ < maxPosZ; posZ++)
+            for (int posZ = 0; posZ < maxPosZ; ++posZ)
             {
                 //生成するマップオブジェクトを選択
                 int objectNumber = Random.Range(0, MapObjectType.Length);
@@ -59,17 +57,28 @@ public class CreateMap : MonoBehaviour
                 if (posZ == 0 && (posX == 1 || posX == 2 || posX == 3))
                 {
                     mapObject.transform.SetParent(GameObject.Find("ClearMapObjects").transform);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_FALSE);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_TRUE);
+                }
+                else if (posZ == 6 && (posX == 1 || posX == 2 || posX == 3))
+                {
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_FALSE);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_TRUE);
                 }
                 else
                 {
                     mapObject.transform.SetParent(GameObject.Find("FoggyMapObjects").transform);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_TRUE);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_TRUE);
                 }
             }
-
-            posZ = 0;
         }
-
-        posX = 0;
     }
 
     //外部からマップの重み表を取得するメソッド

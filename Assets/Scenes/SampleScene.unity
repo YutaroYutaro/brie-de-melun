@@ -518,6 +518,7 @@ GameObject:
   - component: {fileID: 121988193}
   - component: {fileID: 121988192}
   - component: {fileID: 121988191}
+  - component: {fileID: 121988196}
   m_Layer: 0
   m_Name: TestUnit
   m_TagString: ProximityAttackUnit
@@ -607,6 +608,17 @@ Transform:
   m_Father: {fileID: 1452963235}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &121988196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 121988190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725c2af9a1d337145a62375adb270805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &127021778 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1371062022258188, guid: dcd9cd5977d39dd4b83a1cc9adc5d14d,
@@ -2750,6 +2762,7 @@ GameObject:
   - component: {fileID: 1536392512}
   - component: {fileID: 1536392511}
   - component: {fileID: 1536392510}
+  - component: {fileID: 1536392515}
   m_Layer: 0
   m_Name: TestUnit (1)
   m_TagString: ProximityAttackUnit
@@ -2839,6 +2852,17 @@ Transform:
   m_Father: {fileID: 1452963235}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1536392515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536392509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725c2af9a1d337145a62375adb270805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1635012302 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1913341401584546, guid: 61213bb74a322a4439df1f0e1d8ec3bb,

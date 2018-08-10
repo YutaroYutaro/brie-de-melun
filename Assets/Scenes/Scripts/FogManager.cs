@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class FogManager : MonoBehaviour
 {
+    public int[,] PlayerOneFogMapState = new int[5, 7];
+    public int[,] PlayerTwoFogMapState = new int[5, 7];
+
     public void ClearFog(int mapObjectPosX, int mapObjectPosZ)
     {
         Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
@@ -35,5 +38,25 @@ public class FogManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public int[,] GetPlayerOneFogMapState()
+    {
+        return PlayerOneFogMapState;
+    }
+
+    public void SetPlayerOneFogMapState(int posX, int posZ, int fogFlag)
+    {
+        PlayerOneFogMapState[posX, posZ] = fogFlag;
+    }
+
+    public int[,] GetPlayerTwoFogMapState()
+    {
+        return PlayerTwoFogMapState;
+    }
+
+    public void SetPlayerTwoFogMapState(int posX, int posZ, int fogFlag)
+    {
+        PlayerTwoFogMapState[posX, posZ] = fogFlag;
     }
 }
