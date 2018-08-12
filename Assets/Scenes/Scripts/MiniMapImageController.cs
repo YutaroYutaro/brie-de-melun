@@ -8,184 +8,131 @@ using SummonUnitTypeDefine;
 
 public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private MiniMapImageInstancePosition _miniMapImageInstancePosition = null;
-
-
-    private string _nowPhase = null;
-
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
+        string nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
 
-        _miniMapImageInstancePosition = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>();
+        int miniMapPosX = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>().PosX;
+        int miniMapPosZ = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>().PosZ;
 
-        if (_nowPhase == "SelectMoveUnit")
+        switch (nowPhase)
         {
-            List<GameObject> unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
+            case "SelectMoveUnit":
+                Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
 
-            for (int i = 0; i < unitList.Count; i++)
-            {
-                int unitPositionX = Mathf.RoundToInt(unitList[i].transform.position.x);
-                int unitPositionZ = Mathf.RoundToInt(unitList[i].transform.position.z);
-
-                if (unitPositionX == _miniMapImageInstancePosition.PosX &&
-                    unitPositionZ == _miniMapImageInstancePosition.PosZ)
+                foreach (Transform player1UnitChild in player1UnitChildren)
                 {
-                    GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(unitList[i]);
-                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectDestination");
-                    Debug.Log("Phase: SelectDestination");
-                    break;
-                }
-            }
-        }
-        else if (_nowPhase == "SelectDestination")
-        {
-            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
-                .MiniMapUnitMove(_miniMapImageInstancePosition.PosX, _miniMapImageInstancePosition.PosZ);
-            GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
-            Debug.Log("Phase: SelectUseCard");
-            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(null);
-        }
-        else if (_nowPhase == "SelectAttackerUnit")
-        {
-            UnitAttackManager unitAttackManager =
-                GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
-
-            List<UnitAttackManager.AttackerAndTarget> attackerAndTargetList =
-                unitAttackManager.GetAttackerAndTargetList();
-
-            foreach (UnitAttackManager.AttackerAndTarget attackerAndTarget in attackerAndTargetList)
-            {
-                int unitPositionX = Mathf.RoundToInt(attackerAndTarget.Attacker.transform.position.x);
-                int unitPositionZ = Mathf.RoundToInt(attackerAndTarget.Attacker.transform.position.z);
-
-                if (unitPositionX == _miniMapImageInstancePosition.PosX &&
-                    unitPositionZ == _miniMapImageInstancePosition.PosZ)
-                {
-                    unitAttackManager.SetSelectedAttackerAndTargetUnit(attackerAndTarget);
-                    Debug.Log("Debug: Set Attacker Unit");
-
-                    if (attackerAndTarget.Target.Count == 1)
+                    if (player1UnitChild.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
+                        player1UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
                     {
-                        unitAttackManager.MiniMapUnitAttack(attackerAndTarget.Target[0]);
+                        GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
+                            .SetMoveUnit(player1UnitChild.gameObject);
+                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectDestination");
+                        Debug.Log("Phase: SelectDestination");
+                        break;
+                    }
+                }
+
+                break;
+
+            case "SelectDestination":
+                GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
+                    .MiniMapUnitMove(miniMapPosX, miniMapPosZ);
+                GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
+                Debug.Log("Phase: SelectUseCard");
+                GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(null);
+                break;
+
+            case "SelectAttackerUnit":
+                UnitAttackManager unitAttackManager =
+                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
+
+                List<UnitAttackManager.AttackerAndTarget> attackerAndTargetList =
+                    unitAttackManager.GetAttackerAndTargetList();
+
+                foreach (UnitAttackManager.AttackerAndTarget attackerAndTarget in attackerAndTargetList)
+                {
+                    if (attackerAndTarget.Attacker.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
+                        attackerAndTarget.Attacker.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
+                    {
+                        unitAttackManager.SetSelectedAttackerAndTargetUnit(attackerAndTarget);
+                        Debug.Log("Debug: Set Attacker Unit");
+
+                        if (attackerAndTarget.Target.Count == 1)
+                        {
+                            unitAttackManager.MiniMapUnitAttack(attackerAndTarget.Target[0]);
+                            Debug.Log("Phase: SelectUseCard");
+                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
+                        }
+                        else
+                        {
+                            Debug.Log("Phase: SelectAttackTargetUnit");
+                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectAttackTargetUnit");
+                        }
+
+                        break;
+                    }
+                }
+
+                break;
+
+            case "SelectAttackTargetUnit":
+                unitAttackManager =
+                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
+
+                List<GameObject> selectedTargetList =
+                    unitAttackManager.GetSelectedAttackerAndTargetUnit().Target;
+
+                foreach (GameObject selectedTarget in selectedTargetList)
+                {
+                    if (selectedTarget.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
+                        selectedTarget.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
+                    {
+                        unitAttackManager.MiniMapUnitAttack(selectedTarget);
                         Debug.Log("Phase: SelectUseCard");
                         GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
                     }
-                    else
-                    {
-                        Debug.Log("Phase: SelectAttackTargetUnit");
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                            .SetNextPhase("SelectAttackTargetUnit");
-                    }
-
-                    break;
                 }
-            }
-        }
-        else if (_nowPhase == "SelectAttackTargetUnit")
-        {
-            UnitAttackManager unitAttackManager =
-                GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
 
-            List<GameObject> selectedTargetList =
-                unitAttackManager.GetSelectedAttackerAndTargetUnit().Target;
+                break;
 
-            foreach (GameObject selectedTarget in selectedTargetList)
-            {
-                int unitPositionX = Mathf.RoundToInt(selectedTarget.transform.position.x);
-                int unitPositionZ = Mathf.RoundToInt(selectedTarget.transform.position.z);
-
-                if (unitPositionX == _miniMapImageInstancePosition.PosX &&
-                    unitPositionZ == _miniMapImageInstancePosition.PosZ)
-                {
-                    unitAttackManager.MiniMapUnitAttack(selectedTarget);
-                    Debug.Log("Phase: SelectUseCard");
-                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
-                }
-            }
-        }
-
-        switch (_nowPhase)
-        {
             case "SelectMiniMapPositionUnitSummon":
-                int posX = _miniMapImageInstancePosition.PosX;
-                int posZ = _miniMapImageInstancePosition.PosZ;
-
-                if (posZ == 0 && (posX == 1 || posX == 2 || posX == 3))
+                if (miniMapPosZ == 0 && (miniMapPosX == 1 || miniMapPosX == 2 || miniMapPosX == 3))
                 {
                     if (GameObject.Find("Player1Units").transform.childCount != 0)
                     {
-                        Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
-                        bool existUnit1 = false;
-                        bool existUnit2 = false;
-                        bool existUnit3 = false;
+                        player1UnitChildren = GameObject.Find("Player1Units").transform;
 
                         foreach (Transform player1UnitChild in player1UnitChildren)
                         {
-                            if (Mathf.RoundToInt(player1UnitChild.position.x) == 1 &&
-                                Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                            if (player1UnitChild.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
+                                player1UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
                             {
                                 Debug.Log("Exist Unit");
-                                existUnit1 = true;
+                                return;
                             }
-                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
-                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                            {
-                                Debug.Log("Exist Unit");
-                                existUnit2 = true;
-                            }
-                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 3 &&
-                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                            {
-                                Debug.Log("Exist Unit");
-                                existUnit3 = true;
-                            }
-                        }
-
-                        if (!existUnit1 && posX == 1 || !existUnit2 && posX == 2 || !existUnit3 && posX == 3)
-                        {
-                            switch (GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                .SummonUnitType)
-                            {
-                                case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
-                                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                        .SummonProximityAttackUnit(posX, posZ);
-                                    break;
-                                case SummonUnitTypeDefine.SummonUnitType.REMOTE:
-                                    break;
-                                case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
-                                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                        .SummonReconnaissanceUnit(posX, posZ);
-                                    break;
-                            }
-
-                            Debug.Log("Phase: SelectUseCard");
-                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                .SetNextPhase("SelectUseCard");
                         }
                     }
-                    else
+
+                    switch (GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                        .SummonUnitType)
                     {
-                        switch (GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                            .SummonUnitType)
-                        {
-                            case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
-                                GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                    .SummonProximityAttackUnit(posX, posZ);
-                                break;
-                            case SummonUnitTypeDefine.SummonUnitType.REMOTE:
-                                break;
-                            case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
-                                GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                    .SummonReconnaissanceUnit(posX, posZ);
-                                break;
-                        }
-
-                        Debug.Log("Phase: SelectUseCard");
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                            .SetNextPhase("SelectUseCard");
+                        case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
+                            GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                .SummonProximityAttackUnit(miniMapPosX, miniMapPosZ);
+                            break;
+                        case SummonUnitTypeDefine.SummonUnitType.REMOTE:
+                            break;
+                        case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
+                            GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                .SummonReconnaissanceUnit(miniMapPosX, miniMapPosZ);
+                            break;
                     }
+
+                    Debug.Log("Phase: SelectUseCard");
+                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                        .SetNextPhase("SelectUseCard");
                 }
 
                 break;
@@ -193,8 +140,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 foreach (Transform unit in GameObject.Find("Player1Units").transform)
                 {
                     if (unit.gameObject.CompareTag("ReconnaissanceUnit") &&
-                        _miniMapImageInstancePosition.PosX == unit.GetComponent<UnitOwnIntPosition>().PosX &&
-                        _miniMapImageInstancePosition.PosZ == unit.GetComponent<UnitOwnIntPosition>().PosZ
+                        miniMapPosX == unit.GetComponent<UnitOwnIntPosition>().PosX &&
+                        miniMapPosZ == unit.GetComponent<UnitOwnIntPosition>().PosZ
                     )
                     {
                         unit.GetComponent<UnitReconnaissanceController>().UnitReconnaissance();
@@ -203,11 +150,16 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                             .SetNextPhase("SelectUseCard");
                     }
                 }
+
                 break;
+            default:
+                Debug.Log("PosX: " + miniMapPosX +
+                          " PosZ: " + miniMapPosZ);
+                return;
         }
 
-        Debug.Log("PosX: " + _miniMapImageInstancePosition.PosX +
-                  " PosZ: " + _miniMapImageInstancePosition.PosZ);
+        Debug.Log("PosX: " + miniMapPosX +
+                  " PosZ: " + miniMapPosZ);
     }
 
     //マップオブジェクトにマウスがホバーしたときに色を変更
