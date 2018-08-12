@@ -151,9 +151,50 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
                         dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
                     Debug.Log("This is a SummonCard");
-                    Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
+                                                 Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
                     GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
                         .SetNextPhase("SelectMiniMapPositionUnitSummon");
+                }
+
+                switch (dragGameObject.tag)
+                {
+                    case "ReconnaissanceCard":
+                        int numberOfReconnaissanceUnit = 0;
+                        GameObject aloneReconnaissanceUnit = new GameObject();
+                        foreach (Transform unit in GameObject.Find("Player1Units").transform)
+                        {
+                            if (unit.gameObject.CompareTag("ReconnaissanceUnit"))
+                            {
+                                ++numberOfReconnaissanceUnit;
+                                aloneReconnaissanceUnit = unit.gameObject;
+                            }
+                        }
+
+                        if (numberOfReconnaissanceUnit == 1)
+                        {
+                            Debug.Log("This is a ReconnaissanceCard");
+                            aloneReconnaissanceUnit.GetComponent<UnitReconnaissanceController>().UnitReconnaissance();
+
+                            Debug.Log("Phase: SelectUseCard");
+                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectUseCard");
+                        }
+                        else if (numberOfReconnaissanceUnit > 1)
+                        {
+                            Debug.Log("Phase: SelectUseCard");
+                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectUseCard");
+                        }
+                        else
+                        {
+                            dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                            Debug.Log("Don't exist ReconnaissanceUnit.");
+                            return;
+                        }
+
+                        break;
+                    default:
+                        break;
                 }
 
                 dragGameObjectDraggable.parentToReturnTo = transform;
