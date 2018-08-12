@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FogDefine;
 
 public class UnitAttack : MonoBehaviour
 {
@@ -27,8 +28,27 @@ public class UnitAttack : MonoBehaviour
         targetUnit.SetActive(true);
         //await Task.Delay(TimeSpan.FromSeconds(0.1f));
 
+        int[,] playerTwoFogMapState =
+            GameObject.Find("FogManager").GetComponent<FogManager>().GetPlayerTwoFogMapState();
 
-        _targetStatus.HitPoint -= (_attackerStatus.AttackPoint - _targetStatus.DefensPoint);
+        if (playerTwoFogMapState[
+                GetComponent<UnitOwnIntPosition>().PosX,
+                GetComponent<UnitOwnIntPosition>().PosZ
+
+            ]
+            == Fog.FOG_EXIST)
+        {
+            _targetStatus.HitPoint -= _attackerStatus.AttackPoint;
+            GameObject.Find("FogManager").GetComponent<FogManager>().SetPlayerTwoFogMapState(
+                GetComponent<UnitOwnIntPosition>().PosX,
+                GetComponent<UnitOwnIntPosition>().PosZ,
+                Fog.FOG_NOT_EXIST
+            );
+        }
+        else
+        {
+            _targetStatus.HitPoint -= (_attackerStatus.AttackPoint - _targetStatus.DefensPoint);
+        }
 
         _targetStatus.SetUnitStatus(_targetStatus);
     }

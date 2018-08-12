@@ -519,6 +519,7 @@ GameObject:
   - component: {fileID: 121988192}
   - component: {fileID: 121988191}
   - component: {fileID: 121988196}
+  - component: {fileID: 121988197}
   m_Layer: 0
   m_Name: TestUnit
   m_TagString: ProximityAttackUnit
@@ -619,6 +620,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725c2af9a1d337145a62375adb270805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &121988197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 121988190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7c051a5829a7e4dbcd96a795009be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PosX: 0
+  PosZ: 9
 --- !u!1 &127021778 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1371062022258188, guid: dcd9cd5977d39dd4b83a1cc9adc5d14d,
@@ -2763,6 +2777,7 @@ GameObject:
   - component: {fileID: 1536392511}
   - component: {fileID: 1536392510}
   - component: {fileID: 1536392515}
+  - component: {fileID: 1536392516}
   m_Layer: 0
   m_Name: TestUnit (1)
   m_TagString: ProximityAttackUnit
@@ -2863,6 +2878,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725c2af9a1d337145a62375adb270805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1536392516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1536392509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7c051a5829a7e4dbcd96a795009be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PosX: 3
+  PosZ: 5
 --- !u!1 &1635012302 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1913341401584546, guid: 61213bb74a322a4439df1f0e1d8ec3bb,
