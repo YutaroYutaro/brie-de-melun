@@ -29,6 +29,10 @@ public class UnitStatus : MonoBehaviour
         }
         else
         {
+            this.HitPoint = 3;
+            this.AttackPoint = 0;
+            this.DefensPoint = 0;
+            this.MovementPoint = 2;
         }
     }
 

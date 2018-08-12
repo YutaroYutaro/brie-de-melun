@@ -125,7 +125,6 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             {
                                 Debug.Log("Exist Unit (1, 1, 0)");
                                 existUnit1 = true;
-
                             }
                             else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
                                      Mathf.RoundToInt(player1UnitChild.position.z) == 0)
@@ -148,6 +147,9 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             }
                         }
                     }
+
+                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
+                        dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
                     Debug.Log("This is a SummonCard");
                     Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
                     GameObject.Find("PhaseManager").GetComponent<PhaseManager>()

@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using SummonUnitTypeDefine;
 
 public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -144,8 +145,21 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 
                         if (!existUnit1 && posX == 1 || !existUnit2 && posX == 2 || !existUnit3 && posX == 3)
                         {
-                            GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                .SummonProximityAttackUnit(posX, posZ);
+                            switch (GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                .SummonUnitType)
+                            {
+                                case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
+                                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                        .SummonProximityAttackUnit(posX, posZ);
+                                    break;
+                                case SummonUnitTypeDefine.SummonUnitType.REMOTE:
+                                    break;
+                                case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
+                                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                        .SummonReconnaissanceUnit(posX, posZ);
+                                    break;
+                            }
+
                             Debug.Log("Phase: SelectUseCard");
                             GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
                                 .SetNextPhase("SelectUseCard");
@@ -153,8 +167,21 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     }
                     else
                     {
-                        GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                            .SummonProximityAttackUnit(posX, posZ);
+                        switch (GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                            .SummonUnitType)
+                        {
+                            case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
+                                GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                    .SummonProximityAttackUnit(posX, posZ);
+                                break;
+                            case SummonUnitTypeDefine.SummonUnitType.REMOTE:
+                                break;
+                            case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
+                                GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
+                                    .SummonReconnaissanceUnit(posX, posZ);
+                                break;
+                        }
+
                         Debug.Log("Phase: SelectUseCard");
                         GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
                             .SetNextPhase("SelectUseCard");

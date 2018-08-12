@@ -13,6 +13,7 @@ TagManager:
   - Placeholder
   - AttackCard
   - SummonCard
+  - ReconnaissanceCard
   layers:
   - Default
   - TransparentFX

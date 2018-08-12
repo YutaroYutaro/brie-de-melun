@@ -32,7 +32,7 @@ public class UnitSummonGenerator : MonoBehaviour
 
     public void SummonReconnaissanceUnit(int posX, int posZ)
     {
-        GameObject reconnaissanecUnit = Instantiate(ReconnaissanecPrefab);
+        GameObject reconnaissanecUnit = Instantiate(ReconnaissanecPrefab, new Vector3(posX, 1.5f , posZ), Quaternion.identity);
 
         reconnaissanecUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
 
