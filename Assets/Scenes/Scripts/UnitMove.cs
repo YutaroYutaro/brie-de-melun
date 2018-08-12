@@ -42,6 +42,16 @@ public class UnitMove : MonoBehaviour
             if (Mathf.RoundToInt(enemyUnit.transform.position.x) == x &&
                 Mathf.RoundToInt(enemyUnit.transform.position.z) == z)
             {
+                GameObject surpriseAttacker = GameObject.Find("FogManager").GetComponent<FogManager>()
+                    .SetActiveUnitInFog(x, z);
+                if (surpriseAttacker != null)
+                {
+                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>()
+                        .SetSurpriseAttacker(surpriseAttacker);
+                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>()
+                        .SurpriseAttack(this.gameObject);
+                }
+
                 return true;
             }
         }
@@ -82,6 +92,9 @@ public class UnitMove : MonoBehaviour
             _nextDestination.x = nextNode.idX;
             _nextDestination.y = 1;
             _nextDestination.z = nextNode.idZ;
+
+            GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(nextNode.idX, nextNode.idZ);
+            GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(nextNode.idX, nextNode.idZ);
 
             //次に移動するノードに移動
             transform.DOMove(_nextDestination, 0.4f);

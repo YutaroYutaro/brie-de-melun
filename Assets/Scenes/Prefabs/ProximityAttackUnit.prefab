@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114059720868609728}
   - component: {fileID: 114210444239336606}
   - component: {fileID: 114016887889937128}
+  - component: {fileID: 114491221045023194}
+  - component: {fileID: 114921153611014486}
   m_Layer: 0
   m_Name: ProximityAttackUnit
   m_TagString: ProximityAttackUnit
@@ -124,6 +126,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05b6b38add88c74aac183858433bec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114491221045023194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072443327872678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9ab88e748c68c4ab8b670b0efbbfd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPoint: 0
+  AttackPoint: 0
+  DefensPoint: 0
+  MovementPoint: 0
+--- !u!114 &114921153611014486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1072443327872678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7c051a5829a7e4dbcd96a795009be4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PosX: 0
+  PosZ: 0
 --- !u!135 &135321891859641806
 SphereCollider:
   m_ObjectHideFlags: 1

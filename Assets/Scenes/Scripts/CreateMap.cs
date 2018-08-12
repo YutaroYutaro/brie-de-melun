@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
+using FogDefine;
 
 public class CreateMap : MonoBehaviour
 {
     //生成するマップオブジェクト
-    public GameObject[] mapObject;
+    public GameObject[] MapObjectType;
+
+    public Material FogMaterial;
 
     //生成するマップの大きさ
     public int maxPosX = 5;
     public int maxPosZ = 7;
 
-    //マップオブジェクトを生成する座標
-    private int posX = 0;
-    private int posZ = 0;
 
     //マップ重み表
     private int[,] mapWeight;
+    private int[,] mapObjectTypeTable = new int[5, 7];
 
     // Use this for initialization
     void Start()
@@ -23,29 +24,33 @@ public class CreateMap : MonoBehaviour
         mapWeight = new int[maxPosX, maxPosZ];
 
         //左下からマップ生成
-        for (; posX < maxPosX; posX++)
+        for (int posX = 0; posX < maxPosX; ++posX)
         {
-            for (; posZ < maxPosZ; posZ++)
+            for (int posZ = 0; posZ < maxPosZ; ++posZ)
             {
                 //生成するマップオブジェクトを選択
-                int objectNumber = Random.Range(0, mapObject.Length);
+                int objectNumber = Random.Range(0, MapObjectType.Length);
 
                 //マップオブジェクトごとの重みを保存
-                if (mapObject[objectNumber].name == "Field")
+                if (MapObjectType[objectNumber].name == "Field")
                 {
                     mapWeight[posX, posZ] = 1;
+                    mapObjectTypeTable[posX, posZ] = 0;
                 }
-                else if (mapObject[objectNumber].name == "Forest")
+                else if (MapObjectType[objectNumber].name == "Forest")
                 {
                     mapWeight[posX, posZ] = 2;
+                    mapObjectTypeTable[posX, posZ] = 1;
                 }
-                else if (mapObject[objectNumber].name == "GoldMine")
+                else if (MapObjectType[objectNumber].name == "GoldMine")
                 {
                     mapWeight[posX, posZ] = 1;
+                    mapObjectTypeTable[posX, posZ] = 2;
                 }
-                else if (mapObject[objectNumber].name == "Mount")
+                else if (MapObjectType[objectNumber].name == "Mount")
                 {
                     mapWeight[posX, posZ] = 5;
+                    mapObjectTypeTable[posX, posZ] = 3;
                 }
 
                 //オブジェクトの設置位置を設定
@@ -54,18 +59,46 @@ public class CreateMap : MonoBehaviour
                 q = Quaternion.identity;
 
                 //オブジェクトの生成
-                Instantiate(mapObject[objectNumber], position, q);
+                GameObject mapObject = Instantiate(MapObjectType[objectNumber], position, q);
+
+                if (posZ == 0 && (posX == 1 || posX == 2 || posX == 3))
+                {
+                    mapObject.transform.SetParent(GameObject.Find("ClearMapObjects").transform);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_NOT_EXIST);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_EXIST);
+
+                }
+                else if (posZ == 6 && (posX == 1 || posX == 2 || posX == 3))
+                {
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_NOT_EXIST);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_EXIST);
+                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
+                }
+                else
+                {
+                    mapObject.transform.SetParent(GameObject.Find("FoggyMapObjects").transform);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_EXIST);
+                    GameObject.Find("FogManager").GetComponent<FogManager>()
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_EXIST);
+                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
+                }
             }
-
-            posZ = 0;
         }
-
-        posX = 0;
     }
 
     //外部からマップの重み表を取得するメソッド
     public int[,] GetMapWeight()
     {
         return mapWeight;
+    }
+
+    public int GetMapObjectTypeTable(int posX, int posZ)
+    {
+        return mapObjectTypeTable[posX, posZ];
     }
 }

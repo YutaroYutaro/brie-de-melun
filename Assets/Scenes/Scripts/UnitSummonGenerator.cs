@@ -15,6 +15,9 @@ public class UnitSummonGenerator : MonoBehaviour
         proximityUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
 
         GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList().Add(proximityUnit);
+
+        proximityUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
+        proximityUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
     }
 
     public void SummonRemoteAttackUnit()

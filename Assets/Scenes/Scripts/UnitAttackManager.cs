@@ -20,6 +20,8 @@ public class UnitAttackManager : MonoBehaviour
 
     private AttackerAndTarget _selectedAttackerAndTarget;
 
+    private GameObject _surpriseAttacker;
+
 
     public bool ExistAttackTargetUnit()
     {
@@ -46,7 +48,8 @@ public class UnitAttackManager : MonoBehaviour
                 int absZ = Math.Abs(targetUnitPositionZ - attackerUnitPositionZ);
 
                 if (attackerUnit.CompareTag("ProximityAttackUnit") &&
-                    (absX == 0 && absZ == 1 || absX == 1 && absZ == 0))
+                    (absX == 0 && absZ == 1 || absX == 1 && absZ == 0) &&
+                    targetUnit.activeSelf)
                 {
                     attackerAndTarget.Target.Add(targetUnit);
                 }
@@ -77,6 +80,11 @@ public class UnitAttackManager : MonoBehaviour
         return _selectedAttackerAndTarget;
     }
 
+    public void SetSurpriseAttacker(GameObject surpriseAttackTarget)
+    {
+        _surpriseAttacker = surpriseAttackTarget;
+    }
+
     public void ClearGetAttackerAndTargetList()
     {
         _attackerAndTargetList.Clear();
@@ -85,5 +93,10 @@ public class UnitAttackManager : MonoBehaviour
     public void MiniMapUnitAttack(GameObject targetUnit)
     {
         _selectedAttackerAndTarget.Attacker.GetComponent<UnitAttack>().MiniMapClickUnitAttack(targetUnit);
+    }
+
+    public void SurpriseAttack(GameObject targetUnit)
+    {
+        _surpriseAttacker.GetComponent<UnitAttack>().SurpriseAttack(targetUnit);
     }
 }
