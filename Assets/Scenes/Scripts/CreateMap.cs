@@ -6,6 +6,8 @@ public class CreateMap : MonoBehaviour
     //生成するマップオブジェクト
     public GameObject[] MapObjectType;
 
+    public Material FogMaterial;
+
     //生成するマップの大きさ
     public int maxPosX = 5;
     public int maxPosZ = 7;
@@ -13,6 +15,7 @@ public class CreateMap : MonoBehaviour
 
     //マップ重み表
     private int[,] mapWeight;
+    private int[,] mapObjectTypeTable = new int[5, 7];
 
     // Use this for initialization
     void Start()
@@ -32,18 +35,22 @@ public class CreateMap : MonoBehaviour
                 if (MapObjectType[objectNumber].name == "Field")
                 {
                     mapWeight[posX, posZ] = 1;
+                    mapObjectTypeTable[posX, posZ] = 0;
                 }
                 else if (MapObjectType[objectNumber].name == "Forest")
                 {
                     mapWeight[posX, posZ] = 2;
+                    mapObjectTypeTable[posX, posZ] = 1;
                 }
                 else if (MapObjectType[objectNumber].name == "GoldMine")
                 {
                     mapWeight[posX, posZ] = 1;
+                    mapObjectTypeTable[posX, posZ] = 2;
                 }
                 else if (MapObjectType[objectNumber].name == "Mount")
                 {
                     mapWeight[posX, posZ] = 5;
+                    mapObjectTypeTable[posX, posZ] = 3;
                 }
 
                 //オブジェクトの設置位置を設定
@@ -61,6 +68,7 @@ public class CreateMap : MonoBehaviour
                         .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_NOT_EXIST);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
                         .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_EXIST);
+
                 }
                 else if (posZ == 6 && (posX == 1 || posX == 2 || posX == 3))
                 {
@@ -68,6 +76,7 @@ public class CreateMap : MonoBehaviour
                         .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_NOT_EXIST);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
                         .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_EXIST);
+                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
                 }
                 else
                 {
@@ -76,6 +85,7 @@ public class CreateMap : MonoBehaviour
                         .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_EXIST);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
                         .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_EXIST);
+                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
                 }
             }
         }
@@ -85,5 +95,10 @@ public class CreateMap : MonoBehaviour
     public int[,] GetMapWeight()
     {
         return mapWeight;
+    }
+
+    public int GetMapObjectTypeTable(int posX, int posZ)
+    {
+        return mapObjectTypeTable[posX, posZ];
     }
 }

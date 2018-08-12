@@ -8,6 +8,8 @@ public class FogManager : MonoBehaviour
     public int[,] PlayerOneFogMapState = new int[5, 7];
     public int[,] PlayerTwoFogMapState = new int[5, 7];
 
+    public Material[] MaterialTypeList;
+
     public void ClearFog(int mapObjectPosX, int mapObjectPosZ)
     {
         Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
@@ -18,6 +20,12 @@ public class FogManager : MonoBehaviour
                 (mapObjectPosZ == Mathf.RoundToInt(foggyMapObjectsChild.position.z)))
             {
                 foggyMapObjectsChild.transform.SetParent(GameObject.Find("ClearMapObjects").transform);
+                foggyMapObjectsChild.GetComponent<Renderer>().material.color = MaterialTypeList[
+                    GameObject.Find("Map").GetComponent<CreateMap>().GetMapObjectTypeTable(
+                        Mathf.RoundToInt(foggyMapObjectsChild.position.x),
+                        Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+                        )
+                ].color;
             }
         }
     }
