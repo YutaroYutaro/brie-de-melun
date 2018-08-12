@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9ab88e748c68c4ab8b670b0efbbfd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitPoint: 3
+  HitPoint: 0
   AttackPoint: 0
   DefensPoint: 0
-  MovementPoint: 2
+  MovementPoint: 0
 --- !u!135 &135248540032526956
 SphereCollider:
   m_ObjectHideFlags: 1

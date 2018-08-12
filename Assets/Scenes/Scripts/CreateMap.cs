@@ -72,6 +72,7 @@ public class CreateMap : MonoBehaviour
                 }
                 else if (posZ == 6 && (posX == 1 || posX == 2 || posX == 3))
                 {
+                    mapObject.transform.SetParent(GameObject.Find("FoggyMapObjects").transform);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
                         .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_NOT_EXIST);
                     GameObject.Find("FogManager").GetComponent<FogManager>()

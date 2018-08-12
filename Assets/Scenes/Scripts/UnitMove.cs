@@ -90,7 +90,20 @@ public class UnitMove : MonoBehaviour
 
             //次に移動するノードの座標
             _nextDestination.x = nextNode.idX;
-            _nextDestination.y = 1;
+            switch (tag)
+            {
+                case "ProximityAttackUnit":
+                case "RemoteAttackUnit":
+                    _nextDestination.y = 1;
+                    break;
+                case "ReconnaissanceUnit":
+                    _nextDestination.y = 1.5f;
+                    break;
+                default:
+                    _nextDestination.y = 1;
+                    break;
+            }
+
             _nextDestination.z = nextNode.idZ;
 
             GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(nextNode.idX, nextNode.idZ);
