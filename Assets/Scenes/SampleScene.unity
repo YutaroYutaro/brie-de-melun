@@ -526,7 +526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &121988191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,6 +1464,7 @@ MonoBehaviour:
   - {fileID: 1359637190812822, guid: a3447899950fe7d4f822711540952422, type: 2}
   - {fileID: 1248666034343664, guid: a3447899950fe7d4f822711540952422, type: 2}
   - {fileID: 1335605040980320, guid: a3447899950fe7d4f822711540952422, type: 2}
+  FogMaterial: {fileID: 2100000, guid: df06340a82993114eaab366aae622968, type: 2}
   maxPosX: 5
   maxPosZ: 7
 --- !u!4 &641598220
@@ -1898,6 +1899,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c211f27d16dc9244984c2b2289d38d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaterialTypeList:
+  - {fileID: 2100000, guid: 6e15c575c7e3f014eb5dcda5b0e2dd59, type: 2}
+  - {fileID: 2100000, guid: 985fed667153d0243b758eb011bf9108, type: 2}
+  - {fileID: 2100000, guid: fa11ee5d7dee34c4ea8e2a5df279b48a, type: 2}
+  - {fileID: 2100000, guid: 1d0f6f5d2b4645846a220779cf14ee92, type: 2}
 --- !u!4 &805519446
 Transform:
   m_ObjectHideFlags: 0
