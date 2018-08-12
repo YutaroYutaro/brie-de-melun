@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private string _nowPhase = null;
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
-
-        if (_nowPhase == "SelectUseCard")
+        if (GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase() == "SelectUseCard")
         {
             if (eventData.pointerDrag == null)
                 return;
-
 
             Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
@@ -29,13 +24,10 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
-
-        if (_nowPhase == "SelectUseCard")
+        if (GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase() == "SelectUseCard")
         {
             if (eventData.pointerDrag == null)
                 return;
-
 
             Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
@@ -49,121 +41,128 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     public async void OnDrop(PointerEventData eventData)
     {
         if (name == "Hand")
-        {
-            Debug.Log("Here is Hand Zone.");
             return;
-        }
 
-        _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
-
-        if (_nowPhase == "SelectUseCard")
+        if (GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase() == "SelectUseCard")
         {
-            Debug.Log(eventData.pointerDrag.name + "was dropped on " + gameObject.name);
+            Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
 
             GameObject dragGameObject = eventData.pointerDrag;
             Draggable dragGameObjectDraggable = dragGameObject.GetComponent<Draggable>();
 
             if (dragGameObjectDraggable != null)
             {
-                if (dragGameObject.CompareTag("MoveCard"))
+                switch (dragGameObject.tag)
                 {
-                    Debug.Log("This card is a " + dragGameObject.tag);
-                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectMoveUnit");
-                    Debug.Log("Phase: SelectMoveUnit");
-                }
-                else if (dragGameObject.CompareTag("AttackCard"))
-                {
-                    Debug.Log("This card is a " + dragGameObject.tag);
-
-                    UnitAttackManager unitAttackManager =
-                        GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
-
-                    //攻撃できるユニットが存在するか判定
-                    if (!(unitAttackManager.ExistAttackTargetUnit()))
-                    {
-                        dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
-                        Debug.Log("Don't exist target.");
-                        return;
-                    }
-
-                    //アタッカーユニットが1体か判定
-                    if (unitAttackManager.GetAttackerAndTargetList().Count == 1)
-                    {
-                        //ターゲットユニットが1体か判定
-                        if (unitAttackManager
-                                .GetAttackerAndTargetList().First().Target.Count == 1)
+                    case "MoveCard":
+                        if (GameObject.Find("Player1Units").transform.childCount == 0)
                         {
-                            unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
-                                .GetAttackerAndTargetList().First());
-                            unitAttackManager.MiniMapUnitAttack(unitAttackManager
-                                .GetAttackerAndTargetList().First().Target.First());
-                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
-                            Debug.Log("Phase: SelectUseCard");
+                            dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                            Debug.Log("Don't exist MyUnit.");
+                            return;
+                        }
+
+                        Debug.Log("This card is a " + dragGameObject.tag);
+                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectMoveUnit");
+                        Debug.Log("Phase: SelectMoveUnit");
+
+                        break;
+
+                    case "AttackCard":
+                        Debug.Log("This card is a " + dragGameObject.tag);
+
+                        UnitAttackManager unitAttackManager =
+                            GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
+
+                        //攻撃できるユニットが存在するか判定
+                        if (!(unitAttackManager.ExistAttackTargetUnit()))
+                        {
+                            dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                            Debug.Log("Don't exist Attacker or Target.");
+                            return;
+                        }
+
+                        //アタッカーユニットが1体か判定
+                        if (unitAttackManager.GetAttackerAndTargetList().Count == 1)
+                        {
+                            //ターゲットユニットが1体か判定
+                            if (unitAttackManager
+                                    .GetAttackerAndTargetList().First().Target.Count == 1)
+                            {
+                                unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
+                                    .GetAttackerAndTargetList().First());
+                                unitAttackManager.MiniMapUnitAttack(unitAttackManager
+                                    .GetAttackerAndTargetList().First().Target.First());
+                                GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                                    .SetNextPhase("SelectUseCard");
+                                Debug.Log("Phase: SelectUseCard");
+                            }
+                            else
+                            {
+                                unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
+                                    .GetAttackerAndTargetList().First());
+                                Debug.Log("Phase: SelectAttackTargetUnit");
+                                GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                                    .SetNextPhase("SelectAttackTargetUnit");
+                            }
                         }
                         else
                         {
-                            unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
-                                .GetAttackerAndTargetList().First());
-                            Debug.Log("Phase: SelectAttackTargetUnit");
+                            Debug.Log("Phase: SelectAttackerUnit");
                             GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                .SetNextPhase("SelectAttackTargetUnit");
+                                .SetNextPhase("SelectAttackerUnit");
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("Phase: SelectAttackerUnit");
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectAttackerUnit");
-                    }
-                }
-                else if (dragGameObject.CompareTag("SummonCard"))
-                {
-                    if (GameObject.Find("Player1Units").transform.childCount != 0)
-                    {
-                        Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
-                        bool existUnit1 = false;
-                        bool existUnit2 = false;
-                        bool existUnit3 = false;
 
-                        foreach (Transform player1UnitChild in player1UnitChildren)
+                        break;
+
+                    case "SummonCard":
+                        if (GameObject.Find("Player1Units").transform.childCount != 0)
                         {
-                            if (Mathf.RoundToInt(player1UnitChild.position.x) == 1 &&
-                                Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                            {
-                                Debug.Log("Exist Unit (1, 1, 0)");
-                                existUnit1 = true;
-                            }
-                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
-                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                            {
-                                Debug.Log("Exist Unit (2, 1, 0)");
-                                existUnit2 = true;
-                            }
-                            else if (Mathf.RoundToInt(player1UnitChild.position.x) == 3 &&
-                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                            {
-                                Debug.Log("Exist Unit (3, 1, 0)");
-                                existUnit3 = true;
-                            }
+                            Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
+                            bool existUnit1 = false;
+                            bool existUnit2 = false;
+                            bool existUnit3 = false;
 
-                            if (existUnit1 && existUnit2 && existUnit3)
+                            foreach (Transform player1UnitChild in player1UnitChildren)
                             {
-                                Debug.Log("Can't Summon");
-                                dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
-                                return;
+                                if (Mathf.RoundToInt(player1UnitChild.position.x) == 1 &&
+                                    Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                                {
+                                    Debug.Log("Exist Unit (1, 1, 0)");
+                                    existUnit1 = true;
+                                }
+                                else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
+                                         Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                                {
+                                    Debug.Log("Exist Unit (2, 1, 0)");
+                                    existUnit2 = true;
+                                }
+                                else if (Mathf.RoundToInt(player1UnitChild.position.x) == 3 &&
+                                         Mathf.RoundToInt(player1UnitChild.position.z) == 0)
+                                {
+                                    Debug.Log("Exist Unit (3, 1, 0)");
+                                    existUnit3 = true;
+                                }
+
+                                if (existUnit1 && existUnit2 && existUnit3)
+                                {
+                                    Debug.Log("Can't Summon");
+                                    dragGameObjectDraggable.placeholderParent =
+                                        dragGameObjectDraggable.parentToReturnTo;
+                                    return;
+                                }
                             }
                         }
-                    }
 
-                    GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
-                        dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
-                    Debug.Log("This is a SummonCard");
-                                                 Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
-                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                        .SetNextPhase("SelectMiniMapPositionUnitSummon");
-                }
+                        GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
+                            dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
+                        Debug.Log("This is a SummonCard");
+                        Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
+                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                            .SetNextPhase("SelectMiniMapPositionUnitSummon");
 
-                switch (dragGameObject.tag)
-                {
+                        break;
+
                     case "ReconnaissanceCard":
                         int numberOfReconnaissanceUnit = 0;
                         GameObject aloneReconnaissanceUnit = new GameObject();
@@ -197,11 +196,13 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             Debug.Log("Don't exist ReconnaissanceUnit.");
                             return;
                         }
+
                         break;
-//                    default:
-//                        dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
-//                        Debug.Log("Don't exist this card type.");
-//                        return;
+
+                    default:
+                        dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                        Debug.Log("Don't exist this card type.");
+                        return;
                 }
 
                 dragGameObjectDraggable.parentToReturnTo = transform;
