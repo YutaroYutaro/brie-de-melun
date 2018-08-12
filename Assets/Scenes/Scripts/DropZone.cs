@@ -48,6 +48,12 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public async void OnDrop(PointerEventData eventData)
     {
+        if (name == "Hand")
+        {
+            Debug.Log("Here is Hand Zone.");
+            return;
+        }
+
         _nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
 
         if (_nowPhase == "SelectUseCard")

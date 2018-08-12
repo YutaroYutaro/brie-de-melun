@@ -41,6 +41,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
                 Debug.Log("Phase: SelectUseCard");
                 GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(null);
+
                 break;
 
             case "SelectAttackerUnit":
@@ -136,6 +137,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 }
 
                 break;
+
             case "SelectReconnaissanceUnit":
                 foreach (Transform unit in GameObject.Find("Player1Units").transform)
                 {
@@ -152,6 +154,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 }
 
                 break;
+
             default:
                 Debug.Log("PosX: " + miniMapPosX +
                           " PosZ: " + miniMapPosZ);
