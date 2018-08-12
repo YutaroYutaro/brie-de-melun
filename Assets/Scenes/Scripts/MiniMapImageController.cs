@@ -189,6 +189,21 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 }
 
                 break;
+            case "SelectReconnaissanceUnit":
+                foreach (Transform unit in GameObject.Find("Player1Units").transform)
+                {
+                    if (unit.gameObject.CompareTag("ReconnaissanceUnit") &&
+                        _miniMapImageInstancePosition.PosX == unit.GetComponent<UnitOwnIntPosition>().PosX &&
+                        _miniMapImageInstancePosition.PosZ == unit.GetComponent<UnitOwnIntPosition>().PosZ
+                    )
+                    {
+                        unit.GetComponent<UnitReconnaissanceController>().UnitReconnaissance();
+                        Debug.Log("Phase: SelectUseCard");
+                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                            .SetNextPhase("SelectUseCard");
+                    }
+                }
+                break;
         }
 
         Debug.Log("PosX: " + _miniMapImageInstancePosition.PosX +

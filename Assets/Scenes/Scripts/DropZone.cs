@@ -181,9 +181,9 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         }
                         else if (numberOfReconnaissanceUnit > 1)
                         {
-                            Debug.Log("Phase: SelectUseCard");
+                            Debug.Log("Phase: SelectReconnaissanceUnit");
                             GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                .SetNextPhase("SelectUseCard");
+                                .SetNextPhase("SelectReconnaissanceUnit");
                         }
                         else
                         {
@@ -191,10 +191,11 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             Debug.Log("Don't exist ReconnaissanceUnit.");
                             return;
                         }
-
                         break;
-                    default:
-                        break;
+//                    default:
+//                        dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+//                        Debug.Log("Don't exist this card type.");
+//                        return;
                 }
 
                 dragGameObjectDraggable.parentToReturnTo = transform;
