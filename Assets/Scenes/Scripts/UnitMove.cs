@@ -94,6 +94,7 @@ public class UnitMove : MonoBehaviour
             _nextDestination.z = nextNode.idZ;
 
             GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(nextNode.idX, nextNode.idZ);
+            GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(nextNode.idX, nextNode.idZ);
 
             //次に移動するノードに移動
             transform.DOMove(_nextDestination, 0.4f);

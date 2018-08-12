@@ -631,8 +631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7c051a5829a7e4dbcd96a795009be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PosX: 0
-  PosZ: 9
+  PosX: 4
+  PosZ: 5
 --- !u!1 &127021778 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1371062022258188, guid: dcd9cd5977d39dd4b83a1cc9adc5d14d,
@@ -2889,8 +2889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7c051a5829a7e4dbcd96a795009be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PosX: 3
-  PosZ: 5
+  PosX: 0
+  PosZ: 1
 --- !u!1 &1635012302 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1913341401584546, guid: 61213bb74a322a4439df1f0e1d8ec3bb,
