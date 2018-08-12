@@ -48,7 +48,8 @@ public class UnitAttackManager : MonoBehaviour
                 int absZ = Math.Abs(targetUnitPositionZ - attackerUnitPositionZ);
 
                 if (attackerUnit.CompareTag("ProximityAttackUnit") &&
-                    (absX == 0 && absZ == 1 || absX == 1 && absZ == 0))
+                    (absX == 0 && absZ == 1 || absX == 1 && absZ == 0) &&
+                    targetUnit.activeSelf)
                 {
                     attackerAndTarget.Target.Add(targetUnit);
                 }
