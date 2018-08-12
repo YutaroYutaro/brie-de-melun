@@ -58,24 +58,24 @@ public class CreateMap : MonoBehaviour
                 {
                     mapObject.transform.SetParent(GameObject.Find("ClearMapObjects").transform);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
-                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_FALSE);
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_NOT_EXIST);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
-                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_TRUE);
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_EXIST);
                 }
                 else if (posZ == 6 && (posX == 1 || posX == 2 || posX == 3))
                 {
                     GameObject.Find("FogManager").GetComponent<FogManager>()
-                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_FALSE);
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_NOT_EXIST);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
-                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_TRUE);
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_EXIST);
                 }
                 else
                 {
                     mapObject.transform.SetParent(GameObject.Find("FoggyMapObjects").transform);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
-                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_TRUE);
+                        .SetPlayerOneFogMapState(posX, posZ, Fog.FOG_EXIST);
                     GameObject.Find("FogManager").GetComponent<FogManager>()
-                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_TRUE);
+                        .SetPlayerTwoFogMapState(posX, posZ, Fog.FOG_EXIST);
                 }
             }
         }
