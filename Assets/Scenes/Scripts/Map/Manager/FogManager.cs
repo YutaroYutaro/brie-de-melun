@@ -37,7 +37,7 @@ public class FogManager : MonoBehaviour
         foreach (Transform player2UnitsChild in player2UnitsChildren)
         {
             if (unitPosX == player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosX &&
-                unitPosX == player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ &&
+                unitPosZ == player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ &&
                 !(player2UnitsChild.gameObject.activeSelf))
             {
                 player2UnitsChild.gameObject.SetActive(true);

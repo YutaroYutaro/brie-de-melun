@@ -4,59 +4,55 @@ using System.Collections.Generic;
 public class UnitStatus : MonoBehaviour
 {
     //操作ユニットの基本ステータス
-    public float HitPoint = 0;
-    public float AttackPoint = 0;
-    public float DefensPoint = 0;
-    public float MovementPoint = 0;
-
-    private List<GameObject> _unitList;
-    private List<GameObject> _enemyUnitList;
+    public float HitPoint;
+    public float AttackPoint;
+    public float DefensPoint;
+    public float MovementPoint;
 
     void Start()
     {
-        _unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
-        _enemyUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
-
         if (CompareTag("ProximityAttackUnit"))
         {
-            this.HitPoint = 5;
-            this.AttackPoint = 2;
-            this.DefensPoint = 1;
-            this.MovementPoint = 2;
+            HitPoint = 5;
+            AttackPoint = 2;
+            DefensPoint = 1;
+            MovementPoint = 2;
         }
         else if (CompareTag("RemoteAttackUnit"))
         {
         }
         else
         {
-            this.HitPoint = 3;
-            this.AttackPoint = 0;
-            this.DefensPoint = 0;
-            this.MovementPoint = 2;
+            HitPoint = 3;
+            AttackPoint = 0;
+            DefensPoint = 0;
+            MovementPoint = 2;
         }
     }
 
     void Update()
     {
-        if (this.HitPoint <= 0)
+        if (HitPoint <= 0)
         {
-            for (int i = 0; i < _unitList.Count; i++)
+            Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
+
+            foreach (Transform player1UnitChild in player1UnitChildren)
             {
-                if (_unitList[i] == this.gameObject)
+                if (player1UnitChild.gameObject == gameObject)
                 {
-                    Destroy(_unitList[i]);
-                    _unitList.RemoveAt(i);
-                    break;
+                    Destroy(player1UnitChild.gameObject);
+                    return;
                 }
             }
 
-            foreach (var enemyUnit in _enemyUnitList)
+            Transform player2UnitChildren = GameObject.Find("Player2Units").transform;
+
+            foreach (Transform player2UnitChild in player2UnitChildren)
             {
-                if (enemyUnit == this.gameObject)
+                if (player2UnitChild.gameObject == gameObject)
                 {
-                    Destroy(enemyUnit);
-                    _enemyUnitList.Remove(enemyUnit);
-                    break;
+                    Destroy(player2UnitChild.gameObject);
+                    return;
                 }
             }
         }

@@ -6,58 +6,57 @@ using UnityEngine.UI;
 
 public class UnitAttackManager : MonoBehaviour
 {
-    private List<GameObject> _attackerUnitList = null;
-    private List<GameObject> _targetUnitList = null;
-
-
     public struct AttackerAndTarget
     {
         public GameObject Attacker;
         public List<GameObject> Target;
     }
 
-    private List<AttackerAndTarget> _attackerAndTargetList = new List<AttackerAndTarget>();
+    private List<AttackerAndTarget> _attackerAndTargetList;
 
     private AttackerAndTarget _selectedAttackerAndTarget;
 
     private GameObject _surpriseAttacker;
 
+    private void Start()
+    {
+        _attackerAndTargetList = new List<AttackerAndTarget>();
+    }
 
     public bool ExistAttackTargetUnit()
     {
         _attackerAndTargetList.Clear();
 
-        _attackerUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
+        Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
+        Transform player2UnitChildren = GameObject.Find("Player2Units").transform;
 
-        _targetUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
-
-        foreach (GameObject attackerUnit in _attackerUnitList)
+        foreach (Transform player1UnitChild in player1UnitChildren)
         {
             AttackerAndTarget attackerAndTarget;
             attackerAndTarget.Target = new List<GameObject>();
 
-            int attackerUnitPositionX = Mathf.RoundToInt(attackerUnit.transform.position.x);
-            int attackerUnitPositionZ = Mathf.RoundToInt(attackerUnit.transform.position.z);
-
-            foreach (GameObject targetUnit in _targetUnitList)
+            foreach (Transform player2UnitChild in player2UnitChildren)
             {
-                int targetUnitPositionX = Mathf.RoundToInt(targetUnit.transform.position.x);
-                int targetUnitPositionZ = Mathf.RoundToInt(targetUnit.transform.position.z);
+                int absX = Math.Abs(
+                    player2UnitChild.GetComponent<UnitOwnIntPosition>().PosX
+                    - player1UnitChild.GetComponent<UnitOwnIntPosition>().PosX
+                );
+                int absZ = Math.Abs(
+                    player2UnitChild.GetComponent<UnitOwnIntPosition>().PosZ
+                    - player1UnitChild.GetComponent<UnitOwnIntPosition>().PosZ
+                );
 
-                int absX = Math.Abs(targetUnitPositionX - attackerUnitPositionX);
-                int absZ = Math.Abs(targetUnitPositionZ - attackerUnitPositionZ);
-
-                if (attackerUnit.CompareTag("ProximityAttackUnit") &&
+                if (player1UnitChild.CompareTag("ProximityAttackUnit") &&
                     (absX == 0 && absZ == 1 || absX == 1 && absZ == 0) &&
-                    targetUnit.activeSelf)
+                    player2UnitChild.gameObject.activeSelf)
                 {
-                    attackerAndTarget.Target.Add(targetUnit);
+                    attackerAndTarget.Target.Add(player2UnitChild.gameObject);
                 }
             }
 
             if (attackerAndTarget.Target.Count != 0)
             {
-                attackerAndTarget.Attacker = attackerUnit;
+                attackerAndTarget.Attacker = player1UnitChild.gameObject;
                 _attackerAndTargetList.Add(attackerAndTarget);
             }
         }
@@ -83,11 +82,6 @@ public class UnitAttackManager : MonoBehaviour
     public void SetSurpriseAttacker(GameObject surpriseAttackTarget)
     {
         _surpriseAttacker = surpriseAttackTarget;
-    }
-
-    public void ClearGetAttackerAndTargetList()
-    {
-        _attackerAndTargetList.Clear();
     }
 
     public void MiniMapUnitAttack(GameObject targetUnit)

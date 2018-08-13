@@ -12,44 +12,45 @@ public class UnitMove : MonoBehaviour
     Vector3 worldPoint;
     Vector3 _nextDestination;
 
-    private List<GameObject> _unitList;
-    private List<GameObject> _enemyUnitList;
-
     void Start()
     {
-        //メインカメラとオブジェクトの距離を測定
-
-        _unitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList();
-        _enemyUnitList = GameObject.Find("UnitManager").GetComponent<UnitManager>().GetEnemyUnitList();
-
-
         ShortestPath = new ShortestPath();
     }
 
-    private bool ExistUnit(int x, int z)
+    private bool ExistUnit(int posX, int posZ)
     {
-        for (int i = 0; i < _unitList.Count; i++)
+        Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
+
+        foreach (Transform player1UnitChild in player1UnitChildren)
         {
-            if (Mathf.RoundToInt(_unitList[i].transform.position.x) == x &&
-                Mathf.RoundToInt(_unitList[i].transform.position.z) == z)
+            if (player1UnitChild.GetComponent<UnitOwnIntPosition>().PosX == posX &&
+                player1UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
             {
                 return true;
             }
         }
 
-        foreach (GameObject enemyUnit in _enemyUnitList)
+        Transform player2UnitChildren = GameObject.Find("Player2Units").transform;
+
+        foreach (Transform player2UnitChild in player2UnitChildren)
         {
-            if (Mathf.RoundToInt(enemyUnit.transform.position.x) == x &&
-                Mathf.RoundToInt(enemyUnit.transform.position.z) == z)
+            if (player2UnitChild.GetComponent<UnitOwnIntPosition>().PosX == posX &&
+                player2UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
             {
-                GameObject surpriseAttacker = GameObject.Find("FogManager").GetComponent<FogManager>()
-                    .SetActiveUnitInFog(x, z);
+                GameObject surpriseAttacker =
+                    GameObject.Find("FogManager")
+                        .GetComponent<FogManager>()
+                        .SetActiveUnitInFog(posX, posZ);
+
                 if (surpriseAttacker != null)
                 {
-                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>()
+                    GameObject.Find("UnitAttackManager")
+                        .GetComponent<UnitAttackManager>()
                         .SetSurpriseAttacker(surpriseAttacker);
-                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>()
-                        .SurpriseAttack(this.gameObject);
+
+                    GameObject.Find("UnitAttackManager")
+                        .GetComponent<UnitAttackManager>()
+                        .SurpriseAttack(gameObject);
                 }
 
                 return true;
@@ -59,8 +60,10 @@ public class UnitMove : MonoBehaviour
         return false;
     }
 
-    public async void MiniMapClickUnitMove(int clickMiniMapImageInstancePositionX,
-        int clickMiniMapImageInstancePositionZ)
+    public async void MiniMapClickUnitMove(
+        int clickMiniMapImageInstancePositionX,
+        int clickMiniMapImageInstancePositionZ
+    )
     {
         //ダイクストラ法で最短経路を検索
         resultNodes =
