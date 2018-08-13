@@ -1,18 +1,16 @@
 ﻿public class ShortestPath
 {
-    Nodes Nodes;
-
     //ダイクストラ法
     public Nodes[,] DijkstraAlgorithm(int startX, int startZ)
     {
         int maxX = 5;
         int maxZ = 7;
 
-        Nodes = new Nodes();
+        Nodes nodes = new Nodes();
 
-        Nodes[,] nodes = Nodes.CreateNodes(5, 7);
+        Nodes[,] nodesTable = nodes.CreateNodes(5, 7);
 
-        nodes[startX, startZ].cost = 0;
+        nodesTable[startX, startZ].Cost = 0;
 
         while (true)
         {
@@ -22,9 +20,9 @@
             {
                 for (int posZ = 0; posZ < maxZ; posZ++)
                 {
-                    Nodes node = nodes[posX, posZ];
+                    Nodes node = nodesTable[posX, posZ];
 
-                    if (node.done || node.cost < 0)
+                    if (node.Done || node.Cost < 0)
                     {
                         continue;
                     }
@@ -35,7 +33,7 @@
                         continue;
                     }
 
-                    if (node.cost < processNode.cost)
+                    if (node.Cost < processNode.Cost)
                     {
                         processNode = node;
                     }
@@ -47,23 +45,23 @@
                 break;
             }
 
-            processNode.done = true;
+            processNode.Done = true;
 
-            for (int i = 0; i < processNode.edgesTo.Count; i++)
+            for (int i = 0; i < processNode.EdgesTo.Count; i++)
             {
-                Nodes node = processNode.edgesTo[i];
-                int cost = processNode.cost + processNode.edgesCost[i];
+                Nodes node = processNode.EdgesTo[i];
+                int cost = processNode.Cost + processNode.EdgesCost[i];
 
-                bool needsUpadate = (node.cost < 0) || (node.cost > cost);
+                bool needsUpadate = (node.Cost < 0) || (node.Cost > cost);
 
                 if (needsUpadate)
                 {
-                    node.cost = cost;
-                    node.previousNodes = processNode;
+                    node.Cost = cost;
+                    node.PreviousNodes = processNode;
                 }
             }
         }
 
-        return nodes;
+        return nodesTable;
     }
 }

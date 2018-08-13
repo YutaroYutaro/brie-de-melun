@@ -9,15 +9,6 @@ public class TurnStartController : MonoBehaviour
     {
         Debug.Log("Debug: TurnStart");
 
-//        List<GameObject> handcardList =
-//            GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>().GetDeckCardList();
-//
-//        foreach (GameObject handCard in handcardList)
-//        {
-//            GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>().GetHandCardList()
-//                .Add(handCard.gameObject);
-//        }
-
         Transform deckChildren = GameObject.Find("Deck").transform;
         List<GameObject> deckCardObjects = new List<GameObject>();
 
@@ -62,9 +53,6 @@ public class TurnStartController : MonoBehaviour
                 takenCards++;
             }
         }
-
-//        List<GameObject> deckCardObjects =
-//            GameObject.Find("CardFlowManager").GetComponent<CardFlowManager>().GetHandCardList();
 
         foreach (var cardObject in deckCardObjects)
         {

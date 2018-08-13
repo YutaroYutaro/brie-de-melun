@@ -24,7 +24,7 @@ public class FogManager : MonoBehaviour
                     GameObject.Find("Map").GetComponent<CreateMap>().GetMapObjectTypeTable(
                         Mathf.RoundToInt(foggyMapObjectsChild.position.x),
                         Mathf.RoundToInt(foggyMapObjectsChild.position.z)
-                        )
+                    )
                 ].color;
             }
         }
@@ -36,8 +36,8 @@ public class FogManager : MonoBehaviour
 
         foreach (Transform player2UnitsChild in player2UnitsChildren)
         {
-            if (unitPosX == Mathf.RoundToInt(player2UnitsChild.position.x) &&
-                unitPosZ == Mathf.RoundToInt(player2UnitsChild.position.z) &&
+            if (unitPosX == player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosX &&
+                unitPosZ == player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ &&
                 !(player2UnitsChild.gameObject.activeSelf))
             {
                 player2UnitsChild.gameObject.SetActive(true);

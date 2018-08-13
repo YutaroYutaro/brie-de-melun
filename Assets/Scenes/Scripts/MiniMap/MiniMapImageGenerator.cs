@@ -6,26 +6,21 @@ using UnityEngine;
 
 public class MiniMapImageGenerator : MonoBehaviour
 {
-    public GameObject MiniMapImage = null;
+    public GameObject MiniMapImage;
 
-    public GameObject Minimap = null;
+    public GameObject Minimap;
 
     //生成するマップの大きさ
-    public int maxPosX = 5;
-    public int maxPosZ = 7;
+    public int MaxPosX = 5;
+    public int MaxPosZ = 7;
 
-    //マップオブジェクトを生成する座標
-    private int posX = 0;
-    private int posZ = 0;
-
-
-    public List<GameObject> MiniMapImageList = null;
+    public List<GameObject> MiniMapImageList;
 
     void Start()
     {
-        for (; posX < maxPosX; posX++)
+        for (int posX = 0; posX < MaxPosX; ++posX)
         {
-            for (; posZ < maxPosZ; posZ++)
+            for (int posZ = 0; posZ < MaxPosZ; ++posZ)
             {
                 GameObject miniMapImageInstance = Instantiate(MiniMapImage);
                 miniMapImageInstance.GetComponent<MiniMapImageInstancePosition>().PosX = posX;
@@ -33,8 +28,6 @@ public class MiniMapImageGenerator : MonoBehaviour
                 miniMapImageInstance.transform.SetParent(Minimap.transform, false);
                 MiniMapImageList.Add(miniMapImageInstance);
             }
-
-            posZ = 0;
         }
     }
 }

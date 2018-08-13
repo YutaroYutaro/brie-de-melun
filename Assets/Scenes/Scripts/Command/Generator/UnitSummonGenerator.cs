@@ -13,12 +13,13 @@ public class UnitSummonGenerator : MonoBehaviour
 
     public void SummonProximityAttackUnit(int posX, int posZ)
     {
-        GameObject proximityUnit = Instantiate(ProximityAttackPrefab, new Vector3(posX, 1 , posZ), Quaternion.identity);
+        GameObject proximityUnit = Instantiate(
+            ProximityAttackPrefab,
+            new Vector3(posX, 1, posZ),
+            Quaternion.identity
+        );
 
         proximityUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
-
-        GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList().Add(proximityUnit);
-
         proximityUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
         proximityUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
     }
@@ -32,12 +33,13 @@ public class UnitSummonGenerator : MonoBehaviour
 
     public void SummonReconnaissanceUnit(int posX, int posZ)
     {
-        GameObject reconnaissanecUnit = Instantiate(ReconnaissanecPrefab, new Vector3(posX, 1.5f , posZ), Quaternion.identity);
+        GameObject reconnaissanecUnit = Instantiate(
+            ReconnaissanecPrefab,
+            new Vector3(posX, 1.5f, posZ),
+            Quaternion.identity
+        );
 
         reconnaissanecUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
-
-        GameObject.Find("UnitManager").GetComponent<UnitManager>().GetMyUnitList().Add(reconnaissanecUnit);
-
         reconnaissanecUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
         reconnaissanecUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
     }
