@@ -1,18 +1,16 @@
 ﻿public class ShortestPath
 {
-    Nodes Nodes;
-
     //ダイクストラ法
     public Nodes[,] DijkstraAlgorithm(int startX, int startZ)
     {
         int maxX = 5;
         int maxZ = 7;
 
-        Nodes = new Nodes();
+        Nodes nodes = new Nodes();
 
-        Nodes[,] nodes = Nodes.CreateNodes(5, 7);
+        Nodes[,] nodesTable = nodes.CreateNodes(5, 7);
 
-        nodes[startX, startZ].Cost = 0;
+        nodesTable[startX, startZ].Cost = 0;
 
         while (true)
         {
@@ -22,7 +20,7 @@
             {
                 for (int posZ = 0; posZ < maxZ; posZ++)
                 {
-                    Nodes node = nodes[posX, posZ];
+                    Nodes node = nodesTable[posX, posZ];
 
                     if (node.Done || node.Cost < 0)
                     {
@@ -64,6 +62,6 @@
             }
         }
 
-        return nodes;
+        return nodesTable;
     }
 }
