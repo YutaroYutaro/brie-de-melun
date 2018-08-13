@@ -65,26 +65,6 @@ public class UnitStatus : MonoBehaviour
 
     public void SetUnitStatus(UnitStatus unitStatus)
     {
-        this.HitPoint = unitStatus.HitPoint;
-    }
-
-    public float GetUnitHitPoint()
-    {
-        return this.HitPoint;
-    }
-
-    public float GetUnitAttackPoint()
-    {
-        return this.AttackPoint;
-    }
-
-    public float GetUnitDefensPoint()
-    {
-        return this.DefensPoint;
-    }
-
-    public float GetUnitMovementPoint()
-    {
-        return this.MovementPoint;
+        HitPoint = unitStatus.HitPoint;
     }
 }
