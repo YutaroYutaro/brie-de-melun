@@ -6,62 +6,69 @@ using UnityEngine.UI;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private RectTransform rectTransform = null;
+    private RectTransform _rectTransform;
 
-    public Transform parentToReturnTo = null;
+    public Transform ParentToReturnTo;
 
-    private GameObject placeholder = null;
-    public Transform placeholderParent = null;
+    private GameObject _placeholder;
+
+    public Transform PlaceholderParent;
 
     void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
+        _rectTransform = GetComponent<RectTransform>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        placeholder = new GameObject();
-        placeholder.transform.SetParent(this.transform.parent);
-        LayoutElement le = placeholder.AddComponent<LayoutElement>();
-        le.preferredWidth = this.GetComponent<LayoutElement>().preferredWidth;
-        le.preferredHeight = this.GetComponent<LayoutElement>().preferredHeight;
+        _placeholder = new GameObject();
+        _placeholder.transform.SetParent(transform.parent);
+        LayoutElement le = _placeholder.AddComponent<LayoutElement>();
+        le.preferredWidth = GetComponent<LayoutElement>().preferredWidth;
+        le.preferredHeight = GetComponent<LayoutElement>().preferredHeight;
         le.flexibleWidth = 0;
         le.flexibleHeight = 0;
 
-        RectTransform rt = placeholder.GetComponent<RectTransform>();
+        RectTransform rt = _placeholder.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(300, 480);
 
 
-        placeholder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
+        _placeholder.transform.SetSiblingIndex(transform.GetSiblingIndex());
 
-        parentToReturnTo = this.transform.parent;
-        placeholderParent = parentToReturnTo;
-        this.transform.SetParent(this.transform.parent.parent);
+        ParentToReturnTo = transform.parent;
+        PlaceholderParent = ParentToReturnTo;
+        transform.SetParent(transform.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (placeholder.transform.parent != placeholderParent)
+        if (_placeholder.transform.parent != PlaceholderParent)
         {
-            placeholder.transform.SetParent(placeholderParent);
+            _placeholder.transform.SetParent(PlaceholderParent);
         }
 
-        Vector3 result = Vector3.zero;
+        Vector3 result;
 
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, Camera.main,
-            out result))
+        if (RectTransformUtility
+            .ScreenPointToWorldPointInRectangle(
+                _rectTransform,
+                eventData.position,
+                Camera.main,
+                out result
+            )
+        )
         {
-            rectTransform.position = result;
+            _rectTransform.position = result;
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        this.transform.SetParent(parentToReturnTo);
-        this.transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
+        transform.SetParent(ParentToReturnTo);
+        transform.SetSiblingIndex(_placeholder.transform.GetSiblingIndex());
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        Destroy(placeholder);
+        Destroy(_placeholder);
     }
 }

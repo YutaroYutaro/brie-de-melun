@@ -17,7 +17,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
             if (dragObjectDraggable != null)
             {
-                dragObjectDraggable.placeholderParent = transform;
+                dragObjectDraggable.PlaceholderParent = transform;
             }
         }
     }
@@ -31,9 +31,9 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
             Draggable dragObjectDraggable = eventData.pointerDrag.GetComponent<Draggable>();
 
-            if (dragObjectDraggable != null && dragObjectDraggable.placeholderParent == transform)
+            if (dragObjectDraggable != null && dragObjectDraggable.PlaceholderParent == transform)
             {
-                dragObjectDraggable.placeholderParent = dragObjectDraggable.parentToReturnTo;
+                dragObjectDraggable.PlaceholderParent = dragObjectDraggable.ParentToReturnTo;
             }
         }
     }
@@ -57,7 +57,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     case "MoveCard":
                         if (GameObject.Find("Player1Units").transform.childCount == 0)
                         {
-                            dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                            dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
                             Debug.Log("Don't exist MyUnit.");
                             return;
                         }
@@ -77,7 +77,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         //攻撃できるユニットが存在するか判定
                         if (!(unitAttackManager.ExistAttackTargetUnit()))
                         {
-                            dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                            dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
                             Debug.Log("Don't exist Attacker or Target.");
                             return;
                         }
@@ -154,8 +154,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                                 if (existUnit1 && existUnit2 && existUnit3)
                                 {
                                     Debug.Log("Can't Summon");
-                                    dragGameObjectDraggable.placeholderParent =
-                                        dragGameObjectDraggable.parentToReturnTo;
+                                    dragGameObjectDraggable.PlaceholderParent =
+                                        dragGameObjectDraggable.ParentToReturnTo;
                                     return;
                                 }
                             }
@@ -203,7 +203,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         }
                         else
                         {
-                            dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                            dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
                             Debug.Log("Don't exist ReconnaissanceUnit.");
                             return;
                         }
@@ -211,12 +211,12 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         break;
 
                     default:
-                        dragGameObjectDraggable.placeholderParent = dragGameObjectDraggable.parentToReturnTo;
+                        dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
                         Debug.Log("Don't exist this card type.");
                         return;
                 }
 
-                dragGameObjectDraggable.parentToReturnTo = transform;
+                dragGameObjectDraggable.ParentToReturnTo = transform;
                 await Task.Delay(TimeSpan.FromSeconds(1.0f));
                 dragGameObject.transform.SetParent(GameObject.Find("Graveyard").transform);
                 dragGameObject.gameObject.SetActive(false);
