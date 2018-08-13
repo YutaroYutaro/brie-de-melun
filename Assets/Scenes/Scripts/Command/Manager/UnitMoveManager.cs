@@ -2,16 +2,23 @@
 
 public class UnitMoveManager : MonoBehaviour
 {
-    public GameObject _selectMoveUnit = null;
+    public GameObject SelectMoveUnit;
 
     public void SetMoveUnit(GameObject selectMoveUnit)
     {
-        _selectMoveUnit = selectMoveUnit;
+        SelectMoveUnit = selectMoveUnit;
     }
 
-    public void MiniMapUnitMove(int clickMiniMapImageInstancePositionX, int clickMiniMapImageInstancePositionZ)
+    public void MiniMapUnitMove(
+        int clickMiniMapImageInstancePositionX,
+        int clickMiniMapImageInstancePositionZ
+    )
     {
-        _selectMoveUnit.GetComponent<UnitMove>()
-            .MiniMapClickUnitMove(clickMiniMapImageInstancePositionX, clickMiniMapImageInstancePositionZ);
+        SelectMoveUnit
+            .GetComponent<UnitMove>()
+            .MiniMapClickUnitMove(
+                clickMiniMapImageInstancePositionX,
+                clickMiniMapImageInstancePositionZ
+            );
     }
 }
