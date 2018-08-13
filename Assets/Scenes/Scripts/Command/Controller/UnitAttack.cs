@@ -7,13 +7,10 @@ using FogDefine;
 
 public class UnitAttack : MonoBehaviour
 {
-    private UnitStatus _attackerStatus;
-    private UnitStatus _targetStatus;
-
     public async void MiniMapClickUnitAttack(GameObject targetUnit)
     {
-        _attackerStatus = this.GetComponent<UnitStatus>().GetUnitStatus();
-        _targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
+        UnitStatus attackerStatus = GetComponent<UnitStatus>().GetUnitStatus();
+        UnitStatus targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
 
         targetUnit.SetActive(false);
         await Task.Delay(TimeSpan.FromSeconds(0.1f));
@@ -26,7 +23,6 @@ public class UnitAttack : MonoBehaviour
         targetUnit.SetActive(false);
         await Task.Delay(TimeSpan.FromSeconds(0.1f));
         targetUnit.SetActive(true);
-        //await Task.Delay(TimeSpan.FromSeconds(0.1f));
 
         int[,] playerTwoFogMapState =
             GameObject.Find("FogManager").GetComponent<FogManager>().GetPlayerTwoFogMapState();
@@ -34,30 +30,32 @@ public class UnitAttack : MonoBehaviour
         if (playerTwoFogMapState[
                 GetComponent<UnitOwnIntPosition>().PosX,
                 GetComponent<UnitOwnIntPosition>().PosZ
-            ]
-            == Fog.FOG_EXIST)
+            ] == Fog.FOG_EXIST
+        )
         {
-            _targetStatus.HitPoint -= _attackerStatus.AttackPoint;
-            Debug.Log("Attack damage: " + _attackerStatus.AttackPoint);
-            GameObject.Find("FogManager").GetComponent<FogManager>().SetPlayerTwoFogMapState(
-                GetComponent<UnitOwnIntPosition>().PosX,
-                GetComponent<UnitOwnIntPosition>().PosZ,
-                Fog.FOG_NOT_EXIST
-            );
+            targetStatus.HitPoint -= attackerStatus.AttackPoint;
+            Debug.Log("Attack damage: " + attackerStatus.AttackPoint);
+            GameObject.Find("FogManager")
+                .GetComponent<FogManager>()
+                .SetPlayerTwoFogMapState(
+                    GetComponent<UnitOwnIntPosition>().PosX,
+                    GetComponent<UnitOwnIntPosition>().PosZ,
+                    Fog.FOG_NOT_EXIST
+                );
         }
         else
         {
-            _targetStatus.HitPoint -= (_attackerStatus.AttackPoint - _targetStatus.DefensPoint);
-            Debug.Log("Attack damage: " + (_attackerStatus.AttackPoint - _targetStatus.DefensPoint));
+            targetStatus.HitPoint -= (attackerStatus.AttackPoint - targetStatus.DefensPoint);
+            Debug.Log("Attack damage: " + (attackerStatus.AttackPoint - targetStatus.DefensPoint));
         }
 
-        _targetStatus.SetUnitStatus(_targetStatus);
+        targetStatus.SetUnitStatus(targetStatus);
     }
 
     public async void SurpriseAttack(GameObject targetUnit)
     {
-        _attackerStatus = this.GetComponent<UnitStatus>().GetUnitStatus();
-        _targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
+        UnitStatus attackerStatus = GetComponent<UnitStatus>().GetUnitStatus();
+        UnitStatus targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
 
         targetUnit.SetActive(false);
         await Task.Delay(TimeSpan.FromSeconds(0.1f));
@@ -70,27 +68,33 @@ public class UnitAttack : MonoBehaviour
         targetUnit.SetActive(false);
         await Task.Delay(TimeSpan.FromSeconds(0.1f));
         targetUnit.SetActive(true);
-        //await Task.Delay(TimeSpan.FromSeconds(0.1f));
 
-        GameObject.Find("FogManager").GetComponent<FogManager>().SetPlayerOneFogMapState(
-            GetComponent<UnitOwnIntPosition>().PosX,
-            GetComponent<UnitOwnIntPosition>().PosZ,
-            Fog.FOG_NOT_EXIST
-            );
-        GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(
-            GetComponent<UnitOwnIntPosition>().PosX,
-            GetComponent<UnitOwnIntPosition>().PosZ
-            );
-        GameObject.Find("FogManager").GetComponent<FogManager>().SetPlayerTwoFogMapState(
-            targetUnit.GetComponent<UnitOwnIntPosition>().PosX,
-            targetUnit.GetComponent<UnitOwnIntPosition>().PosZ,
-            Fog.FOG_NOT_EXIST
+        GameObject.Find("FogManager")
+            .GetComponent<FogManager>()
+            .SetPlayerOneFogMapState(
+                GetComponent<UnitOwnIntPosition>().PosX,
+                GetComponent<UnitOwnIntPosition>().PosZ,
+                Fog.FOG_NOT_EXIST
             );
 
+        GameObject.Find("FogManager")
+            .GetComponent<FogManager>()
+            .ClearFog(
+                GetComponent<UnitOwnIntPosition>().PosX,
+                GetComponent<UnitOwnIntPosition>().PosZ
+            );
 
-        _targetStatus.HitPoint -= _attackerStatus.AttackPoint;
-        Debug.Log("Attacked damage: " + _attackerStatus.AttackPoint);
+        GameObject.Find("FogManager")
+            .GetComponent<FogManager>()
+            .SetPlayerTwoFogMapState(
+                targetUnit.GetComponent<UnitOwnIntPosition>().PosX,
+                targetUnit.GetComponent<UnitOwnIntPosition>().PosZ,
+                Fog.FOG_NOT_EXIST
+            );
 
-        _targetStatus.SetUnitStatus(_targetStatus);
+        targetStatus.HitPoint -= attackerStatus.AttackPoint;
+        Debug.Log("Attacked damage: " + attackerStatus.AttackPoint);
+
+        targetStatus.SetUnitStatus(targetStatus);
     }
 }

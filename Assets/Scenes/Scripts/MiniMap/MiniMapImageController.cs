@@ -25,10 +25,16 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     if (player1UnitChild.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
                         player1UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
                     {
-                        GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
+                        GameObject.Find("UnitMoveManager")
+                            .GetComponent<UnitMoveManager>()
                             .SetMoveUnit(player1UnitChild.gameObject);
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectDestination");
+
+                        GameObject.Find("PhaseManager")
+                            .GetComponent<PhaseManager>()
+                            .SetNextPhase("SelectDestination");
+
                         Debug.Log("Phase: SelectDestination");
+
                         break;
                     }
                 }
@@ -36,11 +42,22 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 break;
 
             case "SelectDestination":
-                GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
-                    .MiniMapUnitMove(miniMapPosX, miniMapPosZ);
-                GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
+                GameObject.Find("UnitMoveManager")
+                    .GetComponent<UnitMoveManager>()
+                    .MiniMapUnitMove(
+                        miniMapPosX,
+                        miniMapPosZ
+                    );
+
+                GameObject.Find("PhaseManager")
+                    .GetComponent<PhaseManager>()
+                    .SetNextPhase("SelectUseCard");
+
                 Debug.Log("Phase: SelectUseCard");
-                GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SetMoveUnit(null);
+
+                GameObject.Find("UnitMoveManager")
+                    .GetComponent<UnitMoveManager>()
+                    .SetMoveUnit(null);
 
                 break;
 
@@ -57,19 +74,26 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         attackerAndTarget.Attacker.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
                     {
                         unitAttackManager.SetSelectedAttackerAndTargetUnit(attackerAndTarget);
+
                         Debug.Log("Debug: Set Attacker Unit");
 
                         if (attackerAndTarget.Target.Count == 1)
                         {
                             unitAttackManager.MiniMapUnitAttack(attackerAndTarget.Target[0]);
+
+                            GameObject.Find("PhaseManager")
+                                .GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectUseCard");
+
                             Debug.Log("Phase: SelectUseCard");
-                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
                         }
                         else
                         {
-                            Debug.Log("Phase: SelectAttackTargetUnit");
-                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                            GameObject.Find("PhaseManager")
+                                .GetComponent<PhaseManager>()
                                 .SetNextPhase("SelectAttackTargetUnit");
+
+                            Debug.Log("Phase: SelectAttackTargetUnit");
                         }
 
                         break;
@@ -91,8 +115,12 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         selectedTarget.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
                     {
                         unitAttackManager.MiniMapUnitAttack(selectedTarget);
+
+                        GameObject.Find("PhaseManager")
+                            .GetComponent<PhaseManager>()
+                            .SetNextPhase("SelectUseCard");
+
                         Debug.Log("Phase: SelectUseCard");
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectUseCard");
                     }
                 }
 
@@ -116,24 +144,41 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         }
                     }
 
-                    switch (GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                        .SummonUnitType)
+                    switch (GameObject.Find("UnitSummonGenerator")
+                        .GetComponent<UnitSummonGenerator>()
+                        .SummonUnitType
+                    )
                     {
                         case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
-                            GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                .SummonProximityAttackUnit(miniMapPosX, miniMapPosZ);
+                            GameObject.Find("UnitSummonGenerator")
+                                .GetComponent<UnitSummonGenerator>()
+                                .SummonProximityAttackUnit(
+                                    miniMapPosX,
+                                    miniMapPosZ
+                                );
+
                             break;
+
                         case SummonUnitTypeDefine.SummonUnitType.REMOTE:
+
                             break;
+
                         case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
-                            GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>()
-                                .SummonReconnaissanceUnit(miniMapPosX, miniMapPosZ);
+                            GameObject.Find("UnitSummonGenerator")
+                                .GetComponent<UnitSummonGenerator>()
+                                .SummonReconnaissanceUnit(
+                                    miniMapPosX,
+                                    miniMapPosZ
+                                );
+
                             break;
                     }
 
-                    Debug.Log("Phase: SelectUseCard");
-                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                    GameObject.Find("PhaseManager")
+                        .GetComponent<PhaseManager>()
                         .SetNextPhase("SelectUseCard");
+
+                    Debug.Log("Phase: SelectUseCard");
                 }
 
                 break;
@@ -146,10 +191,14 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         miniMapPosZ == unit.GetComponent<UnitOwnIntPosition>().PosZ
                     )
                     {
-                        unit.GetComponent<UnitReconnaissanceController>().UnitReconnaissance();
-                        Debug.Log("Phase: SelectUseCard");
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                        unit.GetComponent<UnitReconnaissanceController>()
+                            .UnitReconnaissance();
+
+                        GameObject.Find("PhaseManager")
+                            .GetComponent<PhaseManager>()
                             .SetNextPhase("SelectUseCard");
+
+                        Debug.Log("Phase: SelectUseCard");
                     }
                 }
 
