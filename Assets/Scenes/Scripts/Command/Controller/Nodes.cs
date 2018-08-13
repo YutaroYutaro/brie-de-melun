@@ -3,16 +3,13 @@ using UnityEngine;
 
 public class Nodes
 {
-    public List<Nodes> edgesTo = new List<Nodes>(); //移動先のノード
-    public List<int> edgesCost = new List<int>(); //移動先の重み
-    public bool done = false; //探索済みか否か
-    public int cost = -1; //現在位置の重み-1に設定
-    public int idX = 0; //ノードのマップ上x座標
-    public int idZ = 0; //ノードのマップ上z座標
-    public Nodes previousNodes = null; //最短経路の次ノード
-
-    GameObject Map; //Mapオブジェクトを格納するオブジェクト
-    CreateMap CreateMap; //MapオブジェクトのCreateMapコンポーネントを格納するオブジェクト
+    public readonly List<Nodes> EdgesTo = new List<Nodes>(); //移動先のノード
+    public readonly List<int> EdgesCost = new List<int>(); //移動先の重み
+    public bool Done = false; //探索済みか否か
+    public int Cost = -1; //現在位置の重み-1に設定
+    public int IdX = 0; //ノードのマップ上x座標
+    public int IdZ = 0; //ノードのマップ上z座標
+    public Nodes PreviousNodes = null; //最短経路の次ノード
 
     //探索するためのノード群を生成するメソッド
     public Nodes[,] CreateNodes(int maxX = 5, int maxZ = 7)
@@ -20,23 +17,19 @@ public class Nodes
         //マップをノードの二次元配列で表現
         Nodes[,] nodes = new Nodes[maxX, maxZ];
 
-        //Mapオブジェクトを取得
-        Map = GameObject.Find("Map");
-
-        //MapオブジェクトからCreateMapコンポーネントを取得
-        CreateMap = Map.GetComponent<CreateMap>();
-
         //CreateMapコンポーネントからマップの重み表を取得
-        int[,] mapWeight = CreateMap.GetMapWeight();
+        int[,] mapWeight = GameObject.Find("Map").GetComponent<CreateMap>().GetMapWeight();
 
         //個々のノードを生成
         for (int posX = 0; posX < maxX; posX++)
         {
             for (int posZ = 0; posZ < maxZ; posZ++)
             {
-                nodes[posX, posZ] = new Nodes();
-                nodes[posX, posZ].idX = posX;
-                nodes[posX, posZ].idZ = posZ;
+                nodes[posX, posZ] = new Nodes()
+                {
+                    IdX = posX,
+                    IdZ = posZ
+                };
             }
         }
 
@@ -113,9 +106,9 @@ public class Nodes
     }
 
     //ノードを結合し重みを付加するメソッド
-    private void AddNode(Nodes node, int cost)
+    private void AddNode(Nodes node, int mapObjectWeight)
     {
-        this.edgesTo.Add(node);
-        this.edgesCost.Add(cost);
+        EdgesTo.Add(node);
+        EdgesCost.Add(mapObjectWeight);
     }
 }

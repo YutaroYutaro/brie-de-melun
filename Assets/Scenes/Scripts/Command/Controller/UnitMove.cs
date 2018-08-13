@@ -82,17 +82,17 @@ public class UnitMove : MonoBehaviour
         while (true)
         {
             //ひとつ前のノードを参照
-            Nodes nextNode = currentNode.previousNodes;
+            Nodes nextNode = currentNode.PreviousNodes;
 
             //クリックしたノードに達するとループを抜ける
-            if (nextNode == null || this.ExistUnit(nextNode.idX, nextNode.idZ))
+            if (nextNode == null || this.ExistUnit(nextNode.IdX, nextNode.IdZ))
             {
                 path += " Goal";
                 break;
             }
 
             //次に移動するノードの座標
-            _nextDestination.x = nextNode.idX;
+            _nextDestination.x = nextNode.IdX;
             switch (tag)
             {
                 case "ProximityAttackUnit":
@@ -107,10 +107,10 @@ public class UnitMove : MonoBehaviour
                     break;
             }
 
-            _nextDestination.z = nextNode.idZ;
+            _nextDestination.z = nextNode.IdZ;
 
-            GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(nextNode.idX, nextNode.idZ);
-            GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(nextNode.idX, nextNode.idZ);
+            GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(nextNode.IdX, nextNode.IdZ);
+            GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(nextNode.IdX, nextNode.IdZ);
 
             //次に移動するノードに移動
             transform.DOMove(_nextDestination, 0.4f);
@@ -118,7 +118,7 @@ public class UnitMove : MonoBehaviour
             //待機
             await Task.Delay(TimeSpan.FromSeconds(0.5f));
 
-            path += nextNode.idX.ToString() + nextNode.idZ.ToString() + " -> ";
+            path += nextNode.IdX.ToString() + nextNode.IdZ.ToString() + " -> ";
 
             //次のノードへ
             currentNode = nextNode;
