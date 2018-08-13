@@ -57,13 +57,20 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                     case "MoveCard":
                         if (GameObject.Find("Player1Units").transform.childCount == 0)
                         {
-                            dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
+                            dragGameObjectDraggable.PlaceholderParent =
+                                dragGameObjectDraggable.ParentToReturnTo;
+
                             Debug.Log("Don't exist MyUnit.");
+
                             return;
                         }
 
                         Debug.Log("This card is a " + dragGameObject.tag);
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>().SetNextPhase("SelectMoveUnit");
+
+                        GameObject.Find("PhaseManager")
+                            .GetComponent<PhaseManager>()
+                            .SetNextPhase("SelectMoveUnit");
+
                         Debug.Log("Phase: SelectMoveUnit");
 
                         break;
@@ -77,8 +84,11 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         //攻撃できるユニットが存在するか判定
                         if (!(unitAttackManager.ExistAttackTargetUnit()))
                         {
-                            dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
+                            dragGameObjectDraggable.PlaceholderParent =
+                                dragGameObjectDraggable.ParentToReturnTo;
+
                             Debug.Log("Don't exist Attacker or Target.");
+
                             return;
                         }
 
@@ -136,26 +146,31 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                                     Mathf.RoundToInt(player1UnitChild.position.z) == 0)
                                 {
                                     Debug.Log("Exist Unit (1, 1, 0)");
+
                                     existUnit1 = true;
                                 }
                                 else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
                                          Mathf.RoundToInt(player1UnitChild.position.z) == 0)
                                 {
                                     Debug.Log("Exist Unit (2, 1, 0)");
+
                                     existUnit2 = true;
                                 }
                                 else if (Mathf.RoundToInt(player1UnitChild.position.x) == 3 &&
                                          Mathf.RoundToInt(player1UnitChild.position.z) == 0)
                                 {
                                     Debug.Log("Exist Unit (3, 1, 0)");
+
                                     existUnit3 = true;
                                 }
 
                                 if (existUnit1 && existUnit2 && existUnit3)
                                 {
                                     Debug.Log("Can't Summon");
+
                                     dragGameObjectDraggable.PlaceholderParent =
                                         dragGameObjectDraggable.ParentToReturnTo;
+
                                     return;
                                 }
                             }
@@ -166,8 +181,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
                         Debug.Log("This is a SummonCard");
 
-                        GameObject.Find("PhaseManager").
-                            GetComponent<PhaseManager>()
+                        GameObject.Find("PhaseManager")
+                            .GetComponent<PhaseManager>()
                             .SetNextPhase("SelectMiniMapPositionUnitSummon");
 
                         Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
@@ -189,30 +204,43 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         if (numberOfReconnaissanceUnit == 1)
                         {
                             Debug.Log("This is a ReconnaissanceCard");
-                            aloneReconnaissanceUnit.GetComponent<UnitReconnaissanceController>().UnitReconnaissance();
+
+                            aloneReconnaissanceUnit
+                                .GetComponent<UnitReconnaissanceController>()
+                                .UnitReconnaissance();
+
+                            GameObject.Find("PhaseManager")
+                                .GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectUseCard");
 
                             Debug.Log("Phase: SelectUseCard");
-                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                .SetNextPhase("SelectUseCard");
                         }
                         else if (numberOfReconnaissanceUnit > 1)
                         {
-                            Debug.Log("Phase: SelectReconnaissanceUnit");
-                            GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+                            GameObject.Find("PhaseManager")
+                                .GetComponent<PhaseManager>()
                                 .SetNextPhase("SelectReconnaissanceUnit");
+
+                            Debug.Log("Phase: SelectReconnaissanceUnit");
                         }
                         else
                         {
-                            dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
+                            dragGameObjectDraggable.PlaceholderParent =
+                                dragGameObjectDraggable.ParentToReturnTo;
+
                             Debug.Log("Don't exist ReconnaissanceUnit.");
+
                             return;
                         }
 
                         break;
 
                     default:
-                        dragGameObjectDraggable.PlaceholderParent = dragGameObjectDraggable.ParentToReturnTo;
+                        dragGameObjectDraggable.PlaceholderParent =
+                            dragGameObjectDraggable.ParentToReturnTo;
+
                         Debug.Log("Don't exist this card type.");
+
                         return;
                 }
 
