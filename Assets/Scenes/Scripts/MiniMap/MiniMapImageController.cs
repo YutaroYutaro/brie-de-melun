@@ -73,12 +73,13 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     if (attackerAndTarget.Attacker.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
                         attackerAndTarget.Attacker.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
                     {
-                        unitAttackManager.SetSelectedAttackerAndTargetUnit(attackerAndTarget);
-
                         Debug.Log("Debug: Set Attacker Unit");
 
                         if (attackerAndTarget.Target.Count == 1)
                         {
+                            unitAttackManager.SelectedAttacker =
+                                unitAttackManager.GetAttackerAndTargetList().First().Attacker;
+
                             unitAttackManager.MiniMapUnitAttack(attackerAndTarget.Target[0]);
 
                             GameObject.Find("PhaseManager")
@@ -89,6 +90,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         }
                         else
                         {
+                            unitAttackManager.SetSelectedAttackerAndTargetUnit(attackerAndTarget);
                             GameObject.Find("PhaseManager")
                                 .GetComponent<PhaseManager>()
                                 .SetNextPhase("SelectAttackTargetUnit");

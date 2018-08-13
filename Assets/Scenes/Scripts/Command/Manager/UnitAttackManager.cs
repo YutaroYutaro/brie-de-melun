@@ -16,7 +16,8 @@ public class UnitAttackManager : MonoBehaviour
 
     private AttackerAndTarget _selectedAttackerAndTarget;
 
-    private GameObject _surpriseAttacker;
+    private GameObject _selectedAttacker;
+    private GameObject _selectedSurpriseAttacker;
 
     private void Start()
     {
@@ -79,18 +80,23 @@ public class UnitAttackManager : MonoBehaviour
         return _selectedAttackerAndTarget;
     }
 
+    public GameObject SelectedAttacker
+    {
+        set { _selectedAttacker = value; }
+    }
+
     public void SetSurpriseAttacker(GameObject surpriseAttackTarget)
     {
-        _surpriseAttacker = surpriseAttackTarget;
+        _selectedSurpriseAttacker = surpriseAttackTarget;
     }
 
     public void MiniMapUnitAttack(GameObject targetUnit)
     {
-        _selectedAttackerAndTarget.Attacker.GetComponent<UnitAttack>().MiniMapClickUnitAttack(targetUnit);
+        _selectedAttacker.GetComponent<UnitAttack>().MiniMapClickUnitAttack(targetUnit);
     }
 
     public void SurpriseAttack(GameObject targetUnit)
     {
-        _surpriseAttacker.GetComponent<UnitAttack>().SurpriseAttack(targetUnit);
+        _selectedSurpriseAttacker.GetComponent<UnitAttack>().SurpriseAttack(targetUnit);
     }
 }

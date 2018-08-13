@@ -89,28 +89,35 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                             if (unitAttackManager
                                     .GetAttackerAndTargetList().First().Target.Count == 1)
                             {
-                                unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
-                                    .GetAttackerAndTargetList().First());
-                                unitAttackManager.MiniMapUnitAttack(unitAttackManager
-                                    .GetAttackerAndTargetList().First().Target.First());
+                                unitAttackManager.SelectedAttacker =
+                                    unitAttackManager.GetAttackerAndTargetList().First().Attacker;
+
+                                unitAttackManager.MiniMapUnitAttack(
+                                    unitAttackManager.GetAttackerAndTargetList().First().Target.First()
+                                );
+
                                 GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
                                     .SetNextPhase("SelectUseCard");
+
                                 Debug.Log("Phase: SelectUseCard");
                             }
                             else
                             {
-                                unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
-                                    .GetAttackerAndTargetList().First());
-                                Debug.Log("Phase: SelectAttackTargetUnit");
+                                unitAttackManager.SelectedAttacker =
+                                    unitAttackManager.GetAttackerAndTargetList().First().Attacker;
+
                                 GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
                                     .SetNextPhase("SelectAttackTargetUnit");
+
+                                Debug.Log("Phase: SelectAttackTargetUnit");
                             }
                         }
                         else
                         {
-                            Debug.Log("Phase: SelectAttackerUnit");
                             GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
                                 .SetNextPhase("SelectAttackerUnit");
+
+                            Debug.Log("Phase: SelectAttackerUnit");
                         }
 
                         break;
@@ -156,10 +163,14 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
                         GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
                             dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
+
                         Debug.Log("This is a SummonCard");
-                        Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
-                        GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
+
+                        GameObject.Find("PhaseManager").
+                            GetComponent<PhaseManager>()
                             .SetNextPhase("SelectMiniMapPositionUnitSummon");
+
+                        Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
 
                         break;
 
