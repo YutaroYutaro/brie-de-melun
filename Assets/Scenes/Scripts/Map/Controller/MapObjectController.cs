@@ -7,17 +7,15 @@ using UnityEngine;
 
 public class MapObjectController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    Color defaultColor;
+    private Color _defaultColor;
 
     void Start()
     {
         //現在の色を保存
-        defaultColor = GetComponent<Renderer>().material.color;
-
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        _defaultColor = GetComponent<Renderer>().material.color;
 
         //オブジェクトが回転しないように設定
-        rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
     //マップオブジェクトにマウスがホバーしたときに色を変更
@@ -29,6 +27,6 @@ public class MapObjectController : MonoBehaviour, IPointerEnterHandler, IPointer
     //ホバーが解除されたら元の色に戻す
     public void OnPointerExit(PointerEventData eventData)
     {
-        GetComponent<Renderer>().material.color = defaultColor;
+        GetComponent<Renderer>().material.color = _defaultColor;
     }
 }
