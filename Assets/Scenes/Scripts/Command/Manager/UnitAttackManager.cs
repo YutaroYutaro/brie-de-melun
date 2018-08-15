@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UnitAttackManager : MonoBehaviour
 {
@@ -50,6 +48,12 @@ public class UnitAttackManager : MonoBehaviour
                 if (player1UnitChild.CompareTag("ProximityAttackUnit") &&
                     (absX == 0 && absZ == 1 || absX == 1 && absZ == 0) &&
                     player2UnitChild.gameObject.activeSelf)
+                {
+                    attackerAndTarget.Target.Add(player2UnitChild.gameObject);
+                }
+                else if (player1UnitChild.CompareTag("RemoteAttackUnit") &&
+                         (absX == 0 && absZ <= 2 || absX <= 2 && absZ == 0 || absX == 1 && absZ == 1) &&
+                         player2UnitChild.gameObject.activeSelf)
                 {
                     attackerAndTarget.Target.Add(player2UnitChild.gameObject);
                 }
