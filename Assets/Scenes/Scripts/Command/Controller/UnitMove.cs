@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine;
+using SummonUnitTypeDefine;
 
 public class UnitMove : MonoBehaviour
 {
@@ -13,12 +13,36 @@ public class UnitMove : MonoBehaviour
     {
         ShortestPath shortestPath = new ShortestPath();
 
+        int unitType;
+
+        switch (tag)
+        {
+            case "ProximityAttackUnit":
+                unitType = SummonUnitTypeDefine.SummonUnitType.PROXIMITY;
+
+                break;
+
+            case "RemoteAttackUnit":
+                unitType = SummonUnitTypeDefine.SummonUnitType.REMOTE;
+
+                break;
+
+            case "ReconnaissanceUnit":
+                unitType = SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE;
+
+                break;
+            default:
+                Debug.LogError("Don't Exist unitType.");
+                return;
+        }
+
         //ダイクストラ法で最短経路を検索
         Nodes[,] resultNodes =
             shortestPath.DijkstraAlgorithm(
                 clickMiniMapImageInstancePositionX,
-                clickMiniMapImageInstancePositionZ
-                );
+                clickMiniMapImageInstancePositionZ,
+                unitType
+            );
 
         //現在地を目的地として設定
         //ノードが後ろから繋がっているため

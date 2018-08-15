@@ -1,14 +1,16 @@
-﻿public class ShortestPath
+﻿using UnityEngine;
+
+public class ShortestPath
 {
     //ダイクストラ法
-    public Nodes[,] DijkstraAlgorithm(int startX, int startZ)
+    public Nodes[,] DijkstraAlgorithm(int startX, int startZ, int unitType)
     {
         int maxX = 5;
         int maxZ = 7;
 
         Nodes nodes = new Nodes();
 
-        Nodes[,] nodesTable = nodes.CreateNodes(5, 7);
+        Nodes[,] nodesTable = nodes.CreateNodes(5, 7, unitType);
 
         nodesTable[startX, startZ].Cost = 0;
 
@@ -21,6 +23,8 @@
                 for (int posZ = 0; posZ < maxZ; posZ++)
                 {
                     Nodes node = nodesTable[posX, posZ];
+
+                    Debug.Log(posX + ", " + posZ + ": cost = " + node.Cost);
 
                     if (node.Done || node.Cost < 0)
                     {
