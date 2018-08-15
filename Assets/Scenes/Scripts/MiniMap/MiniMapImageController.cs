@@ -162,6 +162,12 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                             break;
 
                         case SummonUnitTypeDefine.SummonUnitType.REMOTE:
+                            GameObject.Find("UnitSummonGenerator")
+                                .GetComponent<UnitSummonGenerator>()
+                                .SummonRemoteAttackUnit(
+                                    miniMapPosX,
+                                    miniMapPosZ
+                                );
 
                             break;
 

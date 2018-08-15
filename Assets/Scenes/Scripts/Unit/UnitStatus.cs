@@ -20,6 +20,10 @@ public class UnitStatus : MonoBehaviour
         }
         else if (CompareTag("RemoteAttackUnit"))
         {
+            HitPoint = 3;
+            AttackPoint = 3;
+            DefensPoint = 1;
+            MovementPoint = 2;
         }
         else
         {
