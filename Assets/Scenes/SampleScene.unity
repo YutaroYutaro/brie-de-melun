@@ -1203,10 +1203,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProximityAttackPrefab: {fileID: 1072443327872678, guid: a79c220a3dec8544493c68f2d551bce1,
     type: 2}
-  RemoteAttackPrefab: {fileID: 0}
+  RemoteAttackPrefab: {fileID: 1029876442161244, guid: 69e0ca7c008fdc148ba819d321aaf7f4,
+    type: 2}
   ReconnaissanecPrefab: {fileID: 1660176375483324, guid: 95ab00c474c1b4a4084f77256100cb2e,
     type: 2}
-  _summonUnitType: 0
 --- !u!4 &711444948
 Transform:
   m_ObjectHideFlags: 0
@@ -2826,7 +2826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5add706bc5bd4a14d8d08c3e0ae58596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPhase: SelectUseCard
 --- !u!4 &1681255781
 Transform:
   m_ObjectHideFlags: 0
