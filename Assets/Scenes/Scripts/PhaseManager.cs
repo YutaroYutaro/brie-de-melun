@@ -2,11 +2,13 @@
 
 public class PhaseManager : MonoBehaviour
 {
-    private string _nowPhase;
+    public string StartPhase = "SelectUseCard";
+
+    private string _nowPhase = null;
 
     private void Start()
     {
-        _nowPhase = "SelectUseCard";
+        _nowPhase = StartPhase;
     }
 
     public void SetNextPhase(string phase)
