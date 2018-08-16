@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Threading.Tasks;
+using UniRx.Async;
 
 public class UnitMoveManager : MonoBehaviour
 {
@@ -9,12 +11,12 @@ public class UnitMoveManager : MonoBehaviour
         SelectMoveUnit = selectMoveUnit;
     }
 
-    public void MiniMapUnitMove(
+    public async UniTask<bool> MiniMapUnitMove(
         int clickMiniMapImageInstancePositionX,
         int clickMiniMapImageInstancePositionZ
     )
     {
-        SelectMoveUnit
+        return await SelectMoveUnit
             .GetComponent<UnitMove>()
             .MiniMapClickUnitMove(
                 clickMiniMapImageInstancePositionX,

@@ -1,12 +1,13 @@
 ﻿using System;
 using DG.Tweening;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
-using SummonUnitTypeDefine;
+using UniRx.Async;
 
 public class UnitMove : MonoBehaviour
 {
-    public async void MiniMapClickUnitMove(
+    public async UniTask<bool> MiniMapClickUnitMove(
         int clickMiniMapImageInstancePositionX,
         int clickMiniMapImageInstancePositionZ
     )
@@ -31,9 +32,11 @@ public class UnitMove : MonoBehaviour
                 unitType = SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE;
 
                 break;
+
             default:
                 Debug.LogError("Don't Exist unitType.");
-                return;
+
+                return false;
         }
 
         //ダイクストラ法で最短経路を検索
@@ -41,6 +44,8 @@ public class UnitMove : MonoBehaviour
             shortestPath.DijkstraAlgorithm(
                 clickMiniMapImageInstancePositionX,
                 clickMiniMapImageInstancePositionZ,
+                GetComponent<UnitOwnIntPosition>().PosX,
+                GetComponent<UnitOwnIntPosition>().PosZ,
                 unitType
             );
 
@@ -51,6 +56,14 @@ public class UnitMove : MonoBehaviour
                 GetComponent<UnitOwnIntPosition>().PosX,
                 GetComponent<UnitOwnIntPosition>().PosZ
             ];
+
+        Debug.Log("MoveCost: " + unitPositionNode.Cost);
+
+        if (unitPositionNode.Cost > GetComponent<UnitStatus>().MovementPoint)
+        {
+            Debug.Log("Can't move.");
+            return false;
+        }
 
         Debug.Log("========================================");
 
@@ -67,6 +80,21 @@ public class UnitMove : MonoBehaviour
             {
                 path += " Goal";
                 break;
+            }
+
+            GameObject.Find("FogManager")
+                .GetComponent<FogManager>()
+                .ClearFog(
+                    nextNode.IdX,
+                    nextNode.IdZ
+                );
+
+            int[,] mapWeight = GameObject.Find("Map").GetComponent<CreateMap>().GetMapWeight();
+
+            if (mapWeight[nextNode.IdX, nextNode.IdZ] > GetComponent<UnitStatus>().MovementPoint)
+            {
+                Debug.Log("Crash!");
+                return true;
             }
 
             float unitTypePosY;
@@ -87,13 +115,6 @@ public class UnitMove : MonoBehaviour
 
             Vector3 nextDestination = new Vector3(nextNode.IdX, unitTypePosY, nextNode.IdZ);
 
-            GameObject.Find("FogManager")
-                .GetComponent<FogManager>()
-                .ClearFog(
-                    nextNode.IdX,
-                    nextNode.IdZ
-                );
-
             GetComponent<UnitOwnIntPosition>()
                 .SetUnitOwnIntPosition(
                     nextNode.IdX,
@@ -106,6 +127,12 @@ public class UnitMove : MonoBehaviour
             //待機
             await Task.Delay(TimeSpan.FromSeconds(0.5f));
 
+//            await Task.Run(() => { transform.DOMove(nextDestination, 0.4f); });
+
+            Debug.Log("Before Async.");
+
+//            UnitMoveAnimation(nextDestination);
+
             path += nextNode.IdX.ToString() + nextNode.IdZ.ToString() + " -> ";
 
             //次のノードへ
@@ -114,7 +141,20 @@ public class UnitMove : MonoBehaviour
 
         Debug.Log(path);
         Debug.Log("========================================");
+
+        return true;
     }
+
+//    private async void UnitMoveAnimation(Vector3 nextDestination)
+//    {
+//        Debug.Log("Inside Async Method.");
+//
+//        transform.DOMove(nextDestination, 0.4f);
+//
+//        await Task.Delay(TimeSpan.FromSeconds(0.5f));
+//
+//        Debug.Log("End Async Method.");
+//    }
 
     private bool ExistUnit(int posX, int posZ)
     {

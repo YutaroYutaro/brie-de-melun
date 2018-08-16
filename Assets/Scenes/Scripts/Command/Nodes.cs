@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using SummonUnitTypeDefine;
 
@@ -13,7 +14,7 @@ public class Nodes
     public Nodes PreviousNodes = null; //最短経路の次ノード
 
     //探索するためのノード群を生成するメソッド
-    public Nodes[,] CreateNodes(int maxX, int maxZ, int unitType)
+    public Nodes[,] CreateNodes(int maxX, int maxZ, int unitPosX, int unitPosZ, int unitType)
     {
         //マップをノードの二次元配列で表現
         Nodes[,] nodes = new Nodes[maxX, maxZ];
