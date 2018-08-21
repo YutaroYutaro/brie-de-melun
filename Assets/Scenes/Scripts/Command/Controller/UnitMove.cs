@@ -65,6 +65,33 @@ public class UnitMove : MonoBehaviour
             return false;
         }
 
+        if (GameObject.Find("Player1Units").transform.childCount != 0)
+        {
+            foreach (Transform child in GameObject.Find("Player1Units").transform)
+            {
+                if (child.GetComponent<UnitOwnIntPosition>().PosX == clickMiniMapImageInstancePositionX &&
+                    child.GetComponent<UnitOwnIntPosition>().PosZ == clickMiniMapImageInstancePositionZ)
+                {
+                    Debug.Log("There is a My Unit!");
+                    return false;
+                }
+            }
+        }
+
+        if (GameObject.Find("Player2Units").transform.childCount != 0)
+        {
+            foreach (Transform child in GameObject.Find("Player2Units").transform)
+            {
+                if (child.GetComponent<UnitOwnIntPosition>().PosX == clickMiniMapImageInstancePositionX &&
+                    child.GetComponent<UnitOwnIntPosition>().PosZ == clickMiniMapImageInstancePositionZ &&
+                    child.gameObject.activeSelf)
+                {
+                    Debug.Log("There is a Enemy's Unit!");
+                    return false;
+                }
+            }
+        }
+
         Debug.Log("========================================");
 
         string path = "Start -> ";
