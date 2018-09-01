@@ -5,11 +5,6 @@
 -out:E:/yutaro/brie-de-mulun/Temp/Assembly-CSharp.dll
 -nostdlib
 -unsafe
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.Async.dll
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -70,6 +65,11 @@
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.XRModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEditor.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/Unity.Locator.dll"
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.Async.dll
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
@@ -314,6 +314,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageGenerator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageInstancePosition.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticExistUnitOnPosition.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitOwnIntPosition.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitStatus.cs
 -i:"E:/yutaro/brie-de-mulun/Assets/Unity Technologies/Recorder/Extensions/FCIntegration/BaseFCRecorderSettings.cs"

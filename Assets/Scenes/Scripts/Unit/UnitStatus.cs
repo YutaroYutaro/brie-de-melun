@@ -4,10 +4,10 @@ using System.Collections.Generic;
 public class UnitStatus : MonoBehaviour
 {
     //操作ユニットの基本ステータス
-    public float HitPoint;
-    public float AttackPoint;
-    public float DefensPoint;
-    public float MovementPoint;
+    public int HitPoint;
+    public int AttackPoint;
+    public int DefensPoint;
+    public int MovementPoint;
 
     void Start()
     {

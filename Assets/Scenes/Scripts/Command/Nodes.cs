@@ -35,9 +35,12 @@ public class Nodes
                     IdZ = posZ
                 };
 
+//                Debug.Log("UnitType: " + unitType);
+
                 if (unitType == SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE)
                 {
                     nodeWieght[posX, posZ] = 1;
+//                    Debug.Log("(" + posX + ", " + posZ + ") => " + nodeWieght[posX, posZ]);
                 }
                 else
                 {
@@ -49,6 +52,7 @@ public class Nodes
                         )
                         {
                             nodeWieght[posX, posZ] = 2;
+//                            Debug.Log("(" + posX + ", " + posZ + ") => " + nodeWieght[posX, posZ]);
                             break;
                         }
                     }
@@ -56,6 +60,7 @@ public class Nodes
                     if (nodeWieght[posX, posZ] == 0)
                     {
                         nodeWieght[posX, posZ] = mapWeight[posX, posZ];
+//                        Debug.Log("(" + posX + ", " + posZ + ") => " + nodeWieght[posX, posZ]);
                     }
                 }
             }

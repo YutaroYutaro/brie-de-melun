@@ -3,14 +3,14 @@
 public class ShortestPath
 {
     //ダイクストラ法
-    public Nodes[,] DijkstraAlgorithm(int startX, int startZ,int goalX, int goalZ, int unitType)
+    public Nodes[,] DijkstraAlgorithm(int startX, int startZ, int goalX, int goalZ, int unitType)
     {
         int maxX = 5;
         int maxZ = 7;
 
         Nodes nodes = new Nodes();
 
-        Nodes[,] nodesTable = nodes.CreateNodes(5, 7, goalX, goalZ,unitType);
+        Nodes[,] nodesTable = nodes.CreateNodes(5, 7, goalX, goalZ, unitType);
 
         nodesTable[startX, startZ].Cost = 0;
 

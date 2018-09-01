@@ -49,6 +49,11 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         miniMapPosZ
                     ))
                 {
+                    if (GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SelectedUnitMovePoint > 0)
+                        break;
+
+                    Debug.Log("End Move!");
+
                     GameObject.Find("PhaseManager")
                         .GetComponent<PhaseManager>()
                         .SetNextPhase("SelectUseCard");
@@ -63,8 +68,6 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 {
                     Debug.Log("One more select destination.");
                 }
-
-
 
                 break;
 
