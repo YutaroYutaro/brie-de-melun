@@ -55,7 +55,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 switch (dragGameObject.tag)
                 {
                     case "MoveCard":
-                        if (GameObject.Find("Player1Units").transform.childCount == 0)
+                        Transform player1Units = GameObject.Find("Player1Units").transform;
+                        if (player1Units.childCount == 0)
                         {
                             dragGameObjectDraggable.PlaceholderParent =
                                 dragGameObjectDraggable.ParentToReturnTo;
@@ -66,6 +67,24 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         }
 
                         Debug.Log("This card is a " + dragGameObject.tag);
+
+                        if (player1Units.childCount == 1)
+                        {
+                            foreach (Transform player1UnitChild in player1Units)
+                            {
+                                GameObject.Find("UnitMoveManager")
+                                    .GetComponent<UnitMoveManager>()
+                                    .SetMoveUnit(player1UnitChild.gameObject);
+                            }
+
+                            GameObject.Find("PhaseManager")
+                                .GetComponent<PhaseManager>()
+                                .SetNextPhase("SelectDestination");
+
+                            Debug.Log("Phase: SelectDestination");
+
+                            break;
+                        }
 
                         GameObject.Find("PhaseManager")
                             .GetComponent<PhaseManager>()
