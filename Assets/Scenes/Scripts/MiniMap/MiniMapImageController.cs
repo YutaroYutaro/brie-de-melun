@@ -8,7 +8,7 @@ using SummonUnitTypeDefine;
 
 public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public void OnPointerClick(PointerEventData eventData)
+    public async void OnPointerClick(PointerEventData eventData)
     {
         string nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
 
@@ -42,22 +42,32 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 break;
 
             case "SelectDestination":
-                GameObject.Find("UnitMoveManager")
+                if (await GameObject.Find("UnitMoveManager")
                     .GetComponent<UnitMoveManager>()
                     .MiniMapUnitMove(
                         miniMapPosX,
                         miniMapPosZ
-                    );
+                    ))
+                {
+                    if (GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SelectedUnitMovePoint > 0)
+                        break;
 
-                GameObject.Find("PhaseManager")
-                    .GetComponent<PhaseManager>()
-                    .SetNextPhase("SelectUseCard");
+                    Debug.Log("End Move!");
 
-                Debug.Log("Phase: SelectUseCard");
+                    GameObject.Find("PhaseManager")
+                        .GetComponent<PhaseManager>()
+                        .SetNextPhase("SelectUseCard");
 
-                GameObject.Find("UnitMoveManager")
-                    .GetComponent<UnitMoveManager>()
-                    .SetMoveUnit(null);
+                    Debug.Log("Phase: SelectUseCard");
+
+                    GameObject.Find("UnitMoveManager")
+                        .GetComponent<UnitMoveManager>()
+                        .SetMoveUnit(null);
+                }
+                else
+                {
+                    Debug.Log("One more select destination.");
+                }
 
                 break;
 

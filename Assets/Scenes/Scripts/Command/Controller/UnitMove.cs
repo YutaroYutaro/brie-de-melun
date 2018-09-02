@@ -1,24 +1,69 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 using DG.Tweening;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using UnityEngine;
+using UniRx.Async;
 
 public class UnitMove : MonoBehaviour
 {
-    public async void MiniMapClickUnitMove(
+    public async UniTask<bool> MiniMapClickUnitMove(
         int clickMiniMapImageInstancePositionX,
         int clickMiniMapImageInstancePositionZ
     )
     {
-        ShortestPath shortestPath = new ShortestPath();
+        if (Math.Abs(clickMiniMapImageInstancePositionX - GetComponent<UnitOwnIntPosition>().PosX) > 1 ||
+            Math.Abs(clickMiniMapImageInstancePositionZ - GetComponent<UnitOwnIntPosition>().PosZ) > 1)
+        {
+            Debug.Log("Please click next current position tile!");
+            return false;
+        }
+
+        if (clickMiniMapImageInstancePositionX == GetComponent<UnitOwnIntPosition>().PosX &&
+            clickMiniMapImageInstancePositionZ == GetComponent<UnitOwnIntPosition>().PosZ)
+        {
+            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().ConsumeSelectedUnitMovePoint(2);
+            return true;
+        }
+
+            ShortestPath shortestPath = new ShortestPath();
+
+        int unitType;
+
+        switch (tag)
+        {
+            case "ProximityAttackUnit":
+                unitType = SummonUnitTypeDefine.SummonUnitType.PROXIMITY;
+
+                break;
+
+            case "RemoteAttackUnit":
+                unitType = SummonUnitTypeDefine.SummonUnitType.REMOTE;
+
+                break;
+
+            case "ReconnaissanceUnit":
+                unitType = SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE;
+
+                break;
+
+            default:
+                Debug.LogError("Don't Exist unitType.");
+
+                return false;
+        }
+
+//        Debug.Log("unitType: " + unitType);
 
         //ダイクストラ法で最短経路を検索
         Nodes[,] resultNodes =
             shortestPath.DijkstraAlgorithm(
                 clickMiniMapImageInstancePositionX,
-                clickMiniMapImageInstancePositionZ
-                );
+                clickMiniMapImageInstancePositionZ,
+                GetComponent<UnitOwnIntPosition>().PosX,
+                GetComponent<UnitOwnIntPosition>().PosZ,
+                unitType
+            );
 
         //現在地を目的地として設定
         //ノードが後ろから繋がっているため
@@ -28,10 +73,73 @@ public class UnitMove : MonoBehaviour
                 GetComponent<UnitOwnIntPosition>().PosZ
             ];
 
-        Debug.Log("========================================");
+//        Debug.Log("MoveCost: " + unitPositionNode.Cost);
 
-        string path = "Start -> ";
-        Nodes currentNode = unitPositionNode;
+        if (unitPositionNode.Cost > GetComponent<UnitStatus>().MovementPoint)
+        {
+            Debug.Log("Can't move.");
+            return false;
+        }
+
+        if (GameObject.Find("Player1Units").transform.childCount != 0)
+        {
+            foreach (Transform child in GameObject.Find("Player1Units").transform)
+            {
+                if (child.GetComponent<UnitOwnIntPosition>().PosX == clickMiniMapImageInstancePositionX &&
+                    child.GetComponent<UnitOwnIntPosition>().PosZ == clickMiniMapImageInstancePositionZ)
+                {
+                    Debug.Log("There is a My Unit!");
+                    return false;
+                }
+            }
+        }
+
+        if (GameObject.Find("Player2Units").transform.childCount != 0)
+        {
+            foreach (Transform child in GameObject.Find("Player2Units").transform)
+            {
+                if (child.GetComponent<UnitOwnIntPosition>().PosX == clickMiniMapImageInstancePositionX &&
+                    child.GetComponent<UnitOwnIntPosition>().PosZ == clickMiniMapImageInstancePositionZ &&
+                    child.gameObject.activeSelf)
+                {
+                    Debug.Log("There is a Enemy's Unit!");
+                    return false;
+                }
+            }
+        }
+
+        while (true)
+        {
+            //ひとつ前のノードを参照
+            Nodes nextNode = unitPositionNode.PreviousNodes;
+
+            //クリックしたノードに達するとループを抜ける
+            if (nextNode == null)
+            {
+                break;
+            }
+
+            if (StaticExistUnitOnPosition.ExistUnitOnPosition(GameObject.Find("Player1Units").transform, nextNode.IdX,
+                    nextNode.IdZ, true) ||
+                StaticExistUnitOnPosition.ExistUnitOnPosition(GameObject.Find("Player2Units").transform, nextNode.IdX,
+                    nextNode.IdZ, true)
+            )
+            {
+                Debug.Log("Exist enemy on the way.");
+                return false;
+            }
+
+            //次のノードへ
+            unitPositionNode = nextNode;
+        }
+
+//        Debug.Log("========================================");
+
+//        string path = "Start -> ";
+        Nodes currentNode = resultNodes[
+            GetComponent<UnitOwnIntPosition>().PosX,
+            GetComponent<UnitOwnIntPosition>().PosZ
+        ];
 
         while (true)
         {
@@ -41,8 +149,24 @@ public class UnitMove : MonoBehaviour
             //クリックしたノードに達するとループを抜ける
             if (nextNode == null || ExistUnit(nextNode.IdX, nextNode.IdZ))
             {
-                path += " Goal";
+//                path += " Goal";
                 break;
+            }
+
+            GameObject.Find("FogManager")
+                .GetComponent<FogManager>()
+                .ClearFog(
+                    nextNode.IdX,
+                    nextNode.IdZ
+                );
+
+            int[,] mapWeight = GameObject.Find("Map").GetComponent<CreateMap>().GetMapWeight();
+
+            if (unitType != SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE &&
+                mapWeight[nextNode.IdX, nextNode.IdZ] > GetComponent<UnitStatus>().MovementPoint)
+            {
+                Debug.Log("Crash!");
+                return true;
             }
 
             float unitTypePosY;
@@ -63,13 +187,6 @@ public class UnitMove : MonoBehaviour
 
             Vector3 nextDestination = new Vector3(nextNode.IdX, unitTypePosY, nextNode.IdZ);
 
-            GameObject.Find("FogManager")
-                .GetComponent<FogManager>()
-                .ClearFog(
-                    nextNode.IdX,
-                    nextNode.IdZ
-                );
-
             GetComponent<UnitOwnIntPosition>()
                 .SetUnitOwnIntPosition(
                     nextNode.IdX,
@@ -82,15 +199,38 @@ public class UnitMove : MonoBehaviour
             //待機
             await Task.Delay(TimeSpan.FromSeconds(0.5f));
 
-            path += nextNode.IdX.ToString() + nextNode.IdZ.ToString() + " -> ";
+            Debug.Log("Cost: " + currentNode.Cost);
+
+            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().ConsumeSelectedUnitMovePoint(currentNode.Cost);
+
+//            await Task.Run(() => { transform.DOMove(nextDestination, 0.4f); });
+
+//            Debug.Log("Before Async.");
+
+//            UnitMoveAnimation(nextDestination);
+
+//            path += nextNode.IdX.ToString() + nextNode.IdZ.ToString() + " -> ";
 
             //次のノードへ
             currentNode = nextNode;
         }
 
-        Debug.Log(path);
-        Debug.Log("========================================");
+//        Debug.Log(path);
+//        Debug.Log("========================================");
+
+        return true;
     }
+
+//    private async void UnitMoveAnimation(Vector3 nextDestination)
+//    {
+//        Debug.Log("Inside Async Method.");
+//
+//        transform.DOMove(nextDestination, 0.4f);
+//
+//        await Task.Delay(TimeSpan.FromSeconds(0.5f));
+//
+//        Debug.Log("End Async Method.");
+//    }
 
     private bool ExistUnit(int posX, int posZ)
     {

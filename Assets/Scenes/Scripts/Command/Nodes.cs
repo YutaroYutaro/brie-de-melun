@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using SummonUnitTypeDefine;
 
 public class Nodes
 {
@@ -12,13 +14,15 @@ public class Nodes
     public Nodes PreviousNodes = null; //最短経路の次ノード
 
     //探索するためのノード群を生成するメソッド
-    public Nodes[,] CreateNodes(int maxX = 5, int maxZ = 7)
+    public Nodes[,] CreateNodes(int maxX, int maxZ, int unitPosX, int unitPosZ, int unitType)
     {
         //マップをノードの二次元配列で表現
         Nodes[,] nodes = new Nodes[maxX, maxZ];
 
         //CreateMapコンポーネントからマップの重み表を取得
         int[,] mapWeight = GameObject.Find("Map").GetComponent<CreateMap>().GetMapWeight();
+
+        int[,] nodeWieght = new int[5, 7];
 
         //個々のノードを生成
         for (int posX = 0; posX < maxX; posX++)
@@ -30,6 +34,35 @@ public class Nodes
                     IdX = posX,
                     IdZ = posZ
                 };
+
+//                Debug.Log("UnitType: " + unitType);
+
+                if (unitType == SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE)
+                {
+                    nodeWieght[posX, posZ] = 1;
+//                    Debug.Log("(" + posX + ", " + posZ + ") => " + nodeWieght[posX, posZ]);
+                }
+                else
+                {
+                    foreach (Transform child in GameObject.Find("FoggyMapObjects").transform)
+                    {
+                        if (
+                            Mathf.RoundToInt(child.position.x) == posX &&
+                            Mathf.RoundToInt(child.position.z) == posZ
+                        )
+                        {
+                            nodeWieght[posX, posZ] = 2;
+//                            Debug.Log("(" + posX + ", " + posZ + ") => " + nodeWieght[posX, posZ]);
+                            break;
+                        }
+                    }
+
+                    if (nodeWieght[posX, posZ] == 0)
+                    {
+                        nodeWieght[posX, posZ] = mapWeight[posX, posZ];
+//                        Debug.Log("(" + posX + ", " + posZ + ") => " + nodeWieght[posX, posZ]);
+                    }
+                }
             }
         }
 
@@ -42,62 +75,62 @@ public class Nodes
                 //左下角
                 if (posX == 0 && posZ == 0)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], nodeWieght[posX, posZ]);
                 }
                 //左上角
                 else if (posX == 0 && posZ == maxZ - 1)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], nodeWieght[posX, posZ]);
                 }
                 //右下角
                 else if (posX == maxX - 1 && posZ == 0)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], nodeWieght[posX, posZ]);
                 }
                 //右上角
                 else if (posX == maxX - 1 && posZ == maxZ - 1)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], nodeWieght[posX, posZ]);
                 }
                 //左辺
                 else if (posX == 0)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], nodeWieght[posX, posZ]);
                 }
                 //右辺
                 else if (posX == maxX - 1)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], nodeWieght[posX, posZ]);
                 }
                 //下辺
                 else if (posZ == 0)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], nodeWieght[posX, posZ]);
                 }
                 //上辺
                 else if (posZ == maxZ - 1)
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], nodeWieght[posX, posZ]);
                 }
                 //それ以外
                 else
                 {
-                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], mapWeight[posX, posZ]);
-                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], mapWeight[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX + 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX - 1, posZ], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ + 1], nodeWieght[posX, posZ]);
+                    nodes[posX, posZ].AddNode(nodes[posX, posZ - 1], nodeWieght[posX, posZ]);
                 }
             }
         }
