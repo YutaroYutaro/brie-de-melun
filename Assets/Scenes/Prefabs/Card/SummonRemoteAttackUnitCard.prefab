@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114354442851891698}
   - component: {fileID: 225771403271905000}
   - component: {fileID: 114289016613565864}
+  - component: {fileID: 114186202205232738}
   m_Layer: 5
   m_Name: SummonRemoteAttackUnitCard
   m_TagString: SummonCard
@@ -170,6 +171,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114186202205232738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117478736487082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3eb28fcd8d30640a9b622dea4199b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mana: 0
 --- !u!114 &114289016613565864
 MonoBehaviour:
   m_ObjectHideFlags: 1

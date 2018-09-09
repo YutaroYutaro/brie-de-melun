@@ -5,11 +5,6 @@
 -out:E:/yutaro/brie-de-mulun/Temp/Assembly-CSharp.dll
 -nostdlib
 -unsafe
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.Async.dll
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -70,6 +65,11 @@
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.XRModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEditor.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/Unity.Locator.dll"
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.Async.dll
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
@@ -296,6 +296,8 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnEndController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnStartController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Manager/DeckAndGraveyardManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/ManaModel.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Presenter/ManaPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Controller/UnitAttack.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Controller/UnitMove.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Controller/UnitReconnaissanceController.cs
@@ -306,6 +308,8 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Manager/UnitMoveManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Nodes.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/ShortestPath.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ManaOfCard.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ManaText.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Controller/MapObjectController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/FogDefine.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Generator/CreateMap.cs
@@ -314,6 +318,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageGenerator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageInstancePosition.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticCardOperator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticExistUnitOnPosition.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitOwnIntPosition.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitStatus.cs

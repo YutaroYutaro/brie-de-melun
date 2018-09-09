@@ -43,6 +43,8 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         if (name == "Hand")
             return;
 
+//        if
+
         if (GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase() == "SelectUseCard")
         {
             Debug.Log(eventData.pointerDrag.name + " was dropped on " + gameObject.name);
