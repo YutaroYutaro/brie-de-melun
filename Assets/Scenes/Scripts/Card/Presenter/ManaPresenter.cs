@@ -1,12 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UniRx.Async;
-using UniRx.Async.Triggers;
+﻿using UnityEngine;
 using UniRx.Triggers;
 using UniRx;
-using UnityEngine.EventSystems;
-using Asset.Scripts.Mana;
 
 public class ManaPresenter : MonoBehaviour
 {
@@ -17,15 +11,8 @@ public class ManaPresenter : MonoBehaviour
 
         observableEventTrigger.OnDropAsObservable()
             .Subscribe(eventData =>
-                GetComponent<ManaModel>().ManaReactiveProperty.Value -=
+                ManaModel.Instance.ManaReactiveProperty.Value -=
                     eventData.pointerDrag.GetComponent<ManaOfCard>().Mana
-            );
-
-        GetComponent<ManaModel>().ManaReactiveProperty
-            .Subscribe(mana =>
-                {
-                    Debug.Log("Rest of Mana: " + mana);
-                }
             );
     }
 }

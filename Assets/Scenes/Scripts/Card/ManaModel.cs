@@ -5,7 +5,7 @@ using UniRx;
 using UniRx.Async;
 using UnityEngine;
 
-public class ManaModel : MonoBehaviour {
+public class ManaModel : SingletonMonoBehaviour<ManaModel> {
 
     public ReactiveProperty<int> ManaReactiveProperty = new IntReactiveProperty(3);
 
