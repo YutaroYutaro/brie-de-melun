@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
+using UniRx;
 
 public class PhaseManager : SingletonMonoBehaviour<PhaseManager>
 {
-    public string StartPhase = "SelectUseCard";
+//    public string StartPhase = "SelectUseCard";
 
-    private string _nowPhase = null;
+	[SerializeField]
+	private string _nowPhase;
+	public ReactiveProperty<string> PhaseReactiveProperty;
 
-    private void Start()
-    {
-        _nowPhase = StartPhase;
-    }
+	protected override void Init(){
+		base.Init ();
+		PhaseReactiveProperty = new StringReactiveProperty("SelectUseCard");
+		_nowPhase = "SelectUseCard";
+	}
 
-    public void SetNextPhase(string phase)
-    {
-        _nowPhase = phase;
-    }
+	public void SetNextPhase(string phase)
+	{
+		PhaseReactiveProperty.Value = phase;
+		_nowPhase = phase;
+	}
 
-    public string GetNowPhase()
-    {
-        return _nowPhase;
-    }
+	public string GetNowPhase()
+	{
+		return _nowPhase;
+	}
 }
