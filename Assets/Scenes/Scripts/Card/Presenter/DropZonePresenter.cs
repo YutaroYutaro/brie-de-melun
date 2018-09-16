@@ -67,6 +67,7 @@ public class DropZonePresenter : MonoBehaviour
                                 Debug.Log("Don't exist MyUnit.");
                                 return;
                             }
+
                             break;
 
                         case "AttackCard":
@@ -88,59 +89,21 @@ public class DropZonePresenter : MonoBehaviour
                             break;
 
                         case "SummonCard":
-                            if (GameObject.Find("Player1Units").transform.childCount != 0)
+                            SummonCardController summonCardController = new SummonCardController();
+                            _isSetBool = summonCardController.SetCardTypePhase();
+
+                            if (_isSetBool == false)
                             {
-                                Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
-                                bool existUnit1 = false;
-                                bool existUnit2 = false;
-                                bool existUnit3 = false;
+                                dragGameObjectDraggable.PlaceholderParent =
+                                    dragGameObjectDraggable.ParentToReturnTo;
 
-                                foreach (Transform player1UnitChild in player1UnitChildren)
-                                {
-                                    if (Mathf.RoundToInt(player1UnitChild.position.x) == 1 &&
-                                        Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                                    {
-                                        Debug.Log("Exist Unit (1, 1, 0)");
+                                Debug.Log("Don't exist Attacker or Target.");
 
-                                        existUnit1 = true;
-                                    }
-                                    else if (Mathf.RoundToInt(player1UnitChild.position.x) == 2 &&
-                                             Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                                    {
-                                        Debug.Log("Exist Unit (2, 1, 0)");
-
-                                        existUnit2 = true;
-                                    }
-                                    else if (Mathf.RoundToInt(player1UnitChild.position.x) == 3 &&
-                                             Mathf.RoundToInt(player1UnitChild.position.z) == 0)
-                                    {
-                                        Debug.Log("Exist Unit (3, 1, 0)");
-
-                                        existUnit3 = true;
-                                    }
-
-                                    if (existUnit1 && existUnit2 && existUnit3)
-                                    {
-                                        Debug.Log("Can't Summon");
-
-                                        dragGameObjectDraggable.PlaceholderParent =
-                                            dragGameObjectDraggable.ParentToReturnTo;
-
-                                        return;
-                                    }
-                                }
+                                return;
                             }
 
                             GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
                                 dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
-
-                            Debug.Log("This is a SummonCard");
-
-                            GameObject.Find("PhaseManager")
-                                .GetComponent<PhaseManager>()
-                                .SetNextPhase("SelectMiniMapPositionUnitSummon");
-
-                            Debug.Log("Phase: SelectMiniMapPositionUnitSummon");
 
                             break;
 
