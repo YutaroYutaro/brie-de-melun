@@ -291,6 +291,7 @@
 -d:UNITY_POST_PROCESSING_STACK_V2
 -i:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/Examples/Basics.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/Examples/Sequences.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/AttackCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/Draggable.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/MoveCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnEndController.cs

@@ -71,12 +71,11 @@ public class DropZonePresenter : MonoBehaviour
 
                         case "AttackCard":
                             Debug.Log("This card is a " + dragGameObject.tag);
-
-                            UnitAttackManager unitAttackManager =
-                                GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
+                            AttackCardController attackCardController = new AttackCardController();
+                            _isSetBool = attackCardController.SetCardTypePhase();
 
                             //攻撃できるユニットが存在するか判定
-                            if (!(unitAttackManager.ExistAttackTargetUnit()))
+                            if (_isSetBool == false)
                             {
                                 dragGameObjectDraggable.PlaceholderParent =
                                     dragGameObjectDraggable.ParentToReturnTo;
@@ -84,44 +83,6 @@ public class DropZonePresenter : MonoBehaviour
                                 Debug.Log("Don't exist Attacker or Target.");
 
                                 return;
-                            }
-
-                            //アタッカーユニットが1体か判定
-                            if (unitAttackManager.GetAttackerAndTargetList().Count == 1)
-                            {
-                                //ターゲットユニットが1体か判定
-                                if (unitAttackManager
-                                        .GetAttackerAndTargetList().First().Target.Count == 1)
-                                {
-                                    unitAttackManager.SelectedAttacker =
-                                        unitAttackManager.GetAttackerAndTargetList().First().Attacker;
-
-                                    unitAttackManager.MiniMapUnitAttack(
-                                        unitAttackManager.GetAttackerAndTargetList().First().Target.First()
-                                    );
-
-                                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                        .SetNextPhase("SelectUseCard");
-
-                                    Debug.Log("Phase: SelectUseCard");
-                                }
-                                else
-                                {
-                                    unitAttackManager.SelectedAttacker =
-                                        unitAttackManager.GetAttackerAndTargetList().First().Attacker;
-
-                                    GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                        .SetNextPhase("SelectAttackTargetUnit");
-
-                                    Debug.Log("Phase: SelectAttackTargetUnit");
-                                }
-                            }
-                            else
-                            {
-                                GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
-                                    .SetNextPhase("SelectAttackerUnit");
-
-                                Debug.Log("Phase: SelectAttackerUnit");
                             }
 
                             break;
