@@ -9,6 +9,8 @@ public class TurnStartController : MonoBehaviour
     {
         Debug.Log("Debug: TurnStart");
 
+        ManaModel.Instance.ManaReactiveProperty.Value = 3;
+
         Transform deckChildren = GameObject.Find("Deck").transform;
         List<GameObject> deckCardObjects = new List<GameObject>();
 
