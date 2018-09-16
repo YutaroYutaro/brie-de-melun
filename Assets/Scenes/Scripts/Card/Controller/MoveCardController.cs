@@ -42,38 +42,5 @@ namespace Asset.Scripts.Cards
                     return true;
             }
         }
-
-
-//		if (player1Units.childCount == 0)
-//		{
-//			Debug.Log("Don't exist MyUnit.");
-//
-//			return false;
-//		}
-//
-//		if (player1Units.childCount == 1)
-//		{
-//			foreach (Transform player1UnitChild in player1Units)
-//			{
-//				GameObject.Find("UnitMoveManager")
-//					.GetComponent<UnitMoveManager>()
-//					.SetMoveUnit(player1UnitChild.gameObject);
-//			}
-//
-//			GameObject.Find("PhaseManager")
-//				.GetComponent<PhaseManager>()
-//				.SetNextPhase("SelectDestination");
-//
-//			Debug.Log("Phase: SelectDestination");
-//
-//			return true;
-//		}
-//
-//		GameObject.Find("PhaseManager")
-//			.GetComponent<PhaseManager>()
-//			.SetNextPhase("SelectMoveUnit");
-//
-//		Debug.Log("Phase: SelectMoveUnit");
-//		return true;
     }
 }
