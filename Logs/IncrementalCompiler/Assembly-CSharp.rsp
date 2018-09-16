@@ -294,6 +294,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/AttackCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/Draggable.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/MoveCardController.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/ReconnaissanceCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/SummonCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnEndController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnStartController.cs
