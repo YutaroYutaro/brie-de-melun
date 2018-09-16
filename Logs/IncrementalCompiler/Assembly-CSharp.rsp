@@ -292,8 +292,10 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/Examples/Basics.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/Examples/Sequences.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/Draggable.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/MoveCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnEndController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnStartController.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/ICardType.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Manager/DeckAndGraveyardManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/ManaModel.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Presenter/DropZonePresenter.cs

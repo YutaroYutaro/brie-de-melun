@@ -4,9 +4,12 @@ using UniRx;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Asset.Scripts.Cards;
 
 public class DropZonePresenter : MonoBehaviour
 {
+    private bool _isSetBool;
+
     // Use this for initialization
     void Start()
     {
@@ -53,43 +56,17 @@ public class DropZonePresenter : MonoBehaviour
                     switch (dragGameObject.tag)
                     {
                         case "MoveCard":
-                            Transform player1Units = GameObject.Find("Player1Units").transform;
-                            if (player1Units.childCount == 0)
+                            MoveCardController moveCardController = new MoveCardController();
+                            _isSetBool = moveCardController.SetCardTypePhase();
+
+                            if (_isSetBool == false)
                             {
                                 dragGameObjectDraggable.PlaceholderParent =
                                     dragGameObjectDraggable.ParentToReturnTo;
 
                                 Debug.Log("Don't exist MyUnit.");
-
                                 return;
                             }
-
-                            Debug.Log("This card is a " + dragGameObject.tag);
-
-                            if (player1Units.childCount == 1)
-                            {
-                                foreach (Transform player1UnitChild in player1Units)
-                                {
-                                    GameObject.Find("UnitMoveManager")
-                                        .GetComponent<UnitMoveManager>()
-                                        .SetMoveUnit(player1UnitChild.gameObject);
-                                }
-
-                                GameObject.Find("PhaseManager")
-                                    .GetComponent<PhaseManager>()
-                                    .SetNextPhase("SelectDestination");
-
-                                Debug.Log("Phase: SelectDestination");
-
-                                break;
-                            }
-
-                            GameObject.Find("PhaseManager")
-                                .GetComponent<PhaseManager>()
-                                .SetNextPhase("SelectMoveUnit");
-
-                            Debug.Log("Phase: SelectMoveUnit");
-
                             break;
 
                         case "AttackCard":
