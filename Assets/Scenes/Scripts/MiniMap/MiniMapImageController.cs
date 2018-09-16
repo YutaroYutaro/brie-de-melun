@@ -10,12 +10,12 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 {
     public async void OnPointerClick(PointerEventData eventData)
     {
-        string nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
+//        string nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
 
         int miniMapPosX = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>().PosX;
         int miniMapPosZ = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>().PosZ;
 
-        switch (nowPhase)
+        switch (PhaseManager.Instance.PhaseReactiveProperty.Value)
         {
             case "SelectMoveUnit":
                 Transform player1UnitChildren = GameObject.Find("Player1Units").transform;

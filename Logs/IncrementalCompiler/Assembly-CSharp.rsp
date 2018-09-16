@@ -318,6 +318,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/FogDefine.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Generator/CreateMap.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Manager/FogManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/IPhaseType.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageGenerator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageInstancePosition.cs
