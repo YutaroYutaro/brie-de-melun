@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PhaseManager : MonoBehaviour
+public class PhaseManager : SingletonMonoBehaviour<PhaseManager>
 {
     public string StartPhase = "SelectUseCard";
 
