@@ -10,6 +10,7 @@ public class DropZonePresenter : MonoBehaviour
 {
     private bool _isSetBool;
     private string _debugLogMessage;
+    private ICardType _cardType;
 
     // Use this for initialization
     void Start()
@@ -54,22 +55,19 @@ public class DropZonePresenter : MonoBehaviour
                     switch (dragGameObject.tag)
                     {
                         case "MoveCard":
-                            MoveCardController moveCardController = new MoveCardController();
-                            _isSetBool = moveCardController.SetCardTypePhase();
+                            _cardType = new MoveCardController();
 
                             break;
 
                         case "AttackCard":
-                            AttackCardController attackCardController = new AttackCardController();
-                            _isSetBool = attackCardController.SetCardTypePhase();
+                            _cardType = new AttackCardController();
 
                             break;
 
                         case "SummonCard":
-                            SummonCardController summonCardController = new SummonCardController();
-                            _isSetBool = summonCardController.SetCardTypePhase();
+                            _cardType = new SummonCardController();
 
-                            if (_isSetBool == false) break;
+                            if(_cardType.SetCardTypePhase() == false) break;
 
                             GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
                                 dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
@@ -77,20 +75,17 @@ public class DropZonePresenter : MonoBehaviour
                             break;
 
                         case "ReconnaissanceCard":
-                            ReconnaissanceCardController reconnaissanceCardController =
-                                new ReconnaissanceCardController();
-                            _isSetBool = reconnaissanceCardController.SetCardTypePhase();
+                            _cardType = new ReconnaissanceCardController();
 
                             break;
 
                         default:
                             Debug.Log("Don't exist this card type.");
-                            _isSetBool = false;
 
-                            break;
+                            return;
                     }
 
-                    if (_isSetBool == false)
+                    if (_cardType.SetCardTypePhase() == false)
                     {
                         dragGameObjectDraggable.PlaceholderParent =
                             dragGameObjectDraggable.ParentToReturnTo;
