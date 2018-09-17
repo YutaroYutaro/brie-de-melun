@@ -2,9 +2,18 @@
 using System.Threading.Tasks;
 using UniRx.Async;
 
-public class UnitMoveManager : MonoBehaviour
+public class UnitMoveManager : SingletonMonoBehaviour<UnitMoveManager>
 {
     public GameObject SelectMoveUnit;
+
+    private bool _isMoving = false;
+
+    public bool IsMoving
+    {
+        get => _isMoving;
+        set => _isMoving = value;
+    }
+
 
     [SerializeField]
     private int _selectedUnitMovementPoint;

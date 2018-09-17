@@ -26,7 +26,7 @@ public class UnitMove : MonoBehaviour
             return true;
         }
 
-            ShortestPath shortestPath = new ShortestPath();
+        ShortestPath shortestPath = new ShortestPath();
 
         int unitType;
 
@@ -201,36 +201,15 @@ public class UnitMove : MonoBehaviour
 
             Debug.Log("Cost: " + currentNode.Cost);
 
-            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().ConsumeSelectedUnitMovePoint(currentNode.Cost);
-
-//            await Task.Run(() => { transform.DOMove(nextDestination, 0.4f); });
-
-//            Debug.Log("Before Async.");
-
-//            UnitMoveAnimation(nextDestination);
-
-//            path += nextNode.IdX.ToString() + nextNode.IdZ.ToString() + " -> ";
+            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
+                .ConsumeSelectedUnitMovePoint(currentNode.Cost);
 
             //次のノードへ
             currentNode = nextNode;
         }
 
-//        Debug.Log(path);
-//        Debug.Log("========================================");
-
         return true;
     }
-
-//    private async void UnitMoveAnimation(Vector3 nextDestination)
-//    {
-//        Debug.Log("Inside Async Method.");
-//
-//        transform.DOMove(nextDestination, 0.4f);
-//
-//        await Task.Delay(TimeSpan.FromSeconds(0.5f));
-//
-//        Debug.Log("End Async Method.");
-//    }
 
     private bool ExistUnit(int posX, int posZ)
     {

@@ -1,59 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using SummonUnitTypeDefine;
 using Asset.Scripts.MiniMap;
 
 public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private IPhaseType _phaseType;
 
-    public async void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-//        string nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
-
         int miniMapPosX = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>().PosX;
         int miniMapPosZ = eventData.pointerPress.GetComponent<MiniMapImageInstancePosition>().PosZ;
 
         switch (PhaseManager.Instance.PhaseReactiveProperty.Value)
         {
             case "SelectMoveUnit":
-                _phaseType = new SelectMoveUnitController();
+                _phaseType = new SelectMoveUnitPhase();
                 _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
             case "SelectDestination":
-                if (await GameObject.Find("UnitMoveManager")
-                    .GetComponent<UnitMoveManager>()
-                    .MiniMapUnitMove(
-                        miniMapPosX,
-                        miniMapPosZ
-                    )
-                )
-                {
-                    if (GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SelectedUnitMovePoint > 0)
-                        break;
-
-                    Debug.Log("End Move!");
-
-                    GameObject.Find("PhaseManager")
-                        .GetComponent<PhaseManager>()
-                        .SetNextPhase("SelectUseCard");
-
-                    Debug.Log("Phase: SelectUseCard");
-
-                    GameObject.Find("UnitMoveManager")
-                        .GetComponent<UnitMoveManager>()
-                        .SetMoveUnit(null);
-                }
-                else
-                {
-                    Debug.Log("One more select destination.");
-                }
+                _phaseType = new SelectDestinationPhase();
+                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
