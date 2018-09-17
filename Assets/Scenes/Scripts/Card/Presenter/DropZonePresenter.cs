@@ -65,7 +65,7 @@ public class DropZonePresenter : MonoBehaviour
                         case "SummonCard":
                             _cardType = new SummonCardController();
 
-                            if(_cardType.SetCardTypePhase() == false) break;
+                            if (_cardType.SetCardTypePhase() == false) break;
 
                             GameObject.Find("UnitSummonGenerator").GetComponent<UnitSummonGenerator>().SummonUnitType =
                                 dragGameObject.GetComponent<SummonUnitType>().SummonunitType;
@@ -74,6 +74,11 @@ public class DropZonePresenter : MonoBehaviour
 
                         case "ReconnaissanceCard":
                             _cardType = new ReconnaissanceCardController();
+
+                            break;
+
+                        case "MoneyCard":
+                            _cardType = new MoneyCardController();
 
                             break;
 

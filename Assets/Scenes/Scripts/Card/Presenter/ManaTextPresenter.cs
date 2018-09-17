@@ -6,7 +6,6 @@ public class ManaTextPresenter : MonoBehaviour
 {
     private Text _manaText;
 
-    // Use this for initialization
     void Start()
     {
         _manaText = GetComponent<Text>();
