@@ -8,8 +8,6 @@ using Asset.Scripts.Cards;
 
 public class DropZonePresenter : MonoBehaviour
 {
-    private bool _isSetBool;
-    private string _debugLogMessage;
     private ICardType _cardType;
 
     // Use this for initialization
