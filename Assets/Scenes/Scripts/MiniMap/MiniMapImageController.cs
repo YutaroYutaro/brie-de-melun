@@ -5,9 +5,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using SummonUnitTypeDefine;
+using Asset.Scripts.MiniMap;
 
 public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    private IPhaseType _phaseType;
+
     public async void OnPointerClick(PointerEventData eventData)
     {
 //        string nowPhase = GameObject.Find("PhaseManager").GetComponent<PhaseManager>().GetNowPhase();
@@ -18,26 +21,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
         switch (PhaseManager.Instance.PhaseReactiveProperty.Value)
         {
             case "SelectMoveUnit":
-                Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
-
-                foreach (Transform player1UnitChild in player1UnitChildren)
-                {
-                    if (player1UnitChild.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
-                        player1UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
-                    {
-                        GameObject.Find("UnitMoveManager")
-                            .GetComponent<UnitMoveManager>()
-                            .SetMoveUnit(player1UnitChild.gameObject);
-
-                        GameObject.Find("PhaseManager")
-                            .GetComponent<PhaseManager>()
-                            .SetNextPhase("SelectDestination");
-
-                        Debug.Log("Phase: SelectDestination");
-
-                        break;
-                    }
-                }
+                _phaseType = new SelectMoveUnitController();
+                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
@@ -47,7 +32,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     .MiniMapUnitMove(
                         miniMapPosX,
                         miniMapPosZ
-                    ))
+                    )
+                )
                 {
                     if (GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().SelectedUnitMovePoint > 0)
                         break;
@@ -143,7 +129,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 {
                     if (GameObject.Find("Player1Units").transform.childCount != 0)
                     {
-                        player1UnitChildren = GameObject.Find("Player1Units").transform;
+                        Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
 
                         foreach (Transform player1UnitChild in player1UnitChildren)
                         {
