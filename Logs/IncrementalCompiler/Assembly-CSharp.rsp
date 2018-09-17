@@ -322,6 +322,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageGenerator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageInstancePosition.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectAttackerUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectDestinationPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectMoveUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
