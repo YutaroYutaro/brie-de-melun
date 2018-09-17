@@ -325,6 +325,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectAttackerUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectAttackTargetUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectDestinationPhase.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectMiniMapPositionUnitSummonPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectMoveUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/SingletonMonoBehaviour.cs

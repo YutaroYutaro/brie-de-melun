@@ -41,65 +41,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 break;
 
             case "SelectMiniMapPositionUnitSummon":
-                if (miniMapPosZ == 0 && (miniMapPosX == 1 || miniMapPosX == 2 || miniMapPosX == 3))
-                {
-                    if (GameObject.Find("Player1Units").transform.childCount != 0)
-                    {
-                        Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
-
-                        foreach (Transform player1UnitChild in player1UnitChildren)
-                        {
-                            if (player1UnitChild.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
-                                player1UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
-                            {
-                                Debug.Log("Exist Unit");
-                                return;
-                            }
-                        }
-                    }
-
-                    switch (GameObject.Find("UnitSummonGenerator")
-                        .GetComponent<UnitSummonGenerator>()
-                        .SummonUnitType
-                    )
-                    {
-                        case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
-                            GameObject.Find("UnitSummonGenerator")
-                                .GetComponent<UnitSummonGenerator>()
-                                .SummonProximityAttackUnit(
-                                    miniMapPosX,
-                                    miniMapPosZ
-                                );
-
-                            break;
-
-                        case SummonUnitTypeDefine.SummonUnitType.REMOTE:
-                            GameObject.Find("UnitSummonGenerator")
-                                .GetComponent<UnitSummonGenerator>()
-                                .SummonRemoteAttackUnit(
-                                    miniMapPosX,
-                                    miniMapPosZ
-                                );
-
-                            break;
-
-                        case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
-                            GameObject.Find("UnitSummonGenerator")
-                                .GetComponent<UnitSummonGenerator>()
-                                .SummonReconnaissanceUnit(
-                                    miniMapPosX,
-                                    miniMapPosZ
-                                );
-
-                            break;
-                    }
-
-                    GameObject.Find("PhaseManager")
-                        .GetComponent<PhaseManager>()
-                        .SetNextPhase("SelectUseCard");
-
-                    Debug.Log("Phase: SelectUseCard");
-                }
+                _phaseType = new SelectMiniMapPositionUnitSummonPhase();
+                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
