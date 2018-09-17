@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Asset.Scripts.MiniMap;
@@ -18,52 +16,31 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
         {
             case "SelectMoveUnit":
                 _phaseType = new SelectMoveUnitPhase();
-                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
             case "SelectDestination":
                 _phaseType = new SelectDestinationPhase();
-                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
             case "SelectAttackerUnit":
                 _phaseType = new SelectAttackerUnitPhase();
-                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
             case "SelectAttackTargetUnit":
                 _phaseType = new SelectAttackTargetUnitPhase();
-                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
             case "SelectMiniMapPositionUnitSummon":
                 _phaseType = new SelectMiniMapPositionUnitSummonPhase();
-                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
             case "SelectReconnaissanceUnit":
-                foreach (Transform unit in GameObject.Find("Player1Units").transform)
-                {
-                    if (unit.gameObject.CompareTag("ReconnaissanceUnit") &&
-                        miniMapPosX == unit.GetComponent<UnitOwnIntPosition>().PosX &&
-                        miniMapPosZ == unit.GetComponent<UnitOwnIntPosition>().PosZ
-                    )
-                    {
-                        unit.GetComponent<UnitReconnaissanceController>()
-                            .UnitReconnaissance();
-
-                        GameObject.Find("PhaseManager")
-                            .GetComponent<PhaseManager>()
-                            .SetNextPhase("SelectUseCard");
-
-                        Debug.Log("Phase: SelectUseCard");
-                    }
-                }
+                _phaseType = new SelectReconnaissanceUnitPhase();
 
                 break;
 
@@ -72,6 +49,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                           " PosZ: " + miniMapPosZ);
                 return;
         }
+
+        _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
         Debug.Log("PosX: " + miniMapPosX +
                   " PosZ: " + miniMapPosZ);
