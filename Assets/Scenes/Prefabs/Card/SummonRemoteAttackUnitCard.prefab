@@ -246,7 +246,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Summon Reconnaissance Unit
+  m_Text: Summon Remote Unit
 --- !u!114 &114754955037843708
 MonoBehaviour:
   m_ObjectHideFlags: 1
