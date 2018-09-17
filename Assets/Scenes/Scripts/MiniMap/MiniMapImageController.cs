@@ -35,26 +35,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 break;
 
             case "SelectAttackTargetUnit":
-                UnitAttackManager unitAttackManager =
-                    GameObject.Find("UnitAttackManager").GetComponent<UnitAttackManager>();
-
-                List<GameObject> selectedTargetList =
-                    unitAttackManager.GetSelectedAttackerAndTargetUnit().Target;
-
-                foreach (GameObject selectedTarget in selectedTargetList)
-                {
-                    if (selectedTarget.GetComponent<UnitOwnIntPosition>().PosX == miniMapPosX &&
-                        selectedTarget.GetComponent<UnitOwnIntPosition>().PosZ == miniMapPosZ)
-                    {
-                        unitAttackManager.MiniMapUnitAttack(selectedTarget);
-
-                        GameObject.Find("PhaseManager")
-                            .GetComponent<PhaseManager>()
-                            .SetNextPhase("SelectUseCard");
-
-                        Debug.Log("Phase: SelectUseCard");
-                    }
-                }
+                _phaseType = new SelectAttackTargetUnitPhase();
+                _phaseType.PhaseController(miniMapPosX, miniMapPosZ);
 
                 break;
 
