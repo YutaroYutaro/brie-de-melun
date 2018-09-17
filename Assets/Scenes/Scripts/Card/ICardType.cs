@@ -8,6 +8,5 @@ namespace Asset.Scripts.Cards
     {
         bool SetCardTypePhase();
     }
-
 }
 

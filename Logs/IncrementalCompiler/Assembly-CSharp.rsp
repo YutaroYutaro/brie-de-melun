@@ -318,9 +318,16 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/FogDefine.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Generator/CreateMap.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Manager/FogManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/IPhaseType.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageGenerator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/MiniMapImageInstancePosition.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectAttackerUnitPhase.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectAttackTargetUnitPhase.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectDestinationPhase.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectMiniMapPositionUnitSummonPhase.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectMoveUnitPhase.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectReconnaissanceUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/SingletonMonoBehaviour.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticCardOperator.cs

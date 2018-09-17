@@ -38,6 +38,9 @@ namespace Asset.Scripts.Cards
                 unitAttackManager.SelectedAttacker =
                     unitAttackManager.GetAttackerAndTargetList().First().Attacker;
 
+                unitAttackManager.SetSelectedAttackerAndTargetUnit(unitAttackManager
+                    .GetAttackerAndTargetList().First());
+
                 GameObject.Find("PhaseManager").GetComponent<PhaseManager>()
                     .SetNextPhase("SelectAttackTargetUnit");
 

@@ -10,11 +10,15 @@ public class UnitAttackManager : MonoBehaviour
         public List<GameObject> Target;
     }
 
+    [SerializeField]
     private List<AttackerAndTarget> _attackerAndTargetList;
 
+    [SerializeField]
     private AttackerAndTarget _selectedAttackerAndTarget;
 
+    [SerializeField]
     private GameObject _selectedAttacker;
+
     private GameObject _selectedSurpriseAttacker;
 
     private void Start()
