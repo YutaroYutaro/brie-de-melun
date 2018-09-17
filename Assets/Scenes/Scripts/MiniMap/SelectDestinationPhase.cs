@@ -29,6 +29,7 @@ namespace Asset.Scripts.MiniMap
             else
             {
                 Debug.Log("One more select destination.");
+                UnitMoveManager.Instance.IsMoving = false;
             }
         }
     }
