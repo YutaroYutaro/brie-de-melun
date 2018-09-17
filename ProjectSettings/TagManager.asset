@@ -14,6 +14,7 @@ TagManager:
   - AttackCard
   - SummonCard
   - ReconnaissanceCard
+  - MoneyCard
   layers:
   - Default
   - TransparentFX
