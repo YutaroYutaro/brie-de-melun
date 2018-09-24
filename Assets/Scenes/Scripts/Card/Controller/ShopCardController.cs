@@ -2,10 +2,12 @@
 
 namespace Asset.Scripts.Cards
 {
-    public class ShopCardController : MonoBehaviour, ICardType
+    public class ShopCardController : ICardType
     {
+
         public bool SetCardTypePhase()
         {
+            ShopCanvas.Instance.ShopCanvasOpen();
             return true;
         }
     }
