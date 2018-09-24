@@ -82,6 +82,11 @@ public class DropZonePresenter : MonoBehaviour
 
                             break;
 
+                        case "ShopCard":
+                            _cardType = new ShopCardController();
+
+                            break;
+
                         default:
                             Debug.Log("Don't exist this card type.");
 
