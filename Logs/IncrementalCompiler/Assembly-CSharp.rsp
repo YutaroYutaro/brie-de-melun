@@ -296,6 +296,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/MoneyCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/MoveCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/ReconnaissanceCardController.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/ShopCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/SummonCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnEndController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/TurnStartController.cs
@@ -332,6 +333,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectMoveUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectReconnaissanceUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ShopCanvas.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/SingletonMonoBehaviour.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticCardOperator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticExistUnitOnPosition.cs
