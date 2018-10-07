@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 224196322201005368}
   - component: {fileID: 222275371744860560}
   - component: {fileID: 114897537635333014}
-  - component: {fileID: 114378782797172968}
   - component: {fileID: 114282239968524470}
   - component: {fileID: 225332391406996680}
+  - component: {fileID: 114378782797172968}
   - component: {fileID: 114160988245108154}
   m_Layer: 5
   m_Name: ShopCard

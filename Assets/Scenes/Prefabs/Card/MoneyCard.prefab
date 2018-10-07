@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 224226620152011500}
   - component: {fileID: 222088649635442208}
   - component: {fileID: 114955983400557014}
-  - component: {fileID: 114147795773696022}
   - component: {fileID: 114203293376868730}
   - component: {fileID: 225668551869367376}
+  - component: {fileID: 114147795773696022}
   - component: {fileID: 114133017815845854}
   m_Layer: 5
   m_Name: MoneyCard

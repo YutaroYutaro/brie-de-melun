@@ -291,6 +291,7 @@
 -d:UNITY_POST_PROCESSING_STACK_V2
 -i:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/Examples/Basics.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/Examples/Sequences.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/CardEventTrigerInShopPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/AttackCardController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/Draggable.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Controller/MoneyCardController.cs
@@ -316,6 +317,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Manager/UnitAttackManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Manager/UnitMoveManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Nodes.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Presenter/ShopPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/ShortestPath.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ManaOfCard.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Controller/MapObjectController.cs
