@@ -368,8 +368,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4450028245932240}
   - component: {fileID: 95930901398775650}
-  - component: {fileID: 114516867078019232}
   - component: {fileID: 114294423926037534}
+  - component: {fileID: 114516867078019232}
   - component: {fileID: 114677850965347322}
   - component: {fileID: 114491553365057262}
   - component: {fileID: 114036663410109768}
@@ -922,6 +922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 95930901398775650}
   _isAttack: 0
+  _isSearch: 0
   _isMove: 0
   _isDamaged: 0
   _isDefeated: 0

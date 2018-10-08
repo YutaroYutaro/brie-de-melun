@@ -576,12 +576,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4730244617737746}
   - component: {fileID: 95500036127472764}
-  - component: {fileID: 114060204678929946}
-  - component: {fileID: 114994115145875230}
-  - component: {fileID: 114721336094815776}
   - component: {fileID: 114594608727874604}
   - component: {fileID: 114777380106697488}
+  - component: {fileID: 114721336094815776}
+  - component: {fileID: 114060204678929946}
   - component: {fileID: 114918309961463032}
+  - component: {fileID: 114994115145875230}
   m_Layer: 0
   m_Name: Scout
   m_TagString: ReconnaissanceUnit

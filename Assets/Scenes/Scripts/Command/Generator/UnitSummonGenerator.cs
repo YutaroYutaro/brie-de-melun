@@ -27,7 +27,7 @@ public class UnitSummonGenerator : MonoBehaviour
         GameObject remoteAttackUnit =
             Instantiate(
                 RemoteAttackPrefab,
-                new Vector3(posX, 1, posZ),
+                new Vector3(posX, 0.5f, posZ),
                 Quaternion.identity
             );
 
