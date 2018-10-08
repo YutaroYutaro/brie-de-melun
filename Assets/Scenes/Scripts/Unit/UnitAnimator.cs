@@ -5,39 +5,36 @@ using UnityEngine;
 public class UnitAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private bool _isAttack = false;
-    [SerializeField] private bool _isMove = false;
-    [SerializeField] private bool _isDamaged = false;
-    [SerializeField] private bool _isDefeated = false;
+    [SerializeField] private bool _isAttack;
+    [SerializeField] private bool _isSearch;
+    [SerializeField] private bool _isMove;
+    [SerializeField] private bool _isDamaged;
+    [SerializeField] private bool _isDefeated;
 
     public bool IsMove
     {
-        get => _isMove;
         set => _isMove = value;
     }
 
     public bool IsAttack
     {
-        get => _isAttack;
         set => _isAttack = value;
     }
 
     public bool IsDamaged
     {
-        get => _isDamaged;
         set => _isDamaged = value;
     }
 
 
     public bool IsDefeated
     {
-        get => _isDefeated;
         set => _isDefeated = value;
     }
 
-    // Use this for initialization
-    void Start()
+    public bool IsSearch
     {
+        set => _isSearch = value;
     }
 
     // Update is called once per frame
@@ -52,18 +49,31 @@ public class UnitAnimator : MonoBehaviour
             _animator.SetBool("Move", _isMove);
         }
 
-        if (_isAttack)
+        if (!CompareTag("ReconnaissanceUnit"))
         {
-            _animator.SetBool("Attack", _isAttack);
+            if (_isAttack)
+            {
+                _animator.SetBool("Attack", _isAttack);
+            }
+            else
+            {
+                _animator.SetBool("Attack", _isAttack);
+            }
         }
         else
         {
-            _animator.SetBool("Attack", _isAttack);
+            if (_isSearch)
+            {
+                _animator.SetBool("Search", _isSearch);
+            }
+            else
+            {
+                _animator.SetBool("Search", _isSearch);
+            }
         }
 
         if (_isDamaged)
         {
-            Debug.Log("Here!");
             _animator.SetBool("Damaged", _isDamaged);
         }
         else
@@ -73,7 +83,6 @@ public class UnitAnimator : MonoBehaviour
 
         if (_isDefeated)
         {
-            Debug.Log("Here!");
             _animator.SetBool("Defeated", _isDefeated);
         }
         else
