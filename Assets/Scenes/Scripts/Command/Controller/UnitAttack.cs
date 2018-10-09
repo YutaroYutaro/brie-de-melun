@@ -12,6 +12,15 @@ public class UnitAttack : MonoBehaviour
         UnitStatus attackerStatus = GetComponent<UnitStatus>().GetUnitStatus();
         UnitStatus targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
 
+        GetComponent<UnitRotationController>().UnitRotation(
+            targetUnit.GetComponent<UnitOwnIntPosition>().PosX - GetComponent<UnitOwnIntPosition>().PosX,
+            targetUnit.GetComponent<UnitOwnIntPosition>().PosZ - GetComponent<UnitOwnIntPosition>().PosZ
+        );
+
+        GetComponent<UnitAnimator>().IsAttack = true;
+        await Task.Delay(TimeSpan.FromSeconds(0.9f));
+        GetComponent<UnitAnimator>().IsAttack = false;
+
         targetUnit.SetActive(false);
         await Task.Delay(TimeSpan.FromSeconds(0.1f));
         targetUnit.SetActive(true);
@@ -57,17 +66,14 @@ public class UnitAttack : MonoBehaviour
         UnitStatus attackerStatus = GetComponent<UnitStatus>().GetUnitStatus();
         UnitStatus targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
 
-        targetUnit.SetActive(false);
-        await Task.Delay(TimeSpan.FromSeconds(0.1f));
-        targetUnit.SetActive(true);
-        await Task.Delay(TimeSpan.FromSeconds(0.2f));
-        targetUnit.SetActive(false);
-        await Task.Delay(TimeSpan.FromSeconds(0.1f));
-        targetUnit.SetActive(true);
-        await Task.Delay(TimeSpan.FromSeconds(0.2f));
-        targetUnit.SetActive(false);
-        await Task.Delay(TimeSpan.FromSeconds(0.1f));
-        targetUnit.SetActive(true);
+        targetUnit.GetComponent<UnitRotationController>().UnitRotation(
+            GetComponent<UnitOwnIntPosition>().PosX - targetUnit.GetComponent<UnitOwnIntPosition>().PosX,
+            GetComponent<UnitOwnIntPosition>().PosZ - targetUnit.GetComponent<UnitOwnIntPosition>().PosZ
+        );
+
+        targetUnit.GetComponent<UnitAnimator>().IsDamaged = true;
+        await Task.Delay(TimeSpan.FromSeconds(0.9f));
+        targetUnit.GetComponent<UnitAnimator>().IsDamaged = false;
 
         GameObject.Find("FogManager")
             .GetComponent<FogManager>()

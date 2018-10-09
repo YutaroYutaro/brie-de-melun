@@ -26,6 +26,11 @@ public class UnitMove : MonoBehaviour
             return true;
         }
 
+        GetComponent<UnitRotationController>().UnitRotation(
+            clickMiniMapImageInstancePositionX - GetComponent<UnitOwnIntPosition>().PosX,
+            clickMiniMapImageInstancePositionZ - GetComponent<UnitOwnIntPosition>().PosZ
+        );
+
         ShortestPath shortestPath = new ShortestPath();
 
         int unitType;
@@ -175,7 +180,7 @@ public class UnitMove : MonoBehaviour
             {
                 case "ProximityAttackUnit":
                 case "RemoteAttackUnit":
-                    unitTypePosY = 1;
+                    unitTypePosY = 0.5f;
                     break;
                 case "ReconnaissanceUnit":
                     unitTypePosY = 1.5f;
@@ -193,11 +198,15 @@ public class UnitMove : MonoBehaviour
                     nextNode.IdZ
                 );
 
+            GetComponent<UnitAnimator>().IsMove = true;
+
             //次に移動するノードに移動
-            transform.DOMove(nextDestination, 0.4f);
+            transform.DOMove(nextDestination, 1.3f);
 
             //待機
-            await Task.Delay(TimeSpan.FromSeconds(0.5f));
+            await Task.Delay(TimeSpan.FromSeconds(1.4f));
+
+            GetComponent<UnitAnimator>().IsMove = false;
 
             Debug.Log("Cost: " + currentNode.Cost);
 
