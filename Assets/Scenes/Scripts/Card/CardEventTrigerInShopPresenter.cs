@@ -13,8 +13,11 @@ public class CardEventTrigerInShopPresenter : MonoBehaviour
         ObservableEventTrigger observableEventTrigger = gameObject.AddComponent<ObservableEventTrigger>();
 
         observableEventTrigger.OnPointerDownAsObservable()
+            .Where(eventData =>
+                MoneyModel.Instance.MoneyReactiveProperty.Value >= CardPrefab.GetComponent<PriceOfCard>().Price)
             .Subscribe(eventData =>
                 {
+                    MoneyModel.Instance.MoneyReactiveProperty.Value -= CardPrefab.GetComponent<PriceOfCard>().Price;
                     HandModel.Instance.GenerateCard(CardPrefab);
                 }
             );

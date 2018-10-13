@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 225668551869367376}
   - component: {fileID: 114147795773696022}
   - component: {fileID: 114133017815845854}
+  - component: {fileID: 114321810611817494}
   m_Layer: 5
   m_Name: MoneyCard
   m_TagString: MoneyCard
@@ -154,6 +155,18 @@ MonoBehaviour:
   m_FlexibleWidth: 0
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
+--- !u!114 &114321810611817494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1132289478145298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21df6bc99659aef4e963689108bcc836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _price: 1
 --- !u!114 &114752292161955380
 MonoBehaviour:
   m_ObjectHideFlags: 1

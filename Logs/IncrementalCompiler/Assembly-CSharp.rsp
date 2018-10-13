@@ -336,6 +336,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectMoveUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectReconnaissanceUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PriceOfCard.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ShopCanvas.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/SingletonMonoBehaviour.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticCardOperator.cs
