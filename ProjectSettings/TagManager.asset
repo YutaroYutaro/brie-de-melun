@@ -15,6 +15,7 @@ TagManager:
   - SummonCard
   - ReconnaissanceCard
   - MoneyCard
+  - ShopCard
   layers:
   - Default
   - TransparentFX
