@@ -6,13 +6,17 @@ using UniRx;
 
 public class CardEventTrigerInShopPresenter : MonoBehaviour
 {
+    public GameObject CardPrefab;
+
     void Start()
     {
         ObservableEventTrigger observableEventTrigger = gameObject.AddComponent<ObservableEventTrigger>();
 
         observableEventTrigger.OnPointerDownAsObservable()
             .Subscribe(eventData =>
-                Debug.Log(eventData.pointerEnter.name)
+                {
+                    HandModel.Instance.GenerateCard(CardPrefab);
+                }
             );
     }
 }

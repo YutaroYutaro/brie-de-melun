@@ -319,6 +319,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Nodes.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Presenter/ShopPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/ShortestPath.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/HandModel.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ManaOfCard.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Controller/MapObjectController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/FogDefine.cs
