@@ -5,6 +5,7 @@
 -out:E:/yutaro/brie-de-mulun/Temp/Assembly-CSharp-Editor.dll
 -nostdlib
 -unsafe
+-r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
 -r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Assembly-CSharp.dll
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll"
@@ -66,7 +67,6 @@
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.XRModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEditor.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/Unity.Locator.dll"
--r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
 -r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UniRx.dll
 -r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
 -r:E:/yutaro/brie-de-mulun/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
@@ -102,6 +102,9 @@
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/Editor/UnityEditor.Purchasing.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll
+-r:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/Newtonsoft.Json.dll"
+-r:E:/yutaro/brie-de-mulun/Assets/Plugins/WebSocket/websocket-sharp.dll
+-r:E:/yutaro/brie-de-mulun/Assets/Plugins/Photon3Unity3D.dll
 -r:"C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll"
 -r:"C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.dll"
 -r:"C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Core.dll"
@@ -310,6 +313,24 @@
 -d:ENABLE_UNITY_COLLECTIONS_CHECKS
 -d:UNITY_TEAM_LICENSE
 -d:UNITY_POST_PROCESSING_STACK_V2
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Demos/DemoHub/Editor/PunStartup.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/AccountService.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/CullAreaEditor.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/PhotonConverter.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/PhotonEditor.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/PhotonEditorUtils.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/PhotonGUI.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/PhotonViewHandler.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/PhotonViewInspector.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/PunSceneSettings.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/ReorderableListResources.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/ServerSettingsInspector.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/Views/PhotonAnimatorViewEditor.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/Views/PhotonRigidbody2DViewEditor.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/Views/PhotonRigidbodyViewEditor.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/Views/PhotonTransformViewEditor.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/UtilityScripts/PhotonPlayer/Editor/PlayerRoomIndexingInspector.cs"
+-i:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/UtilityScripts/PhotonPlayer/Editor/PunTeamsInspector.cs"
 -i:"E:/yutaro/brie-de-mulun/Assets/Unity Technologies/Recorder/Extensions/FCIntegration/Editor/RecorderEditorBase.cs"
 -i:"E:/yutaro/brie-de-mulun/Assets/Unity Technologies/Recorder/Extensions/FCIntegration/EXR/Editor/EXRRecorderSettingsEditor.cs"
 -i:"E:/yutaro/brie-de-mulun/Assets/Unity Technologies/Recorder/Extensions/FCIntegration/GIF/Editor/GIFRecorderSettingsEditor.cs"
