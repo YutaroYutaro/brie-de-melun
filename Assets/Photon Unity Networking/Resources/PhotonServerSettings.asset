@@ -42,4 +42,7 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - SummonEnemyProximityAttackUnit
+  - SummonEnemyReconnaissanceUnit
+  - SummonEnemyRemoteAttackUnit
   DisableAutoOpenWizard: 1
