@@ -464,6 +464,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Nodes.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Presenter/ShopPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/ShortestPath.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/EnemyUnitController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/HandModel.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ManaOfCard.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Map/Controller/MapObjectController.cs
@@ -491,6 +492,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitOwnIntPosition.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitRotationController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitStatus.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ViewId.cs
 -i:"E:/yutaro/brie-de-mulun/Assets/Unity Technologies/Recorder/Extensions/FCIntegration/BaseFCRecorderSettings.cs"
 -i:"E:/yutaro/brie-de-mulun/Assets/Unity Technologies/Recorder/Extensions/FCIntegration/EXR/EXRRecorder.cs"
 -i:"E:/yutaro/brie-de-mulun/Assets/Unity Technologies/Recorder/Extensions/FCIntegration/EXR/EXRRecorderSettings.cs"
