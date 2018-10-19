@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class FogManager : MonoBehaviour
+public class FogManager : SingletonMonoBehaviour<FogManager>
 {
     public int[,] PlayerOneFogMapState = new int[5, 7];
     public int[,] PlayerTwoFogMapState = new int[5, 7];
