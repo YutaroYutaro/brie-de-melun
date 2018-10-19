@@ -23,6 +23,18 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     {
         PhotonView unit = PhotonView.Find(id);
         Vector3 nextDestination = new Vector3(4 - posX, posY, 6 - posZ);
+        PhotonView unitGameobject = PhotonView.Get(unit);
+
+        unitGameobject.GetComponent<UnitRotationController>().UnitRotation(
+            4 - posX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+            6 - posZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+        );
+
+        Debug.Log(4 - posX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX);
+        Debug.Log(6 - posZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ);
+
+        unitGameobject.GetComponent<UnitOwnIntPosition>().PosX = 4 - posX;
+        unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ = 6 - posZ;
 
         unit.transform.DOMove(nextDestination, 1.3f);
     }
@@ -43,7 +55,9 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     public void SummonEnemyProximityAttackUnit(Vector3 pos, Quaternion rot, int id)
     {
         GameObject newPlayer = Instantiate(_proximityAttackPrefab, pos, rot);
-        newPlayer.transform.eulerAngles = new Vector3 (0, 180f, 0);
+        newPlayer.transform.eulerAngles = new Vector3(0, 180f, 0);
+        newPlayer.GetComponent<UnitOwnIntPosition>().PosX = (int) pos.x;
+        newPlayer.GetComponent<UnitOwnIntPosition>().PosZ = (int) pos.z;
 
         // Set player's PhotonView
         PhotonView[] nViews = newPlayer.GetComponents<PhotonView>();
