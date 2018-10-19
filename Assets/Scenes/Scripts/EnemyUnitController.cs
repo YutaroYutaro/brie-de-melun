@@ -15,7 +15,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     public void UnitMove(int id, int posX, float posY, int posZ)
     {
         PhotonView photonView = GetComponent<PhotonView>();
-        photonView.RPC("EnemyUnitMove", PhotonTargets.All, id, posX, posY, posZ);
+        photonView.RPC("EnemyUnitMove", PhotonTargets.Others, id, posX, posY, posZ);
     }
 
     [PunRPC]
@@ -43,7 +43,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         PhotonView photonView = GetComponent<PhotonView>();
         photonView.RPC(
             "SummonEnemyProximityAttackUnit",
-            PhotonTargets.All,
+            PhotonTargets.Others,
             pos,
             rot,
             id
