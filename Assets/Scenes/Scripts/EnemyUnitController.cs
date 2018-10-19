@@ -35,8 +35,51 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         unitGameobject.GetComponent<UnitOwnIntPosition>().PosX = 4 - posX;
         unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ = 6 - posZ;
 
+        // ToDo: アクティブ状態になった時のアニメーション遷移
+        Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
+
+        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
+        {
+            if (
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+            )
+            {
+                unitGameobject.gameObject.SetActive(false);
+            }
+        }
+
+        Transform clearMapObjectsChildren = GameObject.Find("ClearMapObjects").transform;
+
+        foreach (Transform clearMapObjectsChild in clearMapObjectsChildren)
+        {
+            if (
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(clearMapObjectsChild.position.x) &&
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(clearMapObjectsChild.position.z)
+            )
+            {
+                unitGameobject.gameObject.SetActive(true);
+            }
+        }
+
         unitGameobject.transform.DOMove(nextDestination, 1.3f);
     }
+
+//    public void UnitAttack(int id, int posX, float posY, int posZ)
+//    {
+//        PhotonView photonView = GetComponent<PhotonView>();
+//        photonView.RPC("EnemyUnitAttack", PhotonTargets.Others, id, posX, posY, posZ);
+//    }
+//
+//    [PunRPC]
+//    public void EnemyUnitAttack(int id, int posX, float posY, int posZ)
+//    {
+//        PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
+//    }
 
     public void SummonUnit(Vector3 pos, Quaternion rot, int id)
     {
