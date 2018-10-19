@@ -21,9 +21,8 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     [PunRPC]
     public void EnemyUnitMove(int id, int posX, float posY, int posZ)
     {
-        PhotonView unit = PhotonView.Find(id);
         Vector3 nextDestination = new Vector3(4 - posX, posY, 6 - posZ);
-        PhotonView unitGameobject = PhotonView.Get(unit);
+        PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
 
         unitGameobject.GetComponent<UnitRotationController>().UnitRotation(
             4 - posX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
@@ -36,7 +35,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         unitGameobject.GetComponent<UnitOwnIntPosition>().PosX = 4 - posX;
         unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ = 6 - posZ;
 
-        unit.transform.DOMove(nextDestination, 1.3f);
+        unitGameobject.transform.DOMove(nextDestination, 1.3f);
     }
 
     public void SummonUnit(Vector3 pos, Quaternion rot, int id)
