@@ -64,6 +64,21 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
 
         newPlayer.transform.SetParent(GameObject.Find("Player2Units").transform);
 
+        Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
+
+        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
+        {
+            if (
+                newPlayer.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
+                newPlayer.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+            )
+            {
+                newPlayer.gameObject.SetActive(false);
+            }
+        }
+
         Debug.Log(nViews);
         Debug.Log(nViews[0].viewID);
     }
