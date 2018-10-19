@@ -1389,7 +1389,7 @@ Prefab:
     - target: {fileID: 224465213359780792, guid: 2adb0fe969ee4504c92c6fb50bbf76f4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224465213359780792, guid: 2adb0fe969ee4504c92c6fb50bbf76f4,
         type: 2}
@@ -1448,17 +1448,17 @@ Prefab:
     - target: {fileID: 224465213359780792, guid: 2adb0fe969ee4504c92c6fb50bbf76f4,
         type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.0007793
+      value: 1.0007795
       objectReference: {fileID: 0}
     - target: {fileID: 224465213359780792, guid: 2adb0fe969ee4504c92c6fb50bbf76f4,
         type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.0007796
+      value: 1.0007801
       objectReference: {fileID: 0}
     - target: {fileID: 224465213359780792, guid: 2adb0fe969ee4504c92c6fb50bbf76f4,
         type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.0007796
+      value: 1.0007801
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -1586,7 +1586,7 @@ Prefab:
     - target: {fileID: 224196322201005368, guid: 226b0faa2a7af174fb698b746ea94b46,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224196322201005368, guid: 226b0faa2a7af174fb698b746ea94b46,
         type: 2}
@@ -3025,9 +3025,9 @@ RectTransform:
   m_Children:
   - {fileID: 1056880264}
   - {fileID: 325284303}
-  - {fileID: 499511005}
   - {fileID: 2006912552}
   - {fileID: 538705980}
+  - {fileID: 499511005}
   m_Father: {fileID: 1319119052}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3585,7 +3585,7 @@ Prefab:
     - target: {fileID: 224999978195454602, guid: dcd9cd5977d39dd4b83a1cc9adc5d14d,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224999978195454602, guid: dcd9cd5977d39dd4b83a1cc9adc5d14d,
         type: 2}
@@ -4160,6 +4160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1508878801}
   - component: {fileID: 1508878800}
+  - component: {fileID: 1508878802}
   m_Layer: 0
   m_Name: EnemyUnitController
   m_TagString: Untagged
@@ -4206,6 +4207,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1508878802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1508878799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f8d3e5931c1dd4b8049f4985e2d504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _proximityAttackPrefab: {fileID: 1770524475118580, guid: f8afb8280d1a8a3419807bdf2b91dffb,
+    type: 2}
+  _remoteAttackPrefab: {fileID: 1632222285373560, guid: e88dabf0e9019c84fb4938e97a772a1b,
+    type: 2}
+  _reconnaissanecPrefab: {fileID: 1648925360689028, guid: bce6afc5b3300454fb16965e63100077,
+    type: 2}
 --- !u!1 &1536392509
 GameObject:
   m_ObjectHideFlags: 0
