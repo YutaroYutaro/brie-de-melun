@@ -6,6 +6,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using System;
 using FogDefine;
+using SummonUnitTypeDefine;
 
 public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
 {
@@ -152,16 +153,42 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         }
     }
 
-    public void SummonUnit(Vector3 pos, Quaternion rot, int id)
+    public void SummonUnit(Vector3 pos, Quaternion rot, int id, int unitType)
     {
         PhotonView photonView = GetComponent<PhotonView>();
-        photonView.RPC(
-            "SummonEnemyProximityAttackUnit",
-            PhotonTargets.Others,
-            pos,
-            rot,
-            id
-        );
+
+        switch (unitType)
+        {
+            case SummonUnitTypeDefine.SummonUnitType.PROXIMITY:
+                photonView.RPC(
+                    "SummonEnemyProximityAttackUnit",
+                    PhotonTargets.Others,
+                    pos,
+                    rot,
+                    id
+                );
+                break;
+            case SummonUnitTypeDefine.SummonUnitType.REMOTE:
+                photonView.RPC(
+                    "SummonEnemyRemoteAttackUnit",
+                    PhotonTargets.Others,
+                    pos,
+                    rot,
+                    id
+                );
+                break;
+            case SummonUnitTypeDefine.SummonUnitType.RECONNAISSANCE:
+                photonView.RPC(
+                    "SummonEnemyReconnaissanceUnit",
+                    PhotonTargets.Others,
+                    pos,
+                    rot,
+                    id
+                );
+                break;
+        }
+
+
     }
 
     [PunRPC]
@@ -198,19 +225,59 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     public void SummonEnemyRemoteAttackUnit(Vector3 pos, Quaternion rot, int id)
     {
         GameObject newPlayer = Instantiate(_remoteAttackPrefab, pos, rot);
+        newPlayer.transform.eulerAngles = new Vector3(0, 180f, 0);
+        newPlayer.GetComponent<UnitOwnIntPosition>().PosX = (int) pos.x;
+        newPlayer.GetComponent<UnitOwnIntPosition>().PosZ = (int) pos.z;
 
         // Set player's PhotonView
-        PhotonView[] nViews = newPlayer.GetComponentsInChildren<PhotonView>();
-        nViews[nViews.Length].viewID = id;
+        PhotonView[] nViews = newPlayer.GetComponents<PhotonView>();
+        nViews[0].viewID = id;
+
+        newPlayer.transform.SetParent(GameObject.Find("Player2Units").transform);
+
+        Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
+
+        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
+        {
+            if (
+                newPlayer.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
+                newPlayer.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+            )
+            {
+                newPlayer.gameObject.SetActive(false);
+            }
+        }
     }
 
     [PunRPC]
     public void SummonEnemyReconnaissanceUnit(Vector3 pos, Quaternion rot, int id)
     {
         GameObject newPlayer = Instantiate(_reconnaissanecPrefab, pos, rot);
+        newPlayer.transform.eulerAngles = new Vector3(0, 180f, 0);
+        newPlayer.GetComponent<UnitOwnIntPosition>().PosX = (int) pos.x;
+        newPlayer.GetComponent<UnitOwnIntPosition>().PosZ = (int) pos.z;
 
         // Set player's PhotonView
-        PhotonView[] nViews = newPlayer.GetComponentsInChildren<PhotonView>();
-        nViews[nViews.Length].viewID = id;
+        PhotonView[] nViews = newPlayer.GetComponents<PhotonView>();
+        nViews[0].viewID = id;
+
+        newPlayer.transform.SetParent(GameObject.Find("Player2Units").transform);
+
+        Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
+
+        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
+        {
+            if (
+                newPlayer.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
+                newPlayer.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+            )
+            {
+                newPlayer.gameObject.SetActive(false);
+            }
+        }
     }
 }
