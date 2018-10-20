@@ -369,13 +369,13 @@ GameObject:
   - component: {fileID: 4450028245932240}
   - component: {fileID: 95930901398775650}
   - component: {fileID: 114387272203579996}
+  - component: {fileID: 114314708218162704}
   - component: {fileID: 114294423926037534}
   - component: {fileID: 114516867078019232}
   - component: {fileID: 114677850965347322}
   - component: {fileID: 114491553365057262}
   - component: {fileID: 114036663410109768}
   - component: {fileID: 114256476601457262}
-  - component: {fileID: 114314708218162704}
   m_Layer: 0
   m_Name: Slime
   m_TagString: ProximityAttackUnit
