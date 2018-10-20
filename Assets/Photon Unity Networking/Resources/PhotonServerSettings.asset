@@ -46,4 +46,5 @@ MonoBehaviour:
   - SummonEnemyReconnaissanceUnit
   - SummonEnemyRemoteAttackUnit
   - EnemyUnitMove
+  - EnemyUnitAttack
   DisableAutoOpenWizard: 1
