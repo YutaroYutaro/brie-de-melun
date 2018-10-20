@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class FogManager : SingletonMonoBehaviour<FogManager>
 {
-    private int[,] _playerOneFogMapState = new int[5, 7];
-    private int[,] _playerTwoFogMapState = new int[5, 7];
+    [SerializeField] private int[,] _playerOneFogMapState = new int[5, 7];
+    [SerializeField] private int[,] _playerTwoFogMapState = new int[5, 7];
 
     public Material[] MaterialTypeList;
 

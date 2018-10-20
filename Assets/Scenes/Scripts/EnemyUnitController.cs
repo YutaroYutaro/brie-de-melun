@@ -30,12 +30,10 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             .Instance
             .SetPlayerTwoFogMapState
             (
-                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
-                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ,
+                4 - posX,
+                6 - posZ,
                 Fog.FOG_NOT_EXIST
             );
-
-        Debug.Log(FogManager.Instance.GetPlayerTwoFogMapState());
 
         unitGameobject
             .GetComponent<UnitRotationController>()
@@ -188,6 +186,16 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         if (unitPosZ > 0)
         {
             FogManager.Instance.SetPlayerTwoFogMapState(unitPosX, unitPosZ - 1, Fog.FOG_NOT_EXIST);
+        }
+
+        int[,] a = FogManager.Instance.PlayerTwoFogMapState;
+
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 7; j++)
+            {
+                Debug.Log("{" + i + ", " + j + "}: " + a[i, j]);
+            }
         }
     }
 
