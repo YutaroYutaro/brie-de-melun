@@ -69,17 +69,38 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         unitGameobject.transform.DOMove(nextDestination, 1.3f);
     }
 
-//    public void UnitAttack(int id, int posX, float posY, int posZ)
-//    {
-//        PhotonView photonView = GetComponent<PhotonView>();
-//        photonView.RPC("EnemyUnitAttack", PhotonTargets.Others, id, posX, posY, posZ);
-//    }
-//
-//    [PunRPC]
-//    public void EnemyUnitAttack(int id, int posX, float posY, int posZ)
-//    {
-//        PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
-//    }
+    public void UnitAttack(int id, int targetPosX, int targetPosZ)
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("EnemyUnitAttack", PhotonTargets.Others, id, targetPosX, targetPosZ);
+    }
+
+    [PunRPC]
+    public async void EnemyUnitAttack(int id, int targetPosX, int targetPosZ)
+    {
+        PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
+        Transform player1UnitsChildren = GameObject.Find("Player1Units").transform;
+
+        foreach (Transform player1UnitsChild in player1UnitsChildren)
+        {
+            if
+            (
+                targetPosX == player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX &&
+                targetPosZ == player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ
+            )
+            {
+                unitGameobject.GetComponent<UnitAnimator>().IsAttack = true;
+                await Task.Delay(TimeSpan.FromSeconds(0.9f));
+                unitGameobject.GetComponent<UnitAnimator>().IsAttack = false;
+
+                player1UnitsChild.GetComponent<UnitAnimator>().IsDamaged = true;
+                await Task.Delay(TimeSpan.FromSeconds(0.9f));
+                player1UnitsChild.GetComponent<UnitAnimator>().IsDamaged = false;
+                unitGameobject.GetComponent<UnitAttack>().MiniMapClickUnitAttack(player1UnitsChild.gameObject);
+                break;
+            }
+        }
+    }
 
     public void SummonUnit(Vector3 pos, Quaternion rot, int id)
     {

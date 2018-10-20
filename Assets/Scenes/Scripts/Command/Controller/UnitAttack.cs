@@ -17,21 +17,19 @@ public class UnitAttack : MonoBehaviour
             targetUnit.GetComponent<UnitOwnIntPosition>().PosZ - GetComponent<UnitOwnIntPosition>().PosZ
         );
 
+        EnemyUnitController.Instance.UnitAttack(
+            GetComponent<ViewId>().UnitViewId,
+            targetUnit.GetComponent<UnitOwnIntPosition>().PosX,
+            targetUnit.GetComponent<UnitOwnIntPosition>().PosZ
+        );
+
         GetComponent<UnitAnimator>().IsAttack = true;
         await Task.Delay(TimeSpan.FromSeconds(0.9f));
         GetComponent<UnitAnimator>().IsAttack = false;
 
-        targetUnit.SetActive(false);
-        await Task.Delay(TimeSpan.FromSeconds(0.1f));
-        targetUnit.SetActive(true);
-        await Task.Delay(TimeSpan.FromSeconds(0.2f));
-        targetUnit.SetActive(false);
-        await Task.Delay(TimeSpan.FromSeconds(0.1f));
-        targetUnit.SetActive(true);
-        await Task.Delay(TimeSpan.FromSeconds(0.2f));
-        targetUnit.SetActive(false);
-        await Task.Delay(TimeSpan.FromSeconds(0.1f));
-        targetUnit.SetActive(true);
+        targetUnit.GetComponent<UnitAnimator>().IsDamaged = true;
+        await Task.Delay(TimeSpan.FromSeconds(0.9f));
+        targetUnit.GetComponent<UnitAnimator>().IsDamaged = false;
 
         int[,] playerTwoFogMapState =
             GameObject.Find("FogManager").GetComponent<FogManager>().GetPlayerTwoFogMapState();
