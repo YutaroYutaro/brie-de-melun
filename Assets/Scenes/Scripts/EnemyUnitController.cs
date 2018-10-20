@@ -5,6 +5,7 @@ using UniRx.Async;
 using DG.Tweening;
 using System.Threading.Tasks;
 using System;
+using FogDefine;
 
 public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
 {
@@ -24,13 +25,24 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         Vector3 nextDestination = new Vector3(4 - posX, posY, 6 - posZ);
         PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
 
-        unitGameobject.GetComponent<UnitRotationController>().UnitRotation(
-            4 - posX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
-            6 - posZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
-        );
+        FogManager
+            .Instance
+            .SetPlayerTwoFogMapState
+            (
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ,
+                Fog.FOG_NOT_EXIST
+            );
 
-        Debug.Log(4 - posX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX);
-        Debug.Log(6 - posZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ);
+        Debug.Log(FogManager.Instance.GetPlayerTwoFogMapState());
+
+        unitGameobject
+            .GetComponent<UnitRotationController>()
+            .UnitRotation
+            (
+                4 - posX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                6 - posZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+            );
 
         unitGameobject.GetComponent<UnitOwnIntPosition>().PosX = 4 - posX;
         unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ = 6 - posZ;
@@ -79,14 +91,40 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     public async void EnemyUnitAttack(int id, int targetPosX, int targetPosZ)
     {
         PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
+        Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
         Transform player1UnitsChildren = GameObject.Find("Player1Units").transform;
+        bool isSurpriseAttack = false;
+
+        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
+        {
+            if (
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+            )
+            {
+                unitGameobject.gameObject.SetActive(true);
+                FogManager
+                    .Instance
+                    .ClearFog
+                    (
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                    );
+                isSurpriseAttack = true;
+                break;
+            }
+        }
+
+        UnitStatus attackerStatus = unitGameobject.GetComponent<UnitStatus>().GetUnitStatus();
 
         foreach (Transform player1UnitsChild in player1UnitsChildren)
         {
             if
             (
-                targetPosX == player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX &&
-                targetPosZ == player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ
+                targetPosX == (4 - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX) &&
+                targetPosZ == (6 - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ)
             )
             {
                 unitGameobject.GetComponent<UnitAnimator>().IsAttack = true;
@@ -96,7 +134,19 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                 player1UnitsChild.GetComponent<UnitAnimator>().IsDamaged = true;
                 await Task.Delay(TimeSpan.FromSeconds(0.9f));
                 player1UnitsChild.GetComponent<UnitAnimator>().IsDamaged = false;
-                unitGameobject.GetComponent<UnitAttack>().MiniMapClickUnitAttack(player1UnitsChild.gameObject);
+
+                if (isSurpriseAttack)
+                {
+                    player1UnitsChild.GetComponent<UnitStatus>().GetUnitStatus().HitPoint
+                        -= unitGameobject.GetComponent<UnitStatus>().GetUnitStatus().AttackPoint;
+                }
+                else
+                {
+                    player1UnitsChild.GetComponent<UnitStatus>().GetUnitStatus().HitPoint
+                        -= unitGameobject.GetComponent<UnitStatus>().GetUnitStatus().AttackPoint
+                           - player1UnitsChild.GetComponent<UnitStatus>().GetUnitStatus().DefensPoint;
+                }
+
                 break;
             }
         }
@@ -142,9 +192,6 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                 newPlayer.gameObject.SetActive(false);
             }
         }
-
-        Debug.Log(nViews);
-        Debug.Log(nViews[0].viewID);
     }
 
     [PunRPC]
