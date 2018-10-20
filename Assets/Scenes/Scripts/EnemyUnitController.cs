@@ -157,7 +157,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     {
         PhotonView photonView = GetComponent<PhotonView>();
         photonView.RPC(
-            "SummonEnemyRemoteAttackUnit",
+            "EnemyUnitReconnaissance",
             PhotonTargets.Others,
             id
         );
@@ -170,10 +170,25 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         int unitPosX = unitGameobject.GetComponent<UnitOwnIntPosition>().PosX;
         int unitPosZ = unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ;
 
-        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX + 1, unitPosZ, Fog.FOG_NOT_EXIST);
-        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX - 1, unitPosZ, Fog.FOG_NOT_EXIST);
-        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX, unitPosZ + 1, Fog.FOG_NOT_EXIST);
-        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX, unitPosZ - 1, Fog.FOG_NOT_EXIST);
+        if (unitPosX < 4)
+        {
+            FogManager.Instance.SetPlayerTwoFogMapState(unitPosX + 1, unitPosZ, Fog.FOG_NOT_EXIST);
+        }
+
+        if (unitPosX > 0)
+        {
+            FogManager.Instance.SetPlayerTwoFogMapState(unitPosX - 1, unitPosZ, Fog.FOG_NOT_EXIST);
+        }
+
+        if (unitPosZ < 6)
+        {
+            FogManager.Instance.SetPlayerTwoFogMapState(unitPosX, unitPosZ + 1, Fog.FOG_NOT_EXIST);
+        }
+
+        if (unitPosZ > 0)
+        {
+            FogManager.Instance.SetPlayerTwoFogMapState(unitPosX, unitPosZ - 1, Fog.FOG_NOT_EXIST);
+        }
     }
 
 
@@ -211,8 +226,6 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                 );
                 break;
         }
-
-
     }
 
     [PunRPC]
