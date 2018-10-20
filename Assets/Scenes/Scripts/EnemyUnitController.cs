@@ -153,6 +153,30 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         }
     }
 
+    public void UnitReconnaissance(int id)
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC(
+            "SummonEnemyRemoteAttackUnit",
+            PhotonTargets.Others,
+            id
+        );
+    }
+
+    [PunRPC]
+    public void EnemyUnitReconnaissance(int id)
+    {
+        PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
+        int unitPosX = unitGameobject.GetComponent<UnitOwnIntPosition>().PosX;
+        int unitPosZ = unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ;
+
+        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX + 1, unitPosZ, Fog.FOG_NOT_EXIST);
+        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX - 1, unitPosZ, Fog.FOG_NOT_EXIST);
+        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX, unitPosZ + 1, Fog.FOG_NOT_EXIST);
+        FogManager.Instance.SetPlayerTwoFogMapState(unitPosX, unitPosZ - 1, Fog.FOG_NOT_EXIST);
+    }
+
+
     public void SummonUnit(Vector3 pos, Quaternion rot, int id, int unitType)
     {
         PhotonView photonView = GetComponent<PhotonView>();

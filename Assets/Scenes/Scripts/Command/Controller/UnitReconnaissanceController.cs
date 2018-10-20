@@ -15,6 +15,8 @@ public class UnitReconnaissanceController : MonoBehaviour {
         await Task.Delay(TimeSpan.FromSeconds(1.4f));
         GetComponent<UnitAnimator>().IsSearch = false;
 
+        EnemyUnitController.Instance.UnitReconnaissance(GetComponent<ViewId>().UnitViewId);
+
         GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(thisIntPosX + 1, thisIntPosZ);
         GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(thisIntPosX - 1, thisIntPosZ);
         GameObject.Find("FogManager").GetComponent<FogManager>().ClearFog(thisIntPosX, thisIntPosZ + 1);
