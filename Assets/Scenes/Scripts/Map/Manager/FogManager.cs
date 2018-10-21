@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class FogManager : MonoBehaviour
+public class FogManager : SingletonMonoBehaviour<FogManager>
 {
-    public int[,] PlayerOneFogMapState = new int[5, 7];
-    public int[,] PlayerTwoFogMapState = new int[5, 7];
+    [SerializeField] private int[,] _playerOneFogMapState = new int[5, 7];
+    [SerializeField] private int[,] _playerTwoFogMapState = new int[5, 7];
 
     public Material[] MaterialTypeList;
 
@@ -50,21 +50,23 @@ public class FogManager : MonoBehaviour
 
     public int[,] GetPlayerOneFogMapState()
     {
-        return PlayerOneFogMapState;
+        return _playerOneFogMapState;
     }
 
     public void SetPlayerOneFogMapState(int posX, int posZ, int fogFlag)
     {
-        PlayerOneFogMapState[posX, posZ] = fogFlag;
+        _playerOneFogMapState[posX, posZ] = fogFlag;
     }
 
     public int[,] GetPlayerTwoFogMapState()
     {
-        return PlayerTwoFogMapState;
+        return _playerTwoFogMapState;
     }
+
+    public int[,] PlayerTwoFogMapState => _playerTwoFogMapState;
 
     public void SetPlayerTwoFogMapState(int posX, int posZ, int fogFlag)
     {
-        PlayerTwoFogMapState[posX, posZ] = fogFlag;
+        _playerTwoFogMapState[posX, posZ] = fogFlag;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAttackManager : MonoBehaviour
+public class UnitAttackManager : SingletonMonoBehaviour<UnitAttackManager>
 {
     public struct AttackerAndTarget
     {
@@ -10,14 +10,11 @@ public class UnitAttackManager : MonoBehaviour
         public List<GameObject> Target;
     }
 
-    [SerializeField]
-    private List<AttackerAndTarget> _attackerAndTargetList;
+    [SerializeField] private List<AttackerAndTarget> _attackerAndTargetList;
 
-    [SerializeField]
-    private AttackerAndTarget _selectedAttackerAndTarget;
+    [SerializeField] private AttackerAndTarget _selectedAttackerAndTarget;
 
-    [SerializeField]
-    private GameObject _selectedAttacker;
+    [SerializeField] private GameObject _selectedAttacker;
 
     private GameObject _selectedSurpriseAttacker;
 
