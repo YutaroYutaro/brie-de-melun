@@ -116,8 +116,6 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             }
         }
 
-        UnitStatus attackerStatus = unitGameobject.GetComponent<UnitStatus>().GetUnitStatus();
-
         foreach (Transform player1UnitsChild in player1UnitsChildren)
         {
             if
@@ -162,11 +160,15 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     }
 
     [PunRPC]
-    public void EnemyUnitReconnaissance(int id)
+    public async void EnemyUnitReconnaissance(int id)
     {
         PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
         int unitPosX = unitGameobject.GetComponent<UnitOwnIntPosition>().PosX;
         int unitPosZ = unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ;
+
+        unitGameobject.GetComponent<UnitAnimator>().IsSearch = true;
+        await Task.Delay(TimeSpan.FromSeconds(1.4f));
+        unitGameobject.GetComponent<UnitAnimator>().IsSearch = false;
 
         if (unitPosX < 4)
         {
