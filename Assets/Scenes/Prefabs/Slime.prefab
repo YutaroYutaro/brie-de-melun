@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 114491553365057262}
   - component: {fileID: 114036663410109768}
   - component: {fileID: 114256476601457262}
+  - component: {fileID: 114684407031863282}
   m_Layer: 0
   m_Name: Slime
   m_TagString: ProximityAttackUnit
@@ -1027,6 +1028,17 @@ MonoBehaviour:
   AttackPoint: 0
   DefensPoint: 0
   MovementPoint: 0
+--- !u!114 &114684407031863282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770524475118580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1864010773299bc408ab2bf14b33b5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137148265891643028
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
