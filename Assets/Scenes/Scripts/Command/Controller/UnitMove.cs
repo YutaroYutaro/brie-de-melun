@@ -203,6 +203,13 @@ public class UnitMove : MonoBehaviour
             //次に移動するノードに移動
             transform.DOMove(nextDestination, 1.3f);
 
+            EnemyUnitController.Instance.UnitMove(
+                GetComponent<ViewId>().UnitViewId,
+                nextNode.IdX,
+                unitTypePosY,
+                nextNode.IdZ
+                );
+
             //待機
             await Task.Delay(TimeSpan.FromSeconds(1.4f));
 

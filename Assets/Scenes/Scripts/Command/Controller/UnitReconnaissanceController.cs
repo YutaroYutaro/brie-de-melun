@@ -11,6 +11,8 @@ public class UnitReconnaissanceController : MonoBehaviour {
         int thisIntPosX = GetComponent<UnitOwnIntPosition>().PosX;
         int thisIntPosZ = GetComponent<UnitOwnIntPosition>().PosZ;
 
+        EnemyUnitController.Instance.UnitReconnaissance(GetComponent<ViewId>().UnitViewId);
+
         GetComponent<UnitAnimator>().IsSearch = true;
         await Task.Delay(TimeSpan.FromSeconds(1.4f));
         GetComponent<UnitAnimator>().IsSearch = false;
