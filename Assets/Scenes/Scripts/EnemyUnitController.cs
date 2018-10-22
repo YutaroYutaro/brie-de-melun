@@ -41,7 +41,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         Destroy(unitGameobject.gameObject);
     }
 
-    public void GameEnd()
+    public void GameEndRpc()
     {
         PhotonView photonView = GetComponent<PhotonView>();
         photonView.RPC("EnemyGameEnd", PhotonTargets.Others);

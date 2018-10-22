@@ -9,7 +9,7 @@ public class GameEndManager : SingletonMonoBehaviour<GameEndManager>
     public void GameEnd()
     {
         Debug.Log("You Win!");
-        EnemyUnitController.Instance.GameEnd();
+        EnemyUnitController.Instance.GameEndRpc();
         StartCoroutine(GameEndEnumerator());
     }
 
