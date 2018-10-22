@@ -28,7 +28,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         Vector3 nextDestination = new Vector3(2, unitGameobject.transform.position.y, -1);
 
         unitGameobject.GetComponent<UnitAnimator>().IsMove = true;
-        transform.DOMove(nextDestination, 1.3f);
+        unitGameobject.transform.DOMove(nextDestination, 1.3f);
         await Task.Delay(TimeSpan.FromSeconds(1.4f));
         unitGameobject.GetComponent<UnitAnimator>().IsMove = false;
 
@@ -41,16 +41,15 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         Destroy(unitGameobject.gameObject);
     }
 
-    public void GameEndRpc(int id)
+    public void GameEndRpc()
     {
         PhotonView photonView = GetComponent<PhotonView>();
-        photonView.RPC("EnemyGameEnd", PhotonTargets.Others, id);
+        photonView.RPC("EnemyGameEnd", PhotonTargets.Others);
     }
 
     [PunRPC]
-    public void EnemyGameEnd(int id)
+    public void EnemyGameEnd()
     {
-        Debug.Log(id);
         Debug.Log("You Lose!");
         StartCoroutine(GameEndEnumerator());
     }
@@ -75,7 +74,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     }
 
     [PunRPC]
-    public void EnemyUnitMove(int id, int posX, float posY, int posZ)
+    public async void EnemyUnitMove(int id, int posX, float posY, int posZ)
     {
         Vector3 nextDestination = new Vector3(4 - posX, posY, 6 - posZ);
         PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
@@ -131,7 +130,10 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             }
         }
 
+        unitGameobject.GetComponent<UnitAnimator>().IsMove = true;
         unitGameobject.transform.DOMove(nextDestination, 1.3f);
+        await Task.Delay(TimeSpan.FromSeconds(1.4f));
+        unitGameobject.GetComponent<UnitAnimator>().IsMove = false;
     }
 
     public void UnitAttack(int id, int targetPosX, int targetPosZ)

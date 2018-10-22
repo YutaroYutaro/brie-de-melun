@@ -22,7 +22,7 @@ public class TowerPresenter : MonoBehaviour
             )
             .Subscribe(_ =>
                 {
-                    EnemyUnitController.Instance.GameEndRpc(0);
+                    EnemyUnitController.Instance.GameEndRpc();
                     GameEndManager.Instance.GameEnd();
                 }
             );
