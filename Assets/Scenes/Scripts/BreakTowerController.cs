@@ -11,6 +11,8 @@ public class BreakTowerController : MonoBehaviour
     {
         if (posX == 2 && posZ == 6 && CompareTag("ProximityAttackUnit"))
         {
+            EnemyUnitController.Instance.TowerBreak(GetComponent<ViewId>().UnitViewId);
+
             Vector3 nextDestination = new Vector3(2, posY, 7);
 
             GetComponent<UnitAnimator>().IsMove = true;
