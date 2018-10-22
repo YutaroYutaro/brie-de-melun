@@ -21,7 +21,10 @@ public class TowerPresenter : MonoBehaviour
                 towerHitPoint <= 0
             )
             .Subscribe(_ =>
-                GameEndManager.Instance.GameEnd()
+                {
+                    EnemyUnitController.Instance.GameEndRpc(0);
+                    GameEndManager.Instance.GameEnd();
+                }
             );
     }
 }
