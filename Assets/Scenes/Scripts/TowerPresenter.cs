@@ -10,10 +10,24 @@ public class TowerPresenter : MonoBehaviour
     {
         TowerModel.Instance.TowerHitPointReactiveProperty
             .Where(towerHitPoint =>
-                towerHitPoint == 2 || towerHitPoint == 1
+                towerHitPoint == 2
             )
             .Subscribe(_ =>
-                Debug.Log("Tower Break!")
+                {
+                    Debug.Log("Tower Break!");
+                    GetComponent<TowerAnimator>().FirstDestroy();
+                }
+            );
+
+        TowerModel.Instance.TowerHitPointReactiveProperty
+            .Where(towerHitPoint =>
+                towerHitPoint == 1
+            )
+            .Subscribe(_ =>
+                {
+                    Debug.Log("Tower Break!");
+                    GetComponent<TowerAnimator>().SecondDestroy();
+                }
             );
 
         TowerModel.Instance.TowerHitPointReactiveProperty
@@ -22,6 +36,7 @@ public class TowerPresenter : MonoBehaviour
             )
             .Subscribe(_ =>
                 {
+                    GetComponent<TowerAnimator>().ThirdDestroy();
                     EnemyUnitController.Instance.GameEndRpc();
                     GameEndManager.Instance.GameEnd();
                 }

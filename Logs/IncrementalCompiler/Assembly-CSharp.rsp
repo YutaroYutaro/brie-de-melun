@@ -490,6 +490,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/SingletonMonoBehaviour.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticCardOperator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/StaticExistUnitOnPosition.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/TowerAnimator.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/TowerModel.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/TowerPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Unit/UnitAnimator.cs
