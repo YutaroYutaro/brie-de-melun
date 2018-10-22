@@ -28,8 +28,8 @@ public class BreakTowerController : MonoBehaviour
 
             TowerModel.Instance.TowerHitPointReactiveProperty.Value -= 1;
 
-            GameObject.Find("PhaseManager")
-                .GetComponent<PhaseManager>()
+            PhaseManager
+                .Instance
                 .SetNextPhase("SelectUseCard");
         }
     }
