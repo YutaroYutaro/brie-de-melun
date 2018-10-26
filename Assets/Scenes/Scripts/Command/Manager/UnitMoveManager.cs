@@ -25,7 +25,13 @@ public class UnitMoveManager : SingletonMonoBehaviour<UnitMoveManager>
         _selectedUnitMovementPoint = (selectMoveUnit != null) ? selectMoveUnit.GetComponent<UnitStatus>().MovementPoint : 0;
     }
 
-    public int SelectedUnitMovePoint => _selectedUnitMovementPoint;
+    public int SelectedUnitMovementPoint
+    {
+        get => _selectedUnitMovementPoint;
+        set => _selectedUnitMovementPoint = value;
+    }
+
+
 
     public void ConsumeSelectedUnitMovePoint(int consumeMovementPoint)
     {
