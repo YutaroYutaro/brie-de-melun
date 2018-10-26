@@ -254,6 +254,13 @@ public class UnitMove : MonoBehaviour
 
                 if (surpriseAttacker != null)
                 {
+                    if (!surpriseAttacker.CompareTag("ReconnaissanceUnit"))
+                    {
+                        surpriseAttacker.GetComponent<Animator>().enabled = false;
+                        surpriseAttacker.GetComponent<Animator>().Play("Attack");
+                        surpriseAttacker.GetComponent<Animator>().enabled = true;
+                    }
+
                     GameObject.Find("UnitAttackManager")
                         .GetComponent<UnitAttackManager>()
                         .SetSurpriseAttacker(surpriseAttacker);
