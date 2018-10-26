@@ -18,6 +18,11 @@ public class UnitSummonGenerator : MonoBehaviour
                 Quaternion.identity
             );
 
+
+        proximityUnit.GetComponent<Animator>().enabled = false;
+        proximityUnit.GetComponent<Animator>().Play("Summon");
+        proximityUnit.GetComponent<Animator>().enabled = true;
+
         proximityUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
         proximityUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
         proximityUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
@@ -42,6 +47,10 @@ public class UnitSummonGenerator : MonoBehaviour
                 Quaternion.identity
             );
 
+        remoteAttackUnit.GetComponent<Animator>().enabled = false;
+        remoteAttackUnit.GetComponent<Animator>().Play("Summon");
+        remoteAttackUnit.GetComponent<Animator>().enabled = true;
+
         remoteAttackUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
         remoteAttackUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
         remoteAttackUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
@@ -65,6 +74,10 @@ public class UnitSummonGenerator : MonoBehaviour
                 new Vector3(posX, 1.5f, posZ),
                 Quaternion.identity
             );
+
+        reconnaissanecUnit.GetComponent<Animator>().enabled = false;
+        reconnaissanecUnit.GetComponent<Animator>().Play("Summon");
+        reconnaissanecUnit.GetComponent<Animator>().enabled = true;
 
         reconnaissanecUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
         reconnaissanecUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;

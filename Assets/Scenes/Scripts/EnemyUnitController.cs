@@ -102,19 +102,6 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         // ToDo: アクティブ状態になった時のアニメーション遷移
         Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
 
-        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
-        {
-            if (
-                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX
-                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
-                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
-                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
-            )
-            {
-                unitGameobject.gameObject.SetActive(false);
-            }
-        }
-
         Transform clearMapObjectsChildren = GameObject.Find("ClearMapObjects").transform;
 
         foreach (Transform clearMapObjectsChild in clearMapObjectsChildren)
@@ -127,13 +114,32 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             )
             {
                 unitGameobject.gameObject.SetActive(true);
+                break;
             }
         }
 
-        unitGameobject.GetComponent<UnitAnimator>().IsMove = true;
+
+        unitGameobject.GetComponent<Animator>().enabled = false;
+        unitGameobject.GetComponent<Animator>().Play("Move");
+        unitGameobject.GetComponent<Animator>().enabled = true;
+//        unitGameobject.GetComponent<UnitAnimator>().IsMove = true;
         unitGameobject.transform.DOMove(nextDestination, 1.3f);
         await Task.Delay(TimeSpan.FromSeconds(1.4f));
-        unitGameobject.GetComponent<UnitAnimator>().IsMove = false;
+//        unitGameobject.GetComponent<UnitAnimator>().IsMove = false;
+
+        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
+        {
+            if (
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+            )
+            {
+                unitGameobject.gameObject.SetActive(false);
+                break;
+            }
+        }
     }
 
     public void UnitAttack(int id, int targetPosX, int targetPosZ)
