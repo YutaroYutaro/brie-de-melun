@@ -48,4 +48,6 @@ MonoBehaviour:
   - EnemyUnitMove
   - EnemyUnitAttack
   - EnemyUnitReconnaissance
+  - EnemyTowerBreak
+  - EnemyGameEnd
   DisableAutoOpenWizard: 1

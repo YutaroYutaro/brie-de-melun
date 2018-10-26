@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 114845139116485116}
   - component: {fileID: 114433373114334438}
   - component: {fileID: 114523905373404776}
+  - component: {fileID: 114907566701019730}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: RemoteAttackUnit
@@ -877,6 +878,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 725c2af9a1d337145a62375adb270805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114907566701019730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1632222285373560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1864010773299bc408ab2bf14b33b5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!137 &137636301534718048

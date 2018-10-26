@@ -215,7 +215,7 @@ public class UnitMove : MonoBehaviour
 
             GetComponent<UnitAnimator>().IsMove = false;
 
-            Debug.Log("Cost: " + currentNode.Cost);
+            GetComponent<BreakTowerController>().BreakTower(nextNode.IdX, unitTypePosY, nextNode.IdZ);
 
             GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>()
                 .ConsumeSelectedUnitMovePoint(currentNode.Cost);
