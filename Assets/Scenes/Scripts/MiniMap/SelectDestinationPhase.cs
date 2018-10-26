@@ -16,7 +16,7 @@ namespace Asset.Scripts.MiniMap
             {
                 UnitMoveManager.Instance.IsMoving = false;
 
-                if (UnitMoveManager.Instance.SelectedUnitMovePoint > 0) return;
+                if (UnitMoveManager.Instance.SelectedUnitMovementPoint > 0) return;
 
                 Debug.Log("End Move!");
 

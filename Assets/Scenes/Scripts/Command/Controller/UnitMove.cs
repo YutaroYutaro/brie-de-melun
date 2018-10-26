@@ -22,7 +22,7 @@ public class UnitMove : MonoBehaviour
         if (clickMiniMapImageInstancePositionX == GetComponent<UnitOwnIntPosition>().PosX &&
             clickMiniMapImageInstancePositionZ == GetComponent<UnitOwnIntPosition>().PosZ)
         {
-            GameObject.Find("UnitMoveManager").GetComponent<UnitMoveManager>().ConsumeSelectedUnitMovePoint(2);
+            UnitMoveManager.Instance.SelectedUnitMovementPoint = 0;
             return true;
         }
 
@@ -171,6 +171,7 @@ public class UnitMove : MonoBehaviour
                 mapWeight[nextNode.IdX, nextNode.IdZ] > GetComponent<UnitStatus>().MovementPoint)
             {
                 Debug.Log("Crash!");
+                UnitMoveManager.Instance.SelectedUnitMovementPoint = 0;
                 return true;
             }
 
@@ -254,6 +255,8 @@ public class UnitMove : MonoBehaviour
 
                 if (surpriseAttacker != null)
                 {
+                    UnitMoveManager.Instance.SelectedUnitMovementPoint = 0;
+
                     if (!surpriseAttacker.CompareTag("ReconnaissanceUnit"))
                     {
                         surpriseAttacker.GetComponent<Animator>().enabled = false;
