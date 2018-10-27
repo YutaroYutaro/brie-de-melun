@@ -454,6 +454,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Presenter/DropZonePresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Presenter/ManaTextPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Card/Presenter/MoneyTextPresenter.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/CardUIController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Controller/UnitAttack.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Controller/UnitMove.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Command/Controller/UnitReconnaissanceController.cs
@@ -485,6 +486,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectReconnaissanceUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Network.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PointerManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PriceOfCard.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ShopCanvas.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/SingletonMonoBehaviour.cs

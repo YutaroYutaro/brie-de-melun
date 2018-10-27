@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 114274381312033210}
   - component: {fileID: 114901767465095998}
   - component: {fileID: 114562309442310996}
+  - component: {fileID: 114401507481679786}
   m_Layer: 5
   m_Name: ReconnaissanceCard
   m_TagString: ReconnaissanceCard
@@ -163,6 +164,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Reconnaissance
+--- !u!114 &114401507481679786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371062022258188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42de832144d06644f9cfa555b671df1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSelected: 0
 --- !u!114 &114562309442310996
 MonoBehaviour:
   m_ObjectHideFlags: 1

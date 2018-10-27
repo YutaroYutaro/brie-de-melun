@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 225332391406996680}
   - component: {fileID: 114378782797172968}
   - component: {fileID: 114160988245108154}
+  - component: {fileID: 114247255210756930}
   m_Layer: 5
   m_Name: ShopCard
   m_TagString: ShopCard
@@ -122,6 +123,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114247255210756930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1284912849980510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42de832144d06644f9cfa555b671df1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSelected: 0
 --- !u!114 &114282239968524470
 MonoBehaviour:
   m_ObjectHideFlags: 1
