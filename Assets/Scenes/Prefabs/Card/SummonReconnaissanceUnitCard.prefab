@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114198923375002290}
   - component: {fileID: 114289016613565864}
   - component: {fileID: 114292408012031478}
+  - component: {fileID: 114159930906243524}
   m_Layer: 5
   m_Name: SummonReconnaissanceUnitCard
   m_TagString: SummonCard
@@ -172,6 +173,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114159930906243524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117478736487082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42de832144d06644f9cfa555b671df1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSelected: 0
 --- !u!114 &114198923375002290
 MonoBehaviour:
   m_ObjectHideFlags: 1
