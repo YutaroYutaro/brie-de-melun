@@ -3601,6 +3601,8 @@ GameObject:
   - component: {fileID: 1214660373}
   - component: {fileID: 1214660372}
   - component: {fileID: 1214660374}
+  - component: {fileID: 1214660375}
+  - component: {fileID: 1214660376}
   m_Layer: 5
   m_Name: MiniMap
   m_TagString: Untagged
@@ -3621,10 +3623,10 @@ RectTransform:
   m_Father: {fileID: 1319119052}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -751.6, y: 260.45996}
-  m_SizeDelta: {x: -1540.6, y: -549.97}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 200, y: -280}
+  m_SizeDelta: {x: 379.40002, y: 530.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1214660372
 MonoBehaviour:
@@ -3682,6 +3684,30 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1214660375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1214660370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56e95bf76e09804891247f3a018c891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 0}
+--- !u!114 &1214660376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1214660370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7663a3bf5fa164a9304a8145011ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 0}
 --- !u!1001 &1222968459
 Prefab:
   m_ObjectHideFlags: 0

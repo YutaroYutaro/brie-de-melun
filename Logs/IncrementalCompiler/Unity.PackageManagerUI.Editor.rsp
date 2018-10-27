@@ -86,16 +86,16 @@
 -r:"C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll"
 -r:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/DOTween.dll
 -r:E:/yutaro/brie-de-mulun/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll
+-r:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/Newtonsoft.Json.dll"
+-r:E:/yutaro/brie-de-mulun/Assets/Plugins/Photon3Unity3D.dll
 -r:E:/yutaro/brie-de-mulun/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll
+-r:E:/yutaro/brie-de-mulun/Assets/Plugins/WebSocket/websocket-sharp.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.7/Editor/UnityEditor.Advertisements.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/Editor/UnityEditor.Analytics.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/Editor/UnityEditor.Purchasing.dll
 -r:C:/Users/shigezou/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll
--r:"E:/yutaro/brie-de-mulun/Assets/Photon Unity Networking/Editor/PhotonNetwork/Newtonsoft.Json.dll"
--r:E:/yutaro/brie-de-mulun/Assets/Plugins/WebSocket/websocket-sharp.dll
--r:E:/yutaro/brie-de-mulun/Assets/Plugins/Photon3Unity3D.dll
 -r:"C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll"
 -r:"C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.dll"
 -r:"C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Core.dll"

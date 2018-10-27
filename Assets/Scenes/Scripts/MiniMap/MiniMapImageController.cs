@@ -2,10 +2,21 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Asset.Scripts.MiniMap;
+using UniRx.Triggers;
+using UniRx;
+
 
 public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private IPhaseType _phaseType;
+
+    private void Start()
+    {
+        ObservableEventTrigger observableEventTrigger = gameObject.AddComponent<ObservableEventTrigger>();
+
+        observableEventTrigger.OnPointerClickAsObservable()
+            .Subscribe();
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
