@@ -23,8 +23,7 @@ namespace Asset.Scripts.MiniMap
 
                     if (attackerAndTarget.Target.Count == 1)
                     {
-                        unitAttackManager.SelectedAttacker =
-                            unitAttackManager.GetAttackerAndTargetList().First().Attacker;
+                        unitAttackManager.SelectedAttacker = attackerAndTarget.Attacker;
 
                         unitAttackManager.MiniMapUnitAttack(attackerAndTarget.Target[0]);
 
@@ -36,6 +35,7 @@ namespace Asset.Scripts.MiniMap
                     }
                     else
                     {
+                        unitAttackManager.SelectedAttacker = attackerAndTarget.Attacker;
                         unitAttackManager.SetSelectedAttackerAndTargetUnit(attackerAndTarget);
                         GameObject.Find("PhaseManager")
                             .GetComponent<PhaseManager>()
