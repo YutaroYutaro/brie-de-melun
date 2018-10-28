@@ -486,6 +486,8 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMap/SelectReconnaissanceUnitPhase.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMapPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MiniMapUIController.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MyTowerModel.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/MyTowerPresenter.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Network.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PointerManager.cs

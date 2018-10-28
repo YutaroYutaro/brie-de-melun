@@ -36,6 +36,8 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
         await Task.Delay(TimeSpan.FromSeconds(0.9f));
         unitGameobject.GetComponent<UnitAnimator>().IsAttack = false;
 
+        MyTowerModel.Instance.TowerHitPointReactiveProperty.Value -= 1;
+
         unitGameobject.GetComponent<UnitAnimator>().IsDefeated = true;
         await Task.Delay(TimeSpan.FromSeconds(1.4f));
         Destroy(unitGameobject.gameObject);
