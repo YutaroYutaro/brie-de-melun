@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9fe321118a1ed3e48bf6575b0961d020
+guid: bf0ef87e10acbf040a5511aa83df8492
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -18,7 +18,6 @@ ModelImporter:
     100024: Tower2 1
     100026: Tower3
     100028: Tower3 1
-    100030: "\u30B5\u30F3"
     400000: Amature
     400002: Base
     400004: Base 1
@@ -34,22 +33,25 @@ ModelImporter:
     400024: Tower2 1
     400026: Tower3
     400028: Tower3 1
-    400030: "\u30B5\u30F3"
     2100000: No Name
-    2100002: "\u30DE\u30C6\u30EA\u30A2\u30EB"
-    4300000: Base
-    4300002: Tower2
-    4300004: Tower1
-    4300006: Tower3
-    4300008: Engine
-    7400000: Amature|Destroyed1st
-    7400002: Amature|Destroyed2nd
-    7400004: Amature|Destroyed3rd
-    7400006: Amature|Wait0Damage
-    7400008: Amature|Wait1Damage
-    7400010: Amature|Wait2Damage
+    4300000: Engine
+    4300002: Tower1
+    4300004: Base
+    4300006: Tower2
+    4300008: Tower3
+    7400000: Amature|Amature|Amature|Destroyed1st|Amature|Destroyed1st
+    7400002: Amature|Amature|Amature|Destroyed1st|Amature|Destroyed1st.001
+    7400004: Amature|Amature|Amature|Destroyed2nd|Amature|Destroyed2nd
+    7400006: Amature|Amature|Amature|Destroyed2nd|Amature|Destroyed2nd.001
+    7400008: Amature|Amature|Amature|Destroyed3rd|Amature|Destroyed3rd
+    7400010: Amature|Amature|Amature|Destroyed3rd|Amature|Destroyed3rd.001
+    7400012: Amature|Amature|Amature|Wait0Damage|Amature|Wait0Damage
+    7400014: Amature|Amature|Amature|Wait0Damage|Amature|Wait0Damage.001
+    7400016: Amature|Amature|Amature|Wait1Damage|Amature|Wait1Damage
+    7400018: Amature|Amature|Amature|Wait1Damage|Amature|Wait1Damage.001
+    7400020: Amature|Amature|Amature|Wait2Damage|Amature|Wait2Damage
+    7400022: Amature|Amature|Amature|Wait2Damage|Amature|Wait2Damage.001
     9500000: //RootNode
-    10800000: "\u30B5\u30F3"
     13700000: Base
     13700002: Engine
     13700004: Tower1
@@ -60,12 +62,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: No Name
-    second: {fileID: 2100000, guid: 476f9328eb70e1d43acfd55d1ed021f5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB"
-    second: {fileID: 2100000, guid: 476f9328eb70e1d43acfd55d1ed021f5, type: 2}
+    second: {fileID: 2100000, guid: fd6a7fb0a9054ee48af169f79ad8276a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
