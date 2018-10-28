@@ -20,12 +20,14 @@ public class FogManager : SingletonMonoBehaviour<FogManager>
                 (mapObjectPosZ == Mathf.RoundToInt(foggyMapObjectsChild.position.z)))
             {
                 foggyMapObjectsChild.transform.SetParent(GameObject.Find("ClearMapObjects").transform);
-                foggyMapObjectsChild.GetComponent<Renderer>().material.color = MaterialTypeList[
-                    GameObject.Find("Map").GetComponent<CreateMap>().GetMapObjectTypeTable(
-                        Mathf.RoundToInt(foggyMapObjectsChild.position.x),
-                        Mathf.RoundToInt(foggyMapObjectsChild.position.z)
-                    )
-                ].color;
+                foggyMapObjectsChild.GetComponent<MapObjectController>().InstantiateMapObject();
+                foggyMapObjectsChild.GetComponent<MapObjectController>().FogDestroy();
+//                foggyMapObjectsChild.GetComponent<Renderer>().material.color = MaterialTypeList[
+//                    GameObject.Find("Map").GetComponent<CreateMap>().GetMapObjectTypeTable(
+//                        Mathf.RoundToInt(foggyMapObjectsChild.position.x),
+//                        Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+//                    )
+//                ].color;
             }
         }
     }
