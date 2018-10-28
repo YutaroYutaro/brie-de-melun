@@ -11,8 +11,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 {
     private IPhaseType _phaseType;
     private float _time;
-    [SerializeField]private float _angularFrequency = 5f;
-    [SerializeField]private static readonly float deltaTime = 0.0333f;
+    [SerializeField] private float _angularFrequency = 5f;
+    [SerializeField] private static readonly float deltaTime = 0.0333f;
 
     private void Start()
     {
@@ -48,6 +48,72 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                             color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
                             GetComponent<Image>().color = color;
                         }).AddTo(this);
+                }
+            );
+
+        IObservable<string> selectMoveUnit = PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase => phase != "SelectMoveUnit");
+
+        PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase =>
+                phase == "SelectMoveUnit"
+            )
+            .Subscribe(_ =>
+                {
+                    Transform player1UnitsChildren = GameObject.Find("Player1Units").transform;
+                    foreach (Transform player1UnitsChild in player1UnitsChildren)
+                    {
+                        if (
+                            player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX == posX &&
+                            player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
+                        {
+                            Observable.Interval(TimeSpan.FromSeconds(deltaTime))
+                                .TakeUntil(selectMoveUnit)
+                                .Subscribe(__ =>
+                                {
+                                    GetComponent<Image>().color = Color.green;
+                                    _time += _angularFrequency * deltaTime;
+                                    var color = GetComponent<Image>().color;
+                                    color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
+                                    GetComponent<Image>().color = color;
+                                }).AddTo(this);
+                        }
+                    }
+                }
+            );
+
+        IObservable<string> selectDestination = PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase => phase != "SelectDestination");
+
+        PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase =>
+                phase == "SelectDestination"
+            )
+            .Subscribe(_ =>
+                {
+                    GetComponent<Image>().color = Color.white;
+
+                    int unitPosX = UnitMoveManager.Instance.SelectMoveUnit.GetComponent<UnitOwnIntPosition>().PosX;
+                    int unitPosZ = UnitMoveManager.Instance.SelectMoveUnit.GetComponent<UnitOwnIntPosition>().PosZ;
+
+                    if (
+                        (unitPosX + 1 == posX && unitPosZ == posZ) ||
+                        (unitPosX - 1 == posX && unitPosZ == posZ) ||
+                        (unitPosX == posX && unitPosZ + 1 == posZ) ||
+                        (unitPosX == posX && unitPosZ - 1 == posZ)
+                        )
+                    {
+                        Observable.Interval(TimeSpan.FromSeconds(deltaTime))
+                            .TakeUntil(selectDestination)
+                            .Subscribe(__ =>
+                            {
+                                GetComponent<Image>().color = Color.green;
+                                _time += _angularFrequency * deltaTime;
+                                var color = GetComponent<Image>().color;
+                                color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
+                                GetComponent<Image>().color = color;
+                            }).AddTo(this);
+                    }
                 }
             );
     }
