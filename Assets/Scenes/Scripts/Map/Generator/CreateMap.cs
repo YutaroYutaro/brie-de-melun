@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using FogDefine;
 
-public class CreateMap : MonoBehaviour
+public class CreateMap : SingletonMonoBehaviour<CreateMap>
 {
     //生成するマップオブジェクト
     public GameObject[] MapObjectType;
 
-    public Material FogMaterial;
+    public GameObject BlockPrefab;
+
+    public GameObject FogPrefab;
+
+//    public Material FogMaterial;
 
     //生成するマップの大きさ
     public int MaxPosX = 5;
@@ -56,7 +60,7 @@ public class CreateMap : MonoBehaviour
 
                 //オブジェクトの生成
                 GameObject mapObject = Instantiate(
-                    MapObjectType[objectNumber],
+                    BlockPrefab,
                     new Vector3(posX, 0, posZ),
                     Quaternion.identity
                 );
@@ -78,6 +82,11 @@ public class CreateMap : MonoBehaviour
                             posZ,
                             Fog.FOG_EXIST
                         );
+                    Instantiate(
+                        MapObjectType[objectNumber],
+                        new Vector3(posX, 0, posZ),
+                        Quaternion.identity
+                    );
                 }
                 else if (posZ == 6 && (posX == 1 || posX == 2 || posX == 3))
                 {
@@ -96,7 +105,15 @@ public class CreateMap : MonoBehaviour
                             posZ,
                             Fog.FOG_EXIST
                         );
-                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
+
+                    // ToDo: 霧モデルインスタンス
+//                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
+//                    Instantiate(
+//                        FogPrefab,
+//                        new Vector3(posX, 1, posZ),
+//                        Quaternion.identity
+//                    );
+                    mapObject.GetComponent<MapObjectController>().InstantiateFog();
                 }
                 else
                 {
@@ -115,7 +132,15 @@ public class CreateMap : MonoBehaviour
                             posZ,
                             Fog.FOG_EXIST
                         );
-                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
+
+                    // ToDo: 霧モデルインスタンス
+//                    mapObject.GetComponent<Renderer>().material.color = FogMaterial.color;
+//                    Instantiate(
+//                        FogPrefab,
+//                        new Vector3(posX, 1, posZ),
+//                        Quaternion.identity
+//                    );
+                    mapObject.GetComponent<MapObjectController>().InstantiateFog();
                 }
             }
         }

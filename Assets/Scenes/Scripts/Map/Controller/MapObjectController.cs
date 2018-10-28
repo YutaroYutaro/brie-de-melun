@@ -5,28 +5,47 @@ using UnityEngine.UI;
 using UnityEngine;
 
 
-public class MapObjectController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MapObjectController : MonoBehaviour
 {
-    private Color _defaultColor;
+    public GameObject[] MapObjectType;
 
-    void Start()
+    public GameObject FogPrefab;
+
+    private GameObject _fogGameObject;
+
+    public void InstantiateMapObject()
     {
-        //現在の色を保存
-        _defaultColor = GetComponent<Renderer>().material.color;
-
-        //オブジェクトが回転しないように設定
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        Instantiate(
+            MapObjectType[
+                CreateMap.Instance.GetMapObjectTypeTable(
+                    Mathf.RoundToInt(transform.position.x),
+                    Mathf.RoundToInt(transform.position.z)
+                )
+            ],
+            new Vector3(
+                Mathf.RoundToInt(transform.position.x),
+                0,
+                Mathf.RoundToInt(transform.position.z)
+            ),
+            Quaternion.identity
+        );
     }
 
-    //マップオブジェクトにマウスがホバーしたときに色を変更
-    public void OnPointerEnter(PointerEventData eventData)
+    public void InstantiateFog()
     {
-        GetComponent<Renderer>().material.color = Color.red;
+        _fogGameObject = Instantiate(
+            FogPrefab,
+            new Vector3(
+                Mathf.RoundToInt(transform.position.x),
+                1,
+                Mathf.RoundToInt(transform.position.z)
+            ),
+            Quaternion.identity
+        );
     }
 
-    //ホバーが解除されたら元の色に戻す
-    public void OnPointerExit(PointerEventData eventData)
+    public void FogDestroy()
     {
-        GetComponent<Renderer>().material.color = _defaultColor;
+        Destroy(_fogGameObject);
     }
 }
