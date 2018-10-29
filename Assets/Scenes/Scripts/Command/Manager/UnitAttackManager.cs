@@ -85,9 +85,15 @@ public class UnitAttackManager : SingletonMonoBehaviour<UnitAttackManager>
         return _selectedAttackerAndTarget;
     }
 
+//    public GameObject SelectedAttacker
+//    {
+//        set { _selectedAttacker = value; }
+//    }
+
     public GameObject SelectedAttacker
     {
-        set { _selectedAttacker = value; }
+        get => _selectedAttacker;
+        set => _selectedAttacker = value;
     }
 
     public void SetSurpriseAttacker(GameObject surpriseAttackTarget)

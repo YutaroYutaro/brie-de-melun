@@ -16,7 +16,13 @@ namespace Asset.Scripts.MiniMap
             {
                 UnitMoveManager.Instance.IsMoving = false;
 
-                if (UnitMoveManager.Instance.SelectedUnitMovementPoint > 0) return;
+                PhaseManager.Instance.SetNextPhase("SelectedDestination");
+
+                if (UnitMoveManager.Instance.SelectedUnitMovementPoint > 0)
+                {
+                    PhaseManager.Instance.SetNextPhase("SelectDestination");
+                    return;
+                }
 
                 Debug.Log("End Move!");
 
