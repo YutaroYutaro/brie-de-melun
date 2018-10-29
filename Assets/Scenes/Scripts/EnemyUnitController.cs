@@ -8,12 +8,14 @@ using System;
 using FogDefine;
 using SummonUnitTypeDefine;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
 {
     [SerializeField] private GameObject _proximityAttackPrefab;
     [SerializeField] private GameObject _remoteAttackPrefab;
     [SerializeField] private GameObject _reconnaissanecPrefab;
+    [SerializeField] private Text _loseText;
 
     public void TowerBreak(int id)
     {
@@ -53,6 +55,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     public void EnemyGameEnd()
     {
         Debug.Log("You Lose!");
+        _loseText.GetComponent<Text>().enabled = true;
         StartCoroutine(GameEndEnumerator());
     }
 

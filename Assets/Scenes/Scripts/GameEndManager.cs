@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameEndManager : SingletonMonoBehaviour<GameEndManager>
 {
+    [SerializeField] private Text _winText;
+
     public void GameEnd()
     {
         Debug.Log("You Win!");
+        _winText.GetComponent<Text>().enabled = true;
         StartCoroutine(GameEndEnumerator());
     }
 
