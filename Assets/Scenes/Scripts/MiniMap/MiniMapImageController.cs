@@ -221,6 +221,39 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     }
                 }
             );
+
+        IObservable<string> selectReconnaissanceUnit = PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase => phase != "SelectReconnaissanceUnit");
+
+        PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase =>
+                phase == "SelectReconnaissanceUnit"
+            )
+            .Subscribe(_ =>
+                {
+                    GetComponent<Image>().color = Color.white;
+
+                    foreach (Transform unit in GameObject.Find("Player1Units").transform)
+                    {
+                        if (unit.gameObject.CompareTag("ReconnaissanceUnit") &&
+                            posX == unit.GetComponent<UnitOwnIntPosition>().PosX &&
+                            posZ == unit.GetComponent<UnitOwnIntPosition>().PosZ
+                        )
+                        {
+                            Observable.Interval(TimeSpan.FromSeconds(deltaTime))
+                                .TakeUntil(selectReconnaissanceUnit)
+                                .Subscribe(__ =>
+                                {
+                                    GetComponent<Image>().color = Color.green;
+                                    _time += _angularFrequency * deltaTime;
+                                    var color = GetComponent<Image>().color;
+                                    color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
+                                    GetComponent<Image>().color = color;
+                                }).AddTo(this);
+                        }
+                    }
+                }
+            );
     }
 
     public void OnPointerClick(PointerEventData eventData)
