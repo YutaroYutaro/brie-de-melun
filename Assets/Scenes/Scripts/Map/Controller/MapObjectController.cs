@@ -37,7 +37,7 @@ public class MapObjectController : MonoBehaviour
             FogPrefab,
             new Vector3(
                 Mathf.RoundToInt(transform.position.x),
-                1,
+                0.7f,
                 Mathf.RoundToInt(transform.position.z)
             ),
             Quaternion.identity
