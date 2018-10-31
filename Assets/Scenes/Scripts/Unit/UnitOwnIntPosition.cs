@@ -9,5 +9,7 @@ public class UnitOwnIntPosition : MonoBehaviour
     {
         PosX = currentUnitPosX;
         PosZ = currentUnitPosZ;
+
+        GetComponent<UnitStatus>().MapObjectEffect(currentUnitPosX, currentUnitPosZ);
     }
 }

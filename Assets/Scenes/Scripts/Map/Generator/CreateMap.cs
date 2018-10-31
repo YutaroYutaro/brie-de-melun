@@ -34,7 +34,18 @@ public class CreateMap : SingletonMonoBehaviour<CreateMap>
             for (int posZ = 0; posZ < MaxPosZ; ++posZ)
             {
                 //生成するマップオブジェクトを選択
-                int objectNumber = Random.Range(0, MapObjectType.Length);
+//                int objectNumber = Random.Range(0, MapObjectType.Length);
+                int objectNumber = 0;
+
+                if (
+                    (posX == 2 && (posZ == 2 || posZ == 4)) ||
+                    (posX == 0 && posZ == 6) ||
+                    (posX == 4 && posZ == 0)
+                )
+                {
+                    objectNumber = 1;
+                }
+
 
                 //マップオブジェクトごとの重みを保存
                 if (MapObjectType[objectNumber].name == "Field")
@@ -44,7 +55,7 @@ public class CreateMap : SingletonMonoBehaviour<CreateMap>
                 }
                 else if (MapObjectType[objectNumber].name == "Forest")
                 {
-                    _mapWeight[posX, posZ] = 2;
+                    _mapWeight[posX, posZ] = 1;
                     _mapObjectTypeTable[posX, posZ] = 1;
                 }
                 else if (MapObjectType[objectNumber].name == "GoldMine")

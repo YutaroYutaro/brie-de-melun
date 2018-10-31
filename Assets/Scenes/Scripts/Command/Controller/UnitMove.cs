@@ -12,8 +12,10 @@ public class UnitMove : MonoBehaviour
         int clickMiniMapImageInstancePositionZ
     )
     {
-        if (Math.Abs(clickMiniMapImageInstancePositionX - GetComponent<UnitOwnIntPosition>().PosX) > 1 ||
-            Math.Abs(clickMiniMapImageInstancePositionZ - GetComponent<UnitOwnIntPosition>().PosZ) > 1)
+        int absPosX = Math.Abs(clickMiniMapImageInstancePositionX - GetComponent<UnitOwnIntPosition>().PosX);
+        int absPosZ = Math.Abs(clickMiniMapImageInstancePositionZ - GetComponent<UnitOwnIntPosition>().PosZ);
+
+        if (absPosX > 1 || absPosZ > 1 || (absPosX == 1 && absPosZ == 1))
         {
             Debug.Log("Please click next current position tile!");
             return false;
@@ -209,7 +211,7 @@ public class UnitMove : MonoBehaviour
                 nextNode.IdX,
                 unitTypePosY,
                 nextNode.IdZ
-                );
+            );
 
             //待機
             await Task.Delay(TimeSpan.FromSeconds(1.4f));
