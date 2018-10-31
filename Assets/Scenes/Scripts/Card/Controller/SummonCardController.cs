@@ -8,6 +8,12 @@ namespace Asset.Scripts.Cards
     {
         public bool SetCardTypePhase()
         {
+            if (GameObject.Find("Player1Units").transform.childCount == 4)
+            {
+                Debug.Log("Too Many Monsters.");
+                return false;
+            }
+
             if (GameObject.Find("Player1Units").transform.childCount != 0)
             {
                 Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
