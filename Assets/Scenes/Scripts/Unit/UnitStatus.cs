@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System.Threading.Tasks;
 using UniRx;
 
 public class UnitStatus : MonoBehaviour
@@ -14,6 +16,7 @@ public class UnitStatus : MonoBehaviour
     private int _defaultAttackPoint;
 
     [SerializeField] private bool _onGoldMine;
+    [SerializeField] private bool _isDead;
 
     void Start()
     {
@@ -47,7 +50,7 @@ public class UnitStatus : MonoBehaviour
             )
             .Subscribe(_ => MoneyModel.Instance.MoneyReactiveProperty.Value += 1);
 
-        StartCoroutine(Defeated());
+//        StartCoroutine(Defeated());
     }
 
     public void MapObjectEffect(int posX, int posZ)
@@ -83,44 +86,32 @@ public class UnitStatus : MonoBehaviour
         HitPoint = unitStatus.HitPoint;
     }
 
-    // コルーチン
-    private IEnumerator Defeated()
+//    // コルーチン
+//    private IEnumerator Defeated()
+//    {
+//        // コルーチンの処理
+//
+//        while (true)
+//        {
+//            if (HitPoint <= 0)
+//            {
+//                GetComponent<UnitAnimator>().IsDefeated = true;
+//                yield return new WaitForSeconds(1.4f);
+//                Destroy(gameObject);
+//            }
+//
+//            yield return null;
+//        }
+//    }
+
+    private async void Update()
     {
-        // コルーチンの処理
-
-        while (true)
+        if (HitPoint <= 0 && !_isDead)
         {
-            if (HitPoint <= 0)
-            {
-                GetComponent<UnitAnimator>().IsDefeated = true;
-                yield return new WaitForSeconds(1.4f);
-                Destroy(gameObject);
-//                Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
-//
-//                foreach (Transform player1UnitChild in player1UnitChildren)
-//                {
-//                    if (player1UnitChild.gameObject == gameObject)
-//                    {
-//                        GetComponent<UnitAnimator>().IsDefeated = true;
-//                        yield return new WaitForSeconds (1.4f);
-//                        Destroy(player1UnitChild.gameObject);
-//                    }
-//                }
-//
-//                Transform player2UnitChildren = GameObject.Find("Player2Units").transform;
-//
-//                foreach (Transform player2UnitChild in player2UnitChildren)
-//                {
-//                    if (player2UnitChild.gameObject == gameObject)
-//                    {
-//                        GetComponent<UnitAnimator>().IsDefeated = true;
-//                        yield return new WaitForSeconds (1.4f);
-//                        Destroy(player2UnitChild.gameObject);
-//                    }
-//                }
-            }
-
-            yield return null;
+            _isDead = true;
+            GetComponent<UnitAnimator>().IsDefeated = true;
+            await Task.Delay(TimeSpan.FromSeconds(1.4f));
+            Destroy(gameObject);
         }
     }
 }
