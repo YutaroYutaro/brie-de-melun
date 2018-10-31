@@ -39,6 +39,13 @@ public class TurnStartController : MonoBehaviour
                 graveCardObjects.Add(graveyardChild.gameObject);
             }
 
+            for (int i = 0; i < graveCardObjects.Count; i++) {
+                GameObject temp = graveCardObjects[i];
+                int randomIndex = Random.Range(0, graveCardObjects.Count);
+                graveCardObjects[i] = graveCardObjects[randomIndex];
+                graveCardObjects[randomIndex] = temp;
+            }
+
             foreach (var cardObject in graveCardObjects)
             {
                 cardObject.transform.SetParent(GameObject.Find("Deck").transform);
