@@ -19,7 +19,7 @@ public class MiniMapPresenter : MonoBehaviour
 
         PhaseManager.Instance.PhaseReactiveProperty
             .Where(phase =>
-                phase != "SelectUseCard"
+                phase != "SelectUseCard" && phase != "EnemyTurn"
             )
             .Subscribe(phase =>
                 {
