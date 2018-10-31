@@ -24,8 +24,7 @@ public class UnitSummonGenerator : MonoBehaviour
         proximityUnit.GetComponent<Animator>().enabled = true;
 
         proximityUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
-        proximityUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
-        proximityUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
+        proximityUnit.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(posX, posZ);
 
         int id = PhotonNetwork.AllocateViewID();
         proximityUnit.GetComponent<ViewId>().UnitViewId = id;
@@ -52,8 +51,7 @@ public class UnitSummonGenerator : MonoBehaviour
         remoteAttackUnit.GetComponent<Animator>().enabled = true;
 
         remoteAttackUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
-        remoteAttackUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
-        remoteAttackUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
+        remoteAttackUnit.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(posX, posZ);
 
         int id = PhotonNetwork.AllocateViewID();
         remoteAttackUnit.GetComponent<ViewId>().UnitViewId = id;
@@ -80,8 +78,7 @@ public class UnitSummonGenerator : MonoBehaviour
         reconnaissanecUnit.GetComponent<Animator>().enabled = true;
 
         reconnaissanecUnit.transform.SetParent(GameObject.Find("Player1Units").transform);
-        reconnaissanecUnit.GetComponent<UnitOwnIntPosition>().PosX = posX;
-        reconnaissanecUnit.GetComponent<UnitOwnIntPosition>().PosZ = posZ;
+        reconnaissanecUnit.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(posX, posZ);
 
         int id = PhotonNetwork.AllocateViewID();
         reconnaissanecUnit.GetComponent<ViewId>().UnitViewId = id;

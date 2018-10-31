@@ -101,8 +101,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                 6 - posZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
             );
 
-        unitGameobject.GetComponent<UnitOwnIntPosition>().PosX = 4 - posX;
-        unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ = 6 - posZ;
+        unitGameobject.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(4 - posX, 6 - posZ);
 
         // ToDo: アクティブ状態になった時のアニメーション遷移
         Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
@@ -320,8 +319,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     {
         GameObject newPlayer = Instantiate(_proximityAttackPrefab, pos, rot);
         newPlayer.transform.eulerAngles = new Vector3(0, 180f, 0);
-        newPlayer.GetComponent<UnitOwnIntPosition>().PosX = (int) pos.x;
-        newPlayer.GetComponent<UnitOwnIntPosition>().PosZ = (int) pos.z;
+        newPlayer.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition((int) pos.x, (int) pos.z);
 
         // Set player's PhotonView
         PhotonView[] nViews = newPlayer.GetComponents<PhotonView>();
@@ -350,8 +348,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     {
         GameObject newPlayer = Instantiate(_remoteAttackPrefab, pos, rot);
         newPlayer.transform.eulerAngles = new Vector3(0, 180f, 0);
-        newPlayer.GetComponent<UnitOwnIntPosition>().PosX = (int) pos.x;
-        newPlayer.GetComponent<UnitOwnIntPosition>().PosZ = (int) pos.z;
+        newPlayer.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition((int) pos.x, (int) pos.z);
 
         // Set player's PhotonView
         PhotonView[] nViews = newPlayer.GetComponents<PhotonView>();
@@ -380,8 +377,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     {
         GameObject newPlayer = Instantiate(_reconnaissanecPrefab, pos, rot);
         newPlayer.transform.eulerAngles = new Vector3(0, 180f, 0);
-        newPlayer.GetComponent<UnitOwnIntPosition>().PosX = (int) pos.x;
-        newPlayer.GetComponent<UnitOwnIntPosition>().PosZ = (int) pos.z;
+        newPlayer.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition((int) pos.x, (int) pos.z);
 
         // Set player's PhotonView
         PhotonView[] nViews = newPlayer.GetComponents<PhotonView>();
