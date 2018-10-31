@@ -118,7 +118,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Summon
+  m_Text: "\u30B9\u30AB\u30A6\u30C8"
 --- !u!114 &114086409419722180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Summon Reconnaissance Unit
+  m_Text: "\u30B9\u30AB\u30A6\u30C8\u3092\u53EC\u559A\u3059\u308B"
 --- !u!114 &114754955037843708
 MonoBehaviour:
   m_ObjectHideFlags: 1

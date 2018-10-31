@@ -117,7 +117,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Unit Move
+  m_Text: "\u6307\u5B9A\u3057\u305F\u30E6\u30CB\u30C3\u30C8\u304C\u79FB\u52D5\u3059\u308B"
 --- !u!114 &114106141692317296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,7 +187,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Move
+  m_Text: "\u79FB\u52D5"
 --- !u!114 &114624348566526166
 MonoBehaviour:
   m_ObjectHideFlags: 1

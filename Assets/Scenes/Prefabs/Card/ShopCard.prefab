@@ -199,7 +199,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Open Shop
+  m_Text: "\u30B7\u30E7\u30C3\u30D7\u3067\u30AB\u30FC\u30C9\u3092\u8CB7\u3046"
 --- !u!114 &114745322962763798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Shop
+  m_Text: "\u30B7\u30E7\u30C3\u30D7"
 --- !u!114 &114897537635333014
 MonoBehaviour:
   m_ObjectHideFlags: 1

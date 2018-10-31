@@ -184,7 +184,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Attack
+  m_Text: "\u653B\u6483"
 --- !u!114 &114535460358453298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Atack Unit
+  m_Text: "\u6307\u5B9A\u3057\u305F\u30E6\u30CB\u30C3\u30C8\u304C\u653B\u6483\u3059\u308B"
 --- !u!114 &114610753162622290
 MonoBehaviour:
   m_ObjectHideFlags: 1
