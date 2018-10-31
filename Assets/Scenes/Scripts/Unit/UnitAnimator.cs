@@ -6,6 +6,8 @@ public class UnitAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private bool _isAttack;
+    [SerializeField] private bool _isMiddleAttack;
+    [SerializeField] private bool _isLongAttack;
     [SerializeField] private bool _isSearch;
     [SerializeField] private bool _isMove;
     [SerializeField] private bool _isDamaged;
@@ -19,6 +21,18 @@ public class UnitAnimator : MonoBehaviour
     public bool IsAttack
     {
         set => _isAttack = value;
+    }
+
+    public bool IsMiddleAttack
+    {
+        get => _isMiddleAttack;
+        set => _isMiddleAttack = value;
+    }
+
+    public bool IsLongAttack
+    {
+        get => _isLongAttack;
+        set => _isLongAttack = value;
     }
 
     public bool IsDamaged
@@ -58,6 +72,24 @@ public class UnitAnimator : MonoBehaviour
             else
             {
                 _animator.SetBool("Attack", _isAttack);
+            }
+
+            if (_isMiddleAttack)
+            {
+                _animator.SetBool("MiddleAttack", _isMiddleAttack);
+            }
+            else
+            {
+                _animator.SetBool("MiddleAttack", _isMiddleAttack);
+            }
+
+            if (_isLongAttack)
+            {
+                _animator.SetBool("LongAttack", _isLongAttack);
+            }
+            else
+            {
+                _animator.SetBool("LongAttack", _isLongAttack);
             }
         }
         else

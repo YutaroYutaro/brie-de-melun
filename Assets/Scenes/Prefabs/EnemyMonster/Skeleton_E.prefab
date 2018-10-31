@@ -809,8 +809,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c297cc78e493b428d86531a38d549e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  _animator: {fileID: 95665971562098200}
   _isAttack: 0
+  _isMiddleAttack: 0
+  _isLongAttack: 0
   _isSearch: 0
   _isMove: 0
   _isDamaged: 0
