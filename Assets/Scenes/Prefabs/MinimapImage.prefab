@@ -81,6 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2315341d760c197478999c930f706a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _angularFrequency: 5
+  _popUp: {fileID: 1300393550180482, guid: 0359c6f02a1aa004fad8ff8ae843e69e, type: 2}
 --- !u!222 &222999497190689760
 CanvasRenderer:
   m_ObjectHideFlags: 1
