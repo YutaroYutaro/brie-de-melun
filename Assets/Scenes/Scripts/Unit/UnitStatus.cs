@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UniRx;
 
 public class UnitStatus : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class UnitStatus : MonoBehaviour
     public int MovementPoint;
 
     private int _defaultAttackPoint;
+
+    [SerializeField] private bool _onGoldMine;
 
     void Start()
     {
@@ -38,6 +41,12 @@ public class UnitStatus : MonoBehaviour
 
         _defaultAttackPoint = AttackPoint;
 
+        PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase =>
+                phase == "EnemyTurn" && _onGoldMine
+            )
+            .Subscribe(_ => MoneyModel.Instance.MoneyReactiveProperty.Value += 1);
+
         StartCoroutine(Defeated());
     }
 
@@ -47,12 +56,15 @@ public class UnitStatus : MonoBehaviour
         {
             case 0:
                 AttackPoint = _defaultAttackPoint;
+                _onGoldMine = false;
                 break;
             case 1:
                 AttackPoint += 2;
+                _onGoldMine = false;
                 break;
             case 2:
                 AttackPoint = _defaultAttackPoint;
+                _onGoldMine = true;
                 break;
             case 3:
                 break;

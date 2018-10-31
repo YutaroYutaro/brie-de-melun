@@ -21,5 +21,7 @@ public class TurnEndController : MonoBehaviour
         {
             cardObject.transform.SetParent(GameObject.Find("Graveyard").transform);
         }
+
+        PhaseManager.Instance.SetNextPhase("EnemyTurn");
     }
 }
