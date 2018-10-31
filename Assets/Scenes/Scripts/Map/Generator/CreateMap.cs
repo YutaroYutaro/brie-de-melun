@@ -46,6 +46,15 @@ public class CreateMap : SingletonMonoBehaviour<CreateMap>
                     objectNumber = 1;
                 }
 
+                if (
+                    (posX == 0 && posZ == 0) ||
+                    (posX == 2 && posZ == 3) ||
+                    (posX == 4 && posZ == 6)
+                )
+                {
+                    objectNumber = 2;
+                }
+
 
                 //マップオブジェクトごとの重みを保存
                 if (MapObjectType[objectNumber].name == "Field")

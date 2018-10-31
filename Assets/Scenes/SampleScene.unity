@@ -1777,7 +1777,7 @@ MonoBehaviour:
   MapObjectType:
   - {fileID: 1567955867364632, guid: 3c6d160f332dab748969bd60278743c3, type: 2}
   - {fileID: 1627703188979374, guid: b84f2d4bc9d9499449169d90494722be, type: 2}
-  - {fileID: 1567955867364632, guid: 3c6d160f332dab748969bd60278743c3, type: 2}
+  - {fileID: 1347442534629010, guid: fffb56c21e9e12f45a540038614b4ef3, type: 2}
   - {fileID: 1567955867364632, guid: 3c6d160f332dab748969bd60278743c3, type: 2}
   BlockPrefab: {fileID: 1479316451831570, guid: 36d5d783ff23e434d94907c84562ef57,
     type: 2}

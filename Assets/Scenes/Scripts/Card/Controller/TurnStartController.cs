@@ -68,5 +68,7 @@ public class TurnStartController : MonoBehaviour
             cardObject.transform.SetParent(GameObject.Find("Hand").transform);
             cardObject.gameObject.SetActive(true);
         }
+
+        PhaseManager.Instance.SetNextPhase("SelectUseCard");
     }
 }

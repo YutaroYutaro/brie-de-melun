@@ -32,7 +32,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
             .Where(phase => phase != "SelectMiniMapPositionUnitSummon");
 
         PhaseManager.Instance.PhaseReactiveProperty
-            .Where(phase => phase == "SelectUseCard")
+            .Where(phase => phase == "SelectUseCard" || phase == "EnemyTurn")
             .Subscribe(_ => GetComponent<Image>().color = Color.white);
 
         PhaseManager.Instance.PhaseReactiveProperty
