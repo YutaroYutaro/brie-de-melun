@@ -23,6 +23,21 @@ namespace Asset.Scripts.MiniMap
                         }
                     }
 
+                    if (GameObject.Find("Player2Units").transform.childCount != 0)
+                    {
+                        Transform player2UnitChildren = GameObject.Find("Player2Units").transform;
+
+                        foreach (Transform player2UnitChild in player2UnitChildren)
+                        {
+                            if (player2UnitChild.GetComponent<UnitOwnIntPosition>().PosX == posX &&
+                                player2UnitChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
+                            {
+                                Debug.Log("Exist Unit");
+                                return;
+                            }
+                        }
+                    }
+
                     switch (GameObject.Find("UnitSummonGenerator")
                         .GetComponent<UnitSummonGenerator>()
                         .SummonUnitType
