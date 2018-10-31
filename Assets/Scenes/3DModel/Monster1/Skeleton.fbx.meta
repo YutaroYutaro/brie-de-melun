@@ -70,7 +70,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Skeleton
-    second: {fileID: 2100000, guid: bcac3964931e07144bf4f942bf196f36, type: 2}
+    second: {fileID: 2100000, guid: d6117e4579fff6a48bb17c1babf7dce4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

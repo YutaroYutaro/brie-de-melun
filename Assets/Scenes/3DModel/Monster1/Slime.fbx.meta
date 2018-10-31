@@ -87,22 +87,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: eye-left
-    second: {fileID: 2100000, guid: fcaff84a6a7359b4495121593aadd04f, type: 2}
+    second: {fileID: 2100000, guid: 589906c554c097940a216fbc902b3dd7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: eye-right
-    second: {fileID: 2100000, guid: fcaff84a6a7359b4495121593aadd04f, type: 2}
+    second: {fileID: 2100000, guid: 589906c554c097940a216fbc902b3dd7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: float-ball
-    second: {fileID: 2100000, guid: f20f480ad2616d443a03fee4f342126e, type: 2}
+    second: {fileID: 2100000, guid: 96d5fea2ffccc8a45b291b44e0ad60d3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: slime
-    second: {fileID: 2100000, guid: f20f480ad2616d443a03fee4f342126e, type: 2}
+    second: {fileID: 2100000, guid: 96d5fea2ffccc8a45b291b44e0ad60d3, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

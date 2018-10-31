@@ -12,6 +12,11 @@ public class UnitAttack : MonoBehaviour
         UnitStatus attackerStatus = GetComponent<UnitStatus>().GetUnitStatus();
         UnitStatus targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
 
+        int attackerPosX = GetComponent<UnitOwnIntPosition>().PosX;
+        int attackerPosZ = GetComponent<UnitOwnIntPosition>().PosZ;
+        int targetPosX = targetUnit.GetComponent<UnitOwnIntPosition>().PosX;
+        int targetPosZ = targetUnit.GetComponent<UnitOwnIntPosition>().PosZ;
+
         GetComponent<UnitRotationController>().UnitRotation(
             targetUnit.GetComponent<UnitOwnIntPosition>().PosX - GetComponent<UnitOwnIntPosition>().PosX,
             targetUnit.GetComponent<UnitOwnIntPosition>().PosZ - GetComponent<UnitOwnIntPosition>().PosZ
@@ -23,9 +28,49 @@ public class UnitAttack : MonoBehaviour
             targetUnit.GetComponent<UnitOwnIntPosition>().PosZ
         );
 
-        GetComponent<UnitAnimator>().IsAttack = true;
-        await Task.Delay(TimeSpan.FromSeconds(0.9f));
-        GetComponent<UnitAnimator>().IsAttack = false;
+        if (CompareTag("RemoteAttackUnit"))
+        {
+            if (
+                (attackerPosX + 1 == targetPosX && attackerPosZ == targetPosZ) ||
+                (attackerPosX - 1 == targetPosX && attackerPosZ == targetPosZ) ||
+                (attackerPosX == targetPosX && attackerPosZ + 1 == targetPosZ) ||
+                (attackerPosX == targetPosX && attackerPosZ - 1 == targetPosZ)
+            )
+            {
+                GetComponent<UnitAnimator>().IsAttack = true;
+                await Task.Delay(TimeSpan.FromSeconds(0.9f));
+                GetComponent<UnitAnimator>().IsAttack = false;
+            }
+            else if (
+                (attackerPosX + 2 == targetPosX && attackerPosZ == targetPosZ) ||
+                (attackerPosX - 2 == targetPosX && attackerPosZ == targetPosZ) ||
+                (attackerPosX == targetPosX && attackerPosZ + 2 == targetPosZ) ||
+                (attackerPosX == targetPosX && attackerPosZ - 2 == targetPosZ)
+            )
+            {
+                GetComponent<UnitAnimator>().IsLongAttack = true;
+                await Task.Delay(TimeSpan.FromSeconds(0.9f));
+                GetComponent<UnitAnimator>().IsLongAttack = false;
+            }
+            else if (
+                (attackerPosX + 1 == targetPosX && attackerPosZ + 1 == targetPosZ) ||
+                (attackerPosX + 1 == targetPosX && attackerPosZ - 1 == targetPosZ) ||
+                (attackerPosX - 1 == targetPosX && attackerPosZ + 1 == targetPosZ) ||
+                (attackerPosX - 1 == targetPosX && attackerPosZ - 1 == targetPosZ)
+            )
+            {
+                Debug.Log("MiddleAttack!!");
+                GetComponent<UnitAnimator>().IsMiddleAttack = true;
+                await Task.Delay(TimeSpan.FromSeconds(0.9f));
+                GetComponent<UnitAnimator>().IsMiddleAttack = false;
+            }
+        }
+        else
+        {
+            GetComponent<UnitAnimator>().IsAttack = true;
+            await Task.Delay(TimeSpan.FromSeconds(0.9f));
+            GetComponent<UnitAnimator>().IsAttack = false;
+        }
 
         targetUnit.GetComponent<UnitAnimator>().IsDamaged = true;
         await Task.Delay(TimeSpan.FromSeconds(0.9f));
