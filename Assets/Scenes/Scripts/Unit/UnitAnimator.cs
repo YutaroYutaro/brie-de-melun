@@ -63,7 +63,18 @@ public class UnitAnimator : MonoBehaviour
             _animator.SetBool("Move", _isMove);
         }
 
-        if (!CompareTag("ReconnaissanceUnit"))
+        if (CompareTag("ProximityAttackUnit"))
+        {
+            if (_isAttack)
+            {
+                _animator.SetBool("Attack", _isAttack);
+            }
+            else
+            {
+                _animator.SetBool("Attack", _isAttack);
+            }
+        }
+        else if (CompareTag("RemoteAttackUnit"))
         {
             if (_isAttack)
             {
@@ -92,7 +103,7 @@ public class UnitAnimator : MonoBehaviour
                 _animator.SetBool("LongAttack", _isLongAttack);
             }
         }
-        else
+        else if (CompareTag("ReconnaissanceUnit"))
         {
             if (_isSearch)
             {

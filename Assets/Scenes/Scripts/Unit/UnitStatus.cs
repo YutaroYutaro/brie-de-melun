@@ -48,36 +48,40 @@ public class UnitStatus : MonoBehaviour
     }
 
     // コルーチン
-    private IEnumerator Defeated() {
+    private IEnumerator Defeated()
+    {
         // コルーチンの処理
 
         while (true)
         {
             if (HitPoint <= 0)
             {
-                Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
-
-                foreach (Transform player1UnitChild in player1UnitChildren)
-                {
-                    if (player1UnitChild.gameObject == gameObject)
-                    {
-                        GetComponent<UnitAnimator>().IsDefeated = true;
-                        yield return new WaitForSeconds (1.4f);
-                        Destroy(player1UnitChild.gameObject);
-                    }
-                }
-
-                Transform player2UnitChildren = GameObject.Find("Player2Units").transform;
-
-                foreach (Transform player2UnitChild in player2UnitChildren)
-                {
-                    if (player2UnitChild.gameObject == gameObject)
-                    {
-                        GetComponent<UnitAnimator>().IsDefeated = true;
-                        yield return new WaitForSeconds (1.4f);
-                        Destroy(player2UnitChild.gameObject);
-                    }
-                }
+                GetComponent<UnitAnimator>().IsDefeated = true;
+                yield return new WaitForSeconds(1.4f);
+                Destroy(gameObject);
+//                Transform player1UnitChildren = GameObject.Find("Player1Units").transform;
+//
+//                foreach (Transform player1UnitChild in player1UnitChildren)
+//                {
+//                    if (player1UnitChild.gameObject == gameObject)
+//                    {
+//                        GetComponent<UnitAnimator>().IsDefeated = true;
+//                        yield return new WaitForSeconds (1.4f);
+//                        Destroy(player1UnitChild.gameObject);
+//                    }
+//                }
+//
+//                Transform player2UnitChildren = GameObject.Find("Player2Units").transform;
+//
+//                foreach (Transform player2UnitChild in player2UnitChildren)
+//                {
+//                    if (player2UnitChild.gameObject == gameObject)
+//                    {
+//                        GetComponent<UnitAnimator>().IsDefeated = true;
+//                        yield return new WaitForSeconds (1.4f);
+//                        Destroy(player2UnitChild.gameObject);
+//                    }
+//                }
             }
 
             yield return null;
