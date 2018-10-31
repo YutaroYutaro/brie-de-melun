@@ -18,6 +18,9 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
     private int _miniMapPosX;
     private int _miniMapPosZ;
 
+    private GameObject _onUnit;
+    [SerializeField] private GameObject _popUp;
+
     private void Start()
     {
         ObservableEventTrigger observableEventTrigger = gameObject.AddComponent<ObservableEventTrigger>();
@@ -254,6 +257,35 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                     }
                 }
             );
+
+        PhaseManager.Instance.PhaseReactiveProperty
+            .Subscribe(_ =>
+            {
+                Transform player1UnitsChildren = GameObject.Find("Player1Units").transform;
+                Transform player2UnitsChildren = GameObject.Find("Player2Units").transform;
+
+                foreach (Transform player1UnitsChild in player1UnitsChildren)
+                {
+                    if (player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX == posX &&
+                        player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
+                    {
+                        _onUnit = player1UnitsChild.gameObject;
+                        return;
+                    }
+                }
+
+                foreach (Transform player2UnitsChild in player2UnitsChildren)
+                {
+                    if (player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosX == posX &&
+                        player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
+                    {
+                        _onUnit = player2UnitsChild.gameObject;
+                        return;
+                    }
+                }
+
+                _onUnit = null;
+            });
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -311,11 +343,43 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
     public void OnPointerEnter(PointerEventData eventData)
     {
         eventData.pointerEnter.GetComponent<Image>().color = Color.red;
+
+        if (_onUnit != null)
+        {
+            UnitStatus unitStatus = _onUnit.gameObject.GetComponent<UnitStatus>().GetUnitStatus();
+            PopUpController.Instance.PopUpOpen();
+
+            String nameText = "";
+
+            switch (_onUnit.tag)
+            {
+                    case "ProximityAttackUnit":
+                        nameText = "スライム";
+                        break;
+                    case "RemoteAttackUnit":
+                        nameText = "スケルトン";
+                        break;
+                    default:
+                        nameText = "スカウト";
+                        break;
+            }
+            PopUpController.Instance.SetPopUpText(
+                nameText +
+                "\n体力：" + unitStatus.HitPoint +
+                "\n攻撃力：" + unitStatus.AttackPoint +
+                "\n防御力：" + unitStatus.DefensPoint
+            );
+        }
     }
 
     //ホバーが解除されたら元の色に戻す
     public void OnPointerExit(PointerEventData eventData)
     {
         eventData.pointerEnter.GetComponent<Image>().color = Color.white;
+
+        if (_onUnit != null)
+        {
+            PopUpController.Instance.PopUpClose();
+        }
     }
 }

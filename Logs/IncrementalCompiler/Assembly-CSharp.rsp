@@ -491,6 +491,7 @@
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/Network.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PhaseManager.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PointerManager.cs
+-i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PopUpController.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/PriceOfCard.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/ShopCanvas.cs
 -i:E:/yutaro/brie-de-mulun/Assets/Scenes/Scripts/SingletonMonoBehaviour.cs
