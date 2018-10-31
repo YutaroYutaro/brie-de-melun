@@ -59,6 +59,7 @@ public class UnitAttack : MonoBehaviour
                 (attackerPosX - 1 == targetPosX && attackerPosZ - 1 == targetPosZ)
             )
             {
+                Debug.Log("MiddleAttack!!");
                 GetComponent<UnitAnimator>().IsMiddleAttack = true;
                 await Task.Delay(TimeSpan.FromSeconds(0.9f));
                 GetComponent<UnitAnimator>().IsMiddleAttack = false;
