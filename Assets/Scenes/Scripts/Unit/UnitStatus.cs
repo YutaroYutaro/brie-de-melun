@@ -10,6 +10,8 @@ public class UnitStatus : MonoBehaviour
     public int DefensPoint;
     public int MovementPoint;
 
+    private int _defaultAttackPoint;
+
     void Start()
     {
         if (CompareTag("ProximityAttackUnit"))
@@ -34,7 +36,29 @@ public class UnitStatus : MonoBehaviour
             MovementPoint = 2;
         }
 
+        _defaultAttackPoint = AttackPoint;
+
         StartCoroutine(Defeated());
+    }
+
+    public void MapObjectEffect(int posX, int posZ)
+    {
+        switch (CreateMap.Instance.GetMapObjectTypeTable(posX, posZ))
+        {
+            case 0:
+                AttackPoint = _defaultAttackPoint;
+                break;
+            case 1:
+                AttackPoint += 2;
+                break;
+            case 2:
+                AttackPoint = _defaultAttackPoint;
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
     }
 
     public UnitStatus GetUnitStatus()
