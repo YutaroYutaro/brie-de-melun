@@ -22,6 +22,11 @@ public class UnitAttack : MonoBehaviour
             targetUnit.GetComponent<UnitOwnIntPosition>().PosZ - GetComponent<UnitOwnIntPosition>().PosZ
         );
 
+        targetUnit.GetComponent<UnitRotationController>().UnitRotation(
+            GetComponent<UnitOwnIntPosition>().PosX - targetUnit.GetComponent<UnitOwnIntPosition>().PosX,
+            GetComponent<UnitOwnIntPosition>().PosZ - targetUnit.GetComponent<UnitOwnIntPosition>().PosZ
+        );
+
         EnemyUnitController.Instance.UnitAttack(
             GetComponent<ViewId>().UnitViewId,
             targetUnit.GetComponent<UnitOwnIntPosition>().PosX,
@@ -108,6 +113,11 @@ public class UnitAttack : MonoBehaviour
     {
         UnitStatus attackerStatus = GetComponent<UnitStatus>().GetUnitStatus();
         UnitStatus targetStatus = targetUnit.GetComponent<UnitStatus>().GetUnitStatus();
+
+        GetComponent<UnitRotationController>().UnitRotation(
+            targetUnit.GetComponent<UnitOwnIntPosition>().PosX - GetComponent<UnitOwnIntPosition>().PosX,
+            targetUnit.GetComponent<UnitOwnIntPosition>().PosZ - GetComponent<UnitOwnIntPosition>().PosZ
+        );
 
         targetUnit.GetComponent<UnitRotationController>().UnitRotation(
             GetComponent<UnitOwnIntPosition>().PosX - targetUnit.GetComponent<UnitOwnIntPosition>().PosX,

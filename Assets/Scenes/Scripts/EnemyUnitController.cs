@@ -191,6 +191,16 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                 targetPosZ == (6 - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ)
             )
             {
+                unitGameobject.GetComponent<UnitRotationController>().UnitRotation(
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                );
+
+                player1UnitsChild.GetComponent<UnitRotationController>().UnitRotation(
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX,
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ
+                );
+
                 unitGameobject.GetComponent<UnitAnimator>().IsAttack = true;
                 await Task.Delay(TimeSpan.FromSeconds(0.9f));
                 unitGameobject.GetComponent<UnitAnimator>().IsAttack = false;
