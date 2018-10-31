@@ -2125,11 +2125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd407b859188f249ad7154503151076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProximityAttackPrefab: {fileID: 1770524475118580, guid: f8afb8280d1a8a3419807bdf2b91dffb,
+  ProximityAttackPrefab: {fileID: 1188599156062572, guid: be4648599190fc241b4f7b3686bccce7,
     type: 2}
-  RemoteAttackPrefab: {fileID: 1632222285373560, guid: e88dabf0e9019c84fb4938e97a772a1b,
+  RemoteAttackPrefab: {fileID: 1837568717270806, guid: 40311bc253bfcbe4a8e1d647cf18ce8a,
     type: 2}
-  ReconnaissanecPrefab: {fileID: 1648925360689028, guid: bce6afc5b3300454fb16965e63100077,
+  ReconnaissanecPrefab: {fileID: 1410274111678036, guid: bb4f73b880a5a3445a61f0c91f64c560,
     type: 2}
 --- !u!4 &711444948
 Transform:
