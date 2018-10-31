@@ -4363,11 +4363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f8d3e5931c1dd4b8049f4985e2d504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _proximityAttackPrefab: {fileID: 1770524475118580, guid: f8afb8280d1a8a3419807bdf2b91dffb,
+  _proximityAttackPrefab: {fileID: 1096440310826134, guid: 84cc911582da71b468248554048a7bd3,
     type: 2}
-  _remoteAttackPrefab: {fileID: 1632222285373560, guid: e88dabf0e9019c84fb4938e97a772a1b,
+  _remoteAttackPrefab: {fileID: 1132721201015706, guid: 6245333a30362db40974b50f7a8c34b1,
     type: 2}
-  _reconnaissanecPrefab: {fileID: 1648925360689028, guid: bce6afc5b3300454fb16965e63100077,
+  _reconnaissanecPrefab: {fileID: 1107572433018560, guid: bd4d9fbe8defaf8479b0744b1cd0f308,
     type: 2}
   _loseText: {fileID: 308171523}
 --- !u!224 &1559032921 stripped
