@@ -201,6 +201,14 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                         unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
                         unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
                     );
+                FogManager
+                    .Instance
+                    .SetPlayerTwoFogMapState
+                    (
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ,
+                        Fog.FOG_NOT_EXIST
+                    );
                 isSurpriseAttack = true;
                 break;
             }
@@ -215,13 +223,17 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             )
             {
                 unitGameobject.GetComponent<UnitRotationController>().UnitRotation(
-                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX - unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
-                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX -
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ -
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
                 );
 
                 player1UnitsChild.GetComponent<UnitRotationController>().UnitRotation(
-                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX,
-                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX -
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX,
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ -
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ
                 );
 
                 unitGameobject.GetComponent<UnitAnimator>().IsAttack = true;
@@ -243,6 +255,86 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                         -= unitGameobject.GetComponent<UnitStatus>().GetUnitStatus().AttackPoint
                            - player1UnitsChild.GetComponent<UnitStatus>().GetUnitStatus().DefensPoint;
                 }
+
+                break;
+            }
+        }
+    }
+
+    public void UnitSurpriseAttack(int id, int attckerPosX, int attckerPosZ)
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("EnemyUnitSurpriseAttack", PhotonTargets.Others, id, attckerPosX, attckerPosZ);
+    }
+
+    [PunRPC]
+    public async void EnemyUnitSurpriseAttack(int id, int attckerPosX, int attckerPosZ)
+    {
+        PhotonView unitGameobject = PhotonView.Get(PhotonView.Find(id));
+        Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
+        Transform player1UnitsChildren = GameObject.Find("Player1Units").transform;
+
+        foreach (Transform foggyMapObjectsChild in foggyMapObjectsChildren)
+        {
+            if (
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosX
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.x) &&
+                unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                == Mathf.RoundToInt(foggyMapObjectsChild.position.z)
+            )
+            {
+                unitGameobject.gameObject.SetActive(true);
+                FogManager
+                    .Instance
+                    .ClearFog
+                    (
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                    );
+                FogManager
+                    .Instance
+                    .SetPlayerTwoFogMapState
+                    (
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                        unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ,
+                        Fog.FOG_NOT_EXIST
+                    );
+                break;
+            }
+        }
+
+        foreach (Transform player1UnitsChild in player1UnitsChildren)
+        {
+            if
+            (
+                attckerPosX == (4 - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX) &&
+                attckerPosZ == (6 - player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ)
+            )
+            {
+                unitGameobject.GetComponent<UnitRotationController>().UnitRotation(
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX -
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ -
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                );
+
+                player1UnitsChild.GetComponent<UnitRotationController>().UnitRotation(
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX -
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosX,
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ -
+                    player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ
+                );
+
+                player1UnitsChild.GetComponent<UnitAnimator>().IsAttack = true;
+                await Task.Delay(TimeSpan.FromSeconds(0.9f));
+                player1UnitsChild.GetComponent<UnitAnimator>().IsAttack = false;
+
+                unitGameobject.GetComponent<UnitAnimator>().IsDamaged = true;
+                await Task.Delay(TimeSpan.FromSeconds(0.9f));
+                unitGameobject.GetComponent<UnitAnimator>().IsDamaged = false;
+
+                unitGameobject.GetComponent<UnitStatus>().GetUnitStatus().HitPoint
+                    -= player1UnitsChild.GetComponent<UnitStatus>().GetUnitStatus().AttackPoint;
 
                 break;
             }

@@ -124,6 +124,12 @@ public class UnitAttack : MonoBehaviour
             GetComponent<UnitOwnIntPosition>().PosZ - targetUnit.GetComponent<UnitOwnIntPosition>().PosZ
         );
 
+        EnemyUnitController.Instance.UnitSurpriseAttack(
+            targetUnit.GetComponent<ViewId>().UnitViewId,
+            GetComponent<UnitOwnIntPosition>().PosX,
+            GetComponent<UnitOwnIntPosition>().PosZ
+        );
+
         targetUnit.GetComponent<UnitAnimator>().IsDamaged = true;
         await Task.Delay(TimeSpan.FromSeconds(0.9f));
         targetUnit.GetComponent<UnitAnimator>().IsDamaged = false;
