@@ -17,7 +17,16 @@ public class UnitMove : MonoBehaviour
 
         if (absPosX > 1 || absPosZ > 1 || (absPosX == 1 && absPosZ == 1))
         {
-            Debug.Log("Please click next current position tile!");
+            Debug.Log("Please click next position tile!");
+            return false;
+        }
+
+        if (!CompareTag("ProximityAttackUnit") &&
+            clickMiniMapImageInstancePositionX == 2 &&
+            clickMiniMapImageInstancePositionZ == 6
+        )
+        {
+            Debug.Log("EnemySummonSpace!");
             return false;
         }
 
