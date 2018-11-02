@@ -1,9 +1,17 @@
 ﻿using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class TurnStartController : MonoBehaviour
 {
     public int MaxTakenCards = 4;
+
+    private void Start()
+    {
+        PhaseManager.Instance.PhaseReactiveProperty
+            .Where(phase => phase == "DrawCard")
+            .Subscribe(_ => TurnStart());
+    }
 
     public void TurnStart()
     {
