@@ -11,8 +11,8 @@ public class PhaseManager : SingletonMonoBehaviour<PhaseManager>
 
 	protected override void Init(){
 		base.Init ();
-		PhaseReactiveProperty = new StringReactiveProperty("SelectUseCard");
-		_nowPhase = "SelectUseCard";
+		PhaseReactiveProperty = new StringReactiveProperty("EnemyTurn");
+		_nowPhase = "EnemyTurn";
 	}
 
 	public void SetNextPhase(string phase)

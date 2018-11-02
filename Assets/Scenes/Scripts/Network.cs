@@ -19,7 +19,7 @@ public class Network : MonoBehaviour
 
     // ルームに入室すると呼ばれる
     void OnJoinedRoom() {
-        PhaseManager.Instance.SetNextPhase("EnemyTurn");
+//        PhaseManager.Instance.SetNextPhase("EnemyTurn");
         Debug.Log("ルームへ入室しました。");
     }
 
@@ -27,7 +27,7 @@ public class Network : MonoBehaviour
     void OnPhotonRandomJoinFailed() {
         Debug.Log("ルームの入室に失敗しました。");
 
-        PhaseManager.Instance.SetNextPhase("EnemyTurn");
+//        PhaseManager.Instance.SetNextPhase("EnemyTurn");
         PhaseManager.Instance.SetNextPhase("SelectUseCard");
         // ルームがないと入室に失敗するため、その時は自分で作る
         // 引数でルーム名を指定できる
