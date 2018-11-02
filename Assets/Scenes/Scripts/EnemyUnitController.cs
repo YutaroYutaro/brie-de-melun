@@ -26,7 +26,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     [PunRPC]
     public void EnemyTurnStart()
     {
-        PhaseManager.Instance.SetNextPhase("DrawCard");
+        PhaseManager.Instance.SetNextPhase("SelectUseCard");
     }
 
     public void TurnEnd()
