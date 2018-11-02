@@ -52,4 +52,5 @@ MonoBehaviour:
   - EnemyGameEnd
   - EnemyTurnStart
   - EnemyTurnEnd
+  - EnemyUnitSurpriseAttack
   DisableAutoOpenWizard: 1

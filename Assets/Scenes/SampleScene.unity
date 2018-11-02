@@ -1737,8 +1737,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3c0430022cd2db2438d192cf408f6ea6, type: 3}
-    m_FontSize: 74
+    m_Font: {fileID: 12800000, guid: b3b52fd648bc1ee449dd2b56118f4a50, type: 3}
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2075,8 +2075,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3c0430022cd2db2438d192cf408f6ea6, type: 3}
-    m_FontSize: 70
+    m_Font: {fileID: 12800000, guid: b3b52fd648bc1ee449dd2b56118f4a50, type: 3}
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2594,7 +2594,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3c0430022cd2db2438d192cf408f6ea6, type: 3}
+    m_Font: {fileID: 12800000, guid: b3b52fd648bc1ee449dd2b56118f4a50, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -4739,8 +4739,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3c0430022cd2db2438d192cf408f6ea6, type: 3}
-    m_FontSize: 74
+    m_Font: {fileID: 12800000, guid: b3b52fd648bc1ee449dd2b56118f4a50, type: 3}
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -5834,11 +5834,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3c0430022cd2db2438d192cf408f6ea6, type: 3}
-    m_FontSize: 74
+    m_Font: {fileID: 12800000, guid: b3b52fd648bc1ee449dd2b56118f4a50, type: 3}
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 7
     m_MaxSize: 74
     m_Alignment: 1
     m_AlignByGeometry: 0
