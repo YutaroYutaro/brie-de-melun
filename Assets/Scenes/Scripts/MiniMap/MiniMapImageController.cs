@@ -277,7 +277,8 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                 foreach (Transform player2UnitsChild in player2UnitsChildren)
                 {
                     if (player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosX == posX &&
-                        player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
+                        player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ &&
+                        player2UnitsChild.gameObject.activeSelf)
                     {
                         _onUnit = player2UnitsChild.gameObject;
                         return;
