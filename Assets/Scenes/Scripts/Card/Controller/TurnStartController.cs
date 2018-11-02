@@ -1,9 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TurnStartController : MonoBehaviour
 {
     public int MaxTakenCards = 4;
+
+    private void Start()
+    {
+        PhaseManager.Instance.PhaseReactiveProperty
+                .Zip(PhaseManager.Instance.PhaseReactiveProperty.Skip(1), (x,y)
+                => new Tuple<string,string>(x, y))
+            .Where(phase => phase.Item1 == "EnemyTurn" && phase.Item2 == "SelectUseCard")
+            .Subscribe(_ =>
+                {
+                    TurnStart();
+                }
+            );
+    }
 
     public void TurnStart()
     {
@@ -39,7 +55,8 @@ public class TurnStartController : MonoBehaviour
                 graveCardObjects.Add(graveyardChild.gameObject);
             }
 
-            for (int i = 0; i < graveCardObjects.Count; i++) {
+            for (int i = 0; i < graveCardObjects.Count; i++)
+            {
                 GameObject temp = graveCardObjects[i];
                 int randomIndex = Random.Range(0, graveCardObjects.Count);
                 graveCardObjects[i] = graveCardObjects[randomIndex];

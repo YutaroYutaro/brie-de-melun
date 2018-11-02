@@ -23,5 +23,6 @@ public class TurnEndController : MonoBehaviour
         }
 
         PhaseManager.Instance.SetNextPhase("EnemyTurn");
+        EnemyUnitController.Instance.TurnStart();
     }
 }

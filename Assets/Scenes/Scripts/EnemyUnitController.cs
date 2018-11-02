@@ -17,6 +17,30 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
     [SerializeField] private GameObject _reconnaissanecPrefab;
     [SerializeField] private Text _loseText;
 
+    public void TurnStart()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("EnemyTurnStart", PhotonTargets.Others);
+    }
+
+    [PunRPC]
+    public void EnemyTurnStart()
+    {
+        PhaseManager.Instance.SetNextPhase("SelectUseCard");
+    }
+
+    public void TurnEnd()
+    {
+        PhotonView photonView = GetComponent<PhotonView>();
+        photonView.RPC("EnemyTurnEnd", PhotonTargets.Others);
+    }
+
+    [PunRPC]
+    public void EnemyTurnEnd()
+    {
+        PhaseManager.Instance.SetNextPhase("EnemyTurn");
+    }
+
     public void TowerBreak(int id)
     {
         PhotonView photonView = GetComponent<PhotonView>();
