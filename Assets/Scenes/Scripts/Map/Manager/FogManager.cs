@@ -43,6 +43,7 @@ public class FogManager : SingletonMonoBehaviour<FogManager>
                 !(player2UnitsChild.gameObject.activeSelf))
             {
                 player2UnitsChild.gameObject.SetActive(true);
+                player2UnitsChild.GetComponent<UnitStatus>().MapObjectEffect(unitPosX, unitPosZ);
                 return player2UnitsChild.gameObject;
             }
         }
