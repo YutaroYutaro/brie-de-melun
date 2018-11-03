@@ -268,8 +268,6 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
         PhaseManager.Instance.PhaseReactiveProperty
             .Subscribe(_ =>
             {
-                Debug.Log("Phase Change");
-
                 Transform clearMapObjectsChildren = GameObject.Find("ClearMapObjects").transform;
                 Transform player1UnitsChildren = GameObject.Find("Player1Units").transform;
                 Transform player2UnitsChildren = GameObject.Find("Player2Units").transform;
