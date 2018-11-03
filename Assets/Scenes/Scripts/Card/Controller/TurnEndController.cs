@@ -6,6 +6,7 @@ public class TurnEndController : MonoBehaviour
 {
     public void TurnEnd()
     {
+        if (PhaseManager.Instance.PhaseReactiveProperty.Value == "EnemyTurn") return;
         Debug.Log("Debug: TurnEnd");
 
         Transform handChildren = GameObject.Find("Hand").transform;

@@ -125,12 +125,12 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
                 6 - posZ - unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
             );
 
-        unitGameobject.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(4 - posX, 6 - posZ);
-
         // ToDo: アクティブ状態になった時のアニメーション遷移
         Transform foggyMapObjectsChildren = GameObject.Find("FoggyMapObjects").transform;
 
         Transform clearMapObjectsChildren = GameObject.Find("ClearMapObjects").transform;
+        
+        unitGameobject.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(4 - posX, 6 - posZ);
 
         foreach (Transform clearMapObjectsChild in clearMapObjectsChildren)
         {
@@ -142,6 +142,7 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             )
             {
                 unitGameobject.gameObject.SetActive(true);
+                unitGameobject.GetComponent<UnitOwnIntPosition>().SetUnitOwnIntPosition(4 - posX, 6 - posZ);
                 unitGameobject.GetComponent<UnitStatus>().MapObjectEffect(
                     unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
                     unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
