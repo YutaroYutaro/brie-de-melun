@@ -17,6 +17,7 @@ public class UnitStatus : MonoBehaviour
 
     [SerializeField] private bool _onGoldMine;
     [SerializeField] private bool _isDead;
+    [SerializeField] private bool _isEnemy;
 
     void Start()
     {
@@ -45,6 +46,18 @@ public class UnitStatus : MonoBehaviour
         _defaultAttackPoint = AttackPoint;
 
         MapObjectEffect(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
+
+        Transform player2UnitsChildren = GameObject.Find("Player2Units").transform;
+
+        foreach (Transform player2UnitsChild in player2UnitsChildren)
+        {
+            if (Mathf.RoundToInt(transform.position.x) == player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosX &&
+                Mathf.RoundToInt(transform.position.z) == player2UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ &&
+                !(player2UnitsChild.gameObject.activeSelf))
+            {
+                _isEnemy = true;
+            }
+        }
 
         PhaseManager.Instance.PhaseReactiveProperty
             .Where(phase =>

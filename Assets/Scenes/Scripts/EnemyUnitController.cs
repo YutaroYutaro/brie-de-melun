@@ -142,10 +142,13 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             )
             {
                 unitGameobject.gameObject.SetActive(true);
+                unitGameobject.GetComponent<UnitStatus>().MapObjectEffect(
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                );
                 break;
             }
         }
-
 
         unitGameobject.GetComponent<Animator>().enabled = false;
         unitGameobject.GetComponent<Animator>().Play("Move");
@@ -194,6 +197,10 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             )
             {
                 unitGameobject.gameObject.SetActive(true);
+                unitGameobject.GetComponent<UnitStatus>().MapObjectEffect(
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                );
                 FogManager
                     .Instance
                     .ClearFog
@@ -284,6 +291,10 @@ public class EnemyUnitController : SingletonMonoBehaviour<EnemyUnitController>
             )
             {
                 unitGameobject.gameObject.SetActive(true);
+                unitGameobject.GetComponent<UnitStatus>().MapObjectEffect(
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosX,
+                    unitGameobject.GetComponent<UnitOwnIntPosition>().PosZ
+                );
                 FogManager
                     .Instance
                     .ClearFog
