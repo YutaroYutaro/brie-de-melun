@@ -64,7 +64,7 @@ public class UnitStatus : MonoBehaviour
                 _onGoldMine = false;
                 break;
             case 1:
-                AttackPoint += 2;
+                AttackPoint = 2 + _defaultAttackPoint;
                 _onGoldMine = false;
                 break;
             case 2:
