@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiniMapImageGenerator : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class MiniMapImageGenerator : MonoBehaviour
 
     public List<GameObject> MiniMapImageList;
 
+    [SerializeField] private Sprite _field;
+
     void Start()
     {
         for (int posX = 0; posX < MaxPosX; ++posX)
@@ -27,6 +30,12 @@ public class MiniMapImageGenerator : MonoBehaviour
                 miniMapImageInstance.GetComponent<MiniMapImageInstancePosition>().PosZ = posZ;
                 miniMapImageInstance.transform.SetParent(Minimap.transform, false);
                 MiniMapImageList.Add(miniMapImageInstance);
+
+                if (posZ == 0 && (posX == 1 || posX == 2 || posX == 3))
+                {
+                    Image img = miniMapImageInstance.GetComponent<Image>();
+                    img.sprite = _field;
+                }
             }
         }
     }
