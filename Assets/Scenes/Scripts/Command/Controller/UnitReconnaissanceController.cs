@@ -28,5 +28,9 @@ public class UnitReconnaissanceController : MonoBehaviour {
         GameObject.Find("FogManager").GetComponent<FogManager>().SetActiveUnitInFog(thisIntPosX, thisIntPosZ - 1);
 
         PhaseManager.Instance.SetNextPhase("Reconnaissance");
+
+        await Task.Delay(TimeSpan.FromSeconds(0.1f));
+
+        PhaseManager.Instance.SetNextPhase("SelectUseCard");
     }
 }

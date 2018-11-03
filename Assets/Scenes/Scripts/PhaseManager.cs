@@ -19,10 +19,12 @@ public class PhaseManager : SingletonMonoBehaviour<PhaseManager>
     {
         PhaseReactiveProperty.Value = phase;
 
-        if (phase != "Reconnaissance")
-        {
-            _nowPhase = phase;
-        }
+//        if (phase != "Reconnaissance")
+//        {
+//            _nowPhase = phase;
+//        }
+
+        _nowPhase = phase;
     }
 
     public string GetNowPhase()
