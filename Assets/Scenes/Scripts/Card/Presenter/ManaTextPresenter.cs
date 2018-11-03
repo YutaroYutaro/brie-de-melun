@@ -12,7 +12,7 @@ public class ManaTextPresenter : MonoBehaviour
 
         ManaModel.Instance.ManaReactiveProperty
             .Subscribe(
-                mana => { _manaText.text = mana.ToString() + "/3"; }
+                mana => { _manaText.text = mana.ToString(); }
             );
     }
 }
