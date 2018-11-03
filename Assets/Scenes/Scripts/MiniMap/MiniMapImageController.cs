@@ -20,6 +20,13 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 
     private GameObject _onUnit;
     [SerializeField] private GameObject _popUp;
+    [SerializeField] private Sprite[] _miniMapImages;
+    [SerializeField] private Sprite _scout;
+    [SerializeField] private Sprite _slime;
+    [SerializeField] private Sprite _skelton;
+    [SerializeField] private Sprite _enemyScout;
+    [SerializeField] private Sprite _enemySlime;
+    [SerializeField] private Sprite _enemySkelton;
 
     private void Start()
     {
@@ -261,8 +268,23 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
         PhaseManager.Instance.PhaseReactiveProperty
             .Subscribe(_ =>
             {
+                Debug.Log("Phase Change");
+
+                Transform clearMapObjectsChildren = GameObject.Find("ClearMapObjects").transform;
                 Transform player1UnitsChildren = GameObject.Find("Player1Units").transform;
                 Transform player2UnitsChildren = GameObject.Find("Player2Units").transform;
+
+                foreach (Transform clearMapObjectsChild in clearMapObjectsChildren)
+                {
+                    if (posX == Mathf.RoundToInt(clearMapObjectsChild.position.x) &&
+                        (posZ == Mathf.RoundToInt(clearMapObjectsChild.position.z)))
+                    {
+                        Image img = GetComponent<Image>();
+                        img.sprite = _miniMapImages[CreateMap.Instance.GetMapObjectTypeTable(posX, posZ)];
+                    }
+                }
+
+                Image monsterImage = gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>();
 
                 foreach (Transform player1UnitsChild in player1UnitsChildren)
                 {
@@ -270,6 +292,21 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         player1UnitsChild.GetComponent<UnitOwnIntPosition>().PosZ == posZ)
                     {
                         _onUnit = player1UnitsChild.gameObject;
+
+                        switch (player1UnitsChild.tag)
+                        {
+                            case "ProximityAttackUnit":
+                                monsterImage.sprite = _slime;
+                                break;
+                            case "RemoteAttackUnit":
+                                monsterImage.sprite = _skelton;
+                                break;
+                            case "ReconnaissanceUnit":
+                                monsterImage.sprite = _scout;
+                                break;
+                        }
+
+                        monsterImage.enabled = true;
                         return;
                     }
                 }
@@ -281,11 +318,27 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                         player2UnitsChild.gameObject.activeSelf)
                     {
                         _onUnit = player2UnitsChild.gameObject;
+
+                        switch (player2UnitsChild.tag)
+                        {
+                            case "ProximityAttackUnit":
+                                monsterImage.sprite = _enemySlime;
+                                break;
+                            case "RemoteAttackUnit":
+                                monsterImage.sprite = _enemySkelton;
+                                break;
+                            case "ReconnaissanceUnit":
+                                monsterImage.sprite = _enemyScout;
+                                break;
+                        }
+
+                        monsterImage.enabled = true;
                         return;
                     }
                 }
 
                 _onUnit = null;
+                monsterImage.enabled = false;
             });
     }
 
@@ -354,16 +407,17 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 
             switch (_onUnit.tag)
             {
-                    case "ProximityAttackUnit":
-                        nameText = "スライム";
-                        break;
-                    case "RemoteAttackUnit":
-                        nameText = "スケルトン";
-                        break;
-                    default:
-                        nameText = "スカウト";
-                        break;
+                case "ProximityAttackUnit":
+                    nameText = "スライム";
+                    break;
+                case "RemoteAttackUnit":
+                    nameText = "スケルトン";
+                    break;
+                default:
+                    nameText = "スカウト";
+                    break;
             }
+
             PopUpController.Instance.SetPopUpText(
                 nameText +
                 "\n体力：" + unitStatus.HitPoint +

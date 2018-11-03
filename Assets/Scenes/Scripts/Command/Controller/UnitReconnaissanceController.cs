@@ -26,5 +26,7 @@ public class UnitReconnaissanceController : MonoBehaviour {
         GameObject.Find("FogManager").GetComponent<FogManager>().SetActiveUnitInFog(thisIntPosX - 1, thisIntPosZ);
         GameObject.Find("FogManager").GetComponent<FogManager>().SetActiveUnitInFog(thisIntPosX, thisIntPosZ + 1);
         GameObject.Find("FogManager").GetComponent<FogManager>().SetActiveUnitInFog(thisIntPosX, thisIntPosZ - 1);
+
+        PhaseManager.Instance.SetNextPhase("Reconnaissance");
     }
 }
