@@ -44,6 +44,8 @@ public class UnitStatus : MonoBehaviour
 
         _defaultAttackPoint = AttackPoint;
 
+        MapObjectEffect(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
+
         PhaseManager.Instance.PhaseReactiveProperty
             .Where(phase =>
                 phase == "EnemyTurn" && _onGoldMine

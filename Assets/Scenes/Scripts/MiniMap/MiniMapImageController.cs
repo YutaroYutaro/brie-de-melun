@@ -43,7 +43,11 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
 
         PhaseManager.Instance.PhaseReactiveProperty
             .Where(phase => phase == "SelectUseCard" || phase == "EnemyTurn")
-            .Subscribe(_ => GetComponent<Image>().color = Color.white);
+            .Subscribe(_ =>
+            {
+                GetComponent<Image>().color = Color.white;
+                gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.white;
+            });
 
         PhaseManager.Instance.PhaseReactiveProperty
             .Where(phase =>
@@ -87,11 +91,11 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                                 .TakeUntil(selectMoveUnit)
                                 .Subscribe(__ =>
                                 {
-                                    GetComponent<Image>().color = Color.green;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.green;
                                     _time += _angularFrequency * deltaTime;
-                                    var color = GetComponent<Image>().color;
+                                    var color = gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color;
                                     color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
-                                    GetComponent<Image>().color = color;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = color;
                                 }).AddTo(this);
                         }
                     }
@@ -108,6 +112,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
             .Subscribe(_ =>
                 {
                     GetComponent<Image>().color = Color.white;
+                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.white;
 
                     int unitPosX = UnitMoveManager.Instance.SelectMoveUnit.GetComponent<UnitOwnIntPosition>().PosX;
                     int unitPosZ = UnitMoveManager.Instance.SelectMoveUnit.GetComponent<UnitOwnIntPosition>().PosZ;
@@ -154,11 +159,11 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                                 .TakeUntil(selectAttackerUnit)
                                 .Subscribe(__ =>
                                 {
-                                    GetComponent<Image>().color = Color.green;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.green;
                                     _time += _angularFrequency * deltaTime;
-                                    var color = GetComponent<Image>().color;
+                                    var color = gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color;
                                     color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
-                                    GetComponent<Image>().color = color;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = color;
                                 }).AddTo(this);
                         }
                     }
@@ -175,6 +180,7 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
             .Subscribe(_ =>
                 {
                     GetComponent<Image>().color = Color.white;
+                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.white;
 
                     Observable.Timer(TimeSpan.FromMilliseconds(100));
 
@@ -198,6 +204,14 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                                 var color = GetComponent<Image>().color;
                                 color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
                                 GetComponent<Image>().color = color;
+                                if (_onUnit != null)
+                                {
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.green;
+                                    _time += _angularFrequency * deltaTime;
+                                    var monsterColor = gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color;
+                                    monsterColor.a = Mathf.Sin(_time) * 0.5f + 0.5f;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = monsterColor;
+                                }
                             }).AddTo(this);
                     }
 
@@ -227,6 +241,14 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                                 var color = GetComponent<Image>().color;
                                 color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
                                 GetComponent<Image>().color = color;
+                                if (_onUnit != null)
+                                {
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.green;
+                                    _time += _angularFrequency * deltaTime;
+                                    var monsterColor = gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color;
+                                    monsterColor.a = Mathf.Sin(_time) * 0.5f + 0.5f;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = monsterColor;
+                                }
                             }).AddTo(this);
                     }
                 }
@@ -254,11 +276,11 @@ public class MiniMapImageController : MonoBehaviour, IPointerClickHandler, IPoin
                                 .TakeUntil(selectReconnaissanceUnit)
                                 .Subscribe(__ =>
                                 {
-                                    GetComponent<Image>().color = Color.green;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = Color.green;
                                     _time += _angularFrequency * deltaTime;
-                                    var color = GetComponent<Image>().color;
+                                    var color = gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color;
                                     color.a = Mathf.Sin(_time) * 0.5f + 0.5f;
-                                    GetComponent<Image>().color = color;
+                                    gameObject.transform.FindChild("Monster").gameObject.GetComponent<Image>().color = color;
                                 }).AddTo(this);
                         }
                     }

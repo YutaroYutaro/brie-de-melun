@@ -107,6 +107,12 @@ public class UnitAttack : MonoBehaviour
         }
 
         targetStatus.SetUnitStatus(targetStatus);
+
+        PhaseManager.Instance.SetNextPhase("Attack");
+
+        await Task.Delay(TimeSpan.FromSeconds(0.1f));
+
+        PhaseManager.Instance.SetNextPhase("SelectUseCard");
     }
 
     public async void SurpriseAttack(GameObject targetUnit)
@@ -161,5 +167,11 @@ public class UnitAttack : MonoBehaviour
         Debug.Log("Attacked damage: " + attackerStatus.AttackPoint);
 
         targetStatus.SetUnitStatus(targetStatus);
+
+        PhaseManager.Instance.SetNextPhase("Attack");
+
+        await Task.Delay(TimeSpan.FromSeconds(0.1f));
+
+        PhaseManager.Instance.SetNextPhase("SelectUseCard");
     }
 }
